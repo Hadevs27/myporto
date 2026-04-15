@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Septoni An | Portfolio IT Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syne:wght@400;700;800&display=swap');
+
+        :root {
+            --anime-accent: #ff0055;
+            --anime-bg: #0a0a0c;
+            --anime-secondary: #00f2ff;
+        }
+
+        body {
+            background-color: var(--anime-bg);
+            color: #e0e0e0;
+            font-family: 'Space+Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Syne', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--anime-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px var(--anime-accent);
+        }
+
+        .cyber-button {
+            position: relative;
+            padding: 10px 25px;
+            background: transparent;
+            border: 1px solid var(--anime-accent);
+            color: white;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            transition: 0.3s;
+        }
+
+        .cyber-button:hover {
+            background: var(--anime-accent);
+            color: black;
+            font-weight: bold;
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255, 0, 85, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 85, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            border-left: 2px solid rgba(255, 0, 85, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--anime-accent);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--anime-accent);
+        }
+
+        #ai-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .chat-window {
+            width: 350px;
+            height: 480px;
+            display: none;
+            flex-direction: column;
+            border: 2px solid var(--anime-accent);
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.3);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--anime-accent) transparent;
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-opacity-90 bg-[#0a0a0c] border-b border-gray-800">
+        <div class="text-2xl font-bold tracking-tighter">
+            <span class="text-pink-600 uppercase">Harry</span>.An
+        </div>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+            <a href="#home" class="hover:text-pink-500 transition">Beranda</a>
+            <a href="#about" class="hover:text-pink-500 transition">Profil</a>
+            <a href="#experience" class="hover:text-pink-500 transition">Pengalaman</a>
+            <a href="#skills" class="hover:text-pink-500 transition">Skill</a>
+            <a href="#contact" class="hover:text-pink-500 transition">Kontak</a>
+        </div>
+        <a href="https://www.linkedin.com/in/harry-septoni-an" target="_blank" class="cyber-button">LinkedIn</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 items-center gap-12">
+            <div class="z-10">
+                <h2 class="text-pink-600 font-bold mb-2 tracking-[0.3em]">SISTEM ONLINE</h2>
+                <h1 class="text-6xl md:text-7xl font-black leading-none mb-6">
+                    HARRY <br> <span class="text-transparent border-t-2 border-b-2 border-pink-600 px-2" style="-webkit-text-stroke: 1px white;">NADAPDAP</span>
+                </h1>
+                <p class="text-gray-400 max-w-md mb-8 text-lg leading-relaxed">
+                    Mahasiswa Teknik Informatika spesialis IT Support & Web Development. Membangun sistem digital yang reliabel dan efisien.
+                </p>
+                <div class="flex space-x-4">
+                    <button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})" class="bg-pink-600 text-white px-8 py-3 font-bold hover:bg-white hover:text-pink-600 transition uppercase tracking-tighter">Riwayat Log</button>
+                    <button onclick="toggleChat()" class="border border-pink-600 text-pink-600 px-8 py-3 font-bold hover:bg-pink-600 hover:text-white transition uppercase tracking-tighter">Chat AI Support</button>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="w-64 h-64 md:w-80 md:h-80 glass-card rounded-2xl overflow-hidden border-2 border-pink-600/30 p-4 relative rotate-3">
+                    <div class="w-full h-full bg-gray-900 rounded-xl flex items-center justify-center overflow-hidden">
+                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=HarryNadapdap" alt="Profil Harry" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-[#0d0d0f] relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="glass-card p-12 border-l-4 border-l-pink-600">
+                <h2 class="text-4xl font-bold mb-8 tracking-tighter">Dekripsi Profil</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            Mahasiswa IT di Universitas Tangerang Raya (IPK 3.95). Berpengalaman sebagai IT Help Desk dan pengembang sistem internal. Fokus pada pemecahan masalah teknis, reliabilitas sistem, dan produktivitas pengguna.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between border-b border-gray-800 pb-2 text-sm">
+                            <span class="text-pink-500 font-bold uppercase tracking-widest">Institusi</span>
+                            <span>Universitas Tangerang Raya</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2 text-sm">
+                            <span class="text-pink-500 font-bold uppercase tracking-widest">Lokasi</span>
+                            <span>Kabupaten Tangerang</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-800 pb-2 text-sm">
+                            <span class="text-pink-500 font-bold uppercase tracking-widest">Bidang</span>
+                            <span>IT Support & Web Dev</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-black mb-16 tracking-tighter">LOG <span class="text-pink-600">AKTIVITAS</span> KERJA</h2>
+            
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="timeline-item">
+                        <div class="text-xs text-blue-400 font-bold mb-1 uppercase tracking-widest">Mei 2025 - Ags 2025</div>
+                        <h4 class="text-lg font-bold text-white uppercase">Intern Sistem Informasi</h4>
+                        <p class="text-sm text-pink-500 mb-2 italic">Disnaker Kab. Tangerang</p>
+                        <ul class="text-gray-400 text-sm list-disc pl-4 space-y-1">
+                            <li>Membangun sistem web internal untuk absensi dan pengarsipan.</li>
+                            <li>Digitalisasi arsip, mengurangi waktu pencarian hingga 50%.</li>
+                            <li>Troubleshooting software dan memberikan dukungan teknis harian.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="text-xs text-blue-400 font-bold mb-1 uppercase tracking-widest">Mei 2024 - Nov 2024</div>
+                        <h4 class="text-lg font-bold text-white uppercase">Asisten Lab Komputer</h4>
+                        <p class="text-sm text-pink-500 mb-2 italic">Universitas Tangerang Raya</p>
+                        <ul class="text-gray-400 text-sm list-disc pl-4 space-y-1">
+                            <li>Troubleshooting hardware/software untuk mahasiswa dan dosen.</li>
+                            <li>Mengurangi downtime sistem sebesar 35% melalui pengecekan proaktif.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase flex items-center">
+                        <i class="fas fa-users mr-3"></i> Organisasi & Misi
+                    </h3>
+                    <div class="glass-card p-6 border-r-4 border-blue-600 mb-4">
+                        <h4 class="font-bold text-white mb-2 uppercase text-sm">Ketua Departemen LEM - HIMATIF</h4>
+                        <p class="text-[11px] text-gray-400 leading-relaxed">Memimpin perencanaan event IT, diskusi teknis, dan koordinasi tim pembicara (2024-2025).</p>
+                    </div>
+                    <div class="glass-card p-6 border-r-4 border-purple-600 mb-4">
+                        <h4 class="font-bold text-white mb-2 uppercase text-sm">Participant CTF - Telkom University</h4>
+                        <p class="text-[11px] text-gray-400 leading-relaxed">Berkompetisi dalam tantangan kriptografi, web exploitation, dan reverse engineering (2025).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-[#0d0d0f]">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-black mb-12 tracking-tighter text-center uppercase">Matrix <span class="text-pink-600">Kemampuan</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass-card p-6 text-center">
+                    <i class="fas fa-tools text-3xl text-pink-500 mb-4"></i>
+                    <h4 class="font-bold text-xs uppercase">IT Support</h4>
+                    <p class="text-[10px] text-gray-500 mt-2">Troubleshooting, Maintenance</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <i class="fas fa-code text-3xl text-blue-500 mb-4"></i>
+                    <h4 class="font-bold text-xs uppercase">Web Dev</h4>
+                    <p class="text-[10px] text-gray-500 mt-2">PHP, Laravel, Bootstrap</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <i class="fab fa-python text-3xl text-yellow-500 mb-4"></i>
+                    <h4 class="font-bold text-xs uppercase">Python</h4>
+                    <p class="text-[10px] text-gray-500 mt-2">Intermediate Level</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <i class="fas fa-project-diagram text-3xl text-green-500 mb-4"></i>
+                    <h4 class="font-bold text-xs uppercase">Data Entry</h4>
+                    <p class="text-[10px] text-gray-500 mt-2">Archiving, Reporting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase">HUBUNGI <span class="text-pink-600">TERMINAL</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <a href="https://www.linkedin.com/in/harry-septoni-an" target="_blank" class="glass-card p-8 group">
+                    <i class="fab fa-linkedin-in text-3xl mb-4 group-hover:text-blue-500 transition"></i>
+                    <h3 class="text-xl font-bold uppercase">LinkedIn</h3>
+                    <p class="text-xs text-gray-500 mt-2">@harry-septoni-an</p>
+                </a>
+                <a href="mailto:harryseptoni27@gmail.com" class="glass-card p-8 group">
+                    <i class="fas fa-envelope text-3xl mb-4 group-hover:text-pink-500 transition"></i>
+                    <h3 class="text-xl font-bold uppercase">Email</h3>
+                    <p class="text-xs text-gray-500 mt-2">harryseptoni27@gmail.com</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Widget -->
+    <div id="ai-widget">
+        <button onclick="toggleChat()" class="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+            <i class="fas fa-robot text-2xl text-white"></i>
+        </button>
+
+        <div id="chat-window" class="chat-window glass-card rounded-lg mb-4 flex flex-col overflow-hidden">
+            <div class="bg-pink-600 p-4 flex justify-between items-center text-white">
+                <div class="flex flex-col">
+                    <span class="font-bold text-xs tracking-widest">HARRY-VIRTUAL ASISTEN</span>
+                    <span class="text-[10px] uppercase">Status: Terhubung</span>
+                </div>
+                <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chat-messages" class="chat-messages text-sm space-y-4 bg-black/40 p-4">
+                <div class="bg-gray-800 p-3 rounded-lg border-l-4 border-pink-600 text-gray-200">
+                    Halo! Saya asisten digital Harry Septoni Armando Nadapdap. Ada yang bisa saya bantu terkait pengalaman Harry di Disnaker atau skill teknisnya?
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-800 bg-black">
+                <div class="flex gap-2">
+                    <input type="text" id="user-input" placeholder="Tanya Harry..." class="flex-1 bg-gray-900 border border-gray-700 p-2 text-xs text-white focus:outline-none focus:border-pink-600">
+                    <button onclick="sendMessage()" class="bg-pink-600 px-4 text-white hover:bg-white hover:text-pink-600 transition"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = ""; 
+        
+        const harryData = {
+            identitas: "Harry Septoni Armando Nadapdap. Mahasiswa IT di Universitas Tangerang Raya (IPK 3.95).",
+            pengalaman: "1. Intern Sistem Informasi di Disnaker Kab. Tangerang (Mei-Ags 2025): Membangun sistem web absensi & arsip. 2. Asisten Lab Komputer (Mei-Nov 2024): Troubleshooting & maintenance lab.",
+            organisasi: "Staf Humas (2023-2024) dan Ketua Departemen Pemberdayaan Mahasiswa (2024-2025) di HIMATIF Universitas Tangerang Raya.",
+            pencapaian: "Koordinator Event Diskusi IT (105 peserta) dan Peserta Capture The Flag (CTF) Telkom University 2025.",
+            skill: "IT Support, Troubleshooting, Web Dev (HTML, CSS, Bootstrap, PHP, Laravel, MySQL), Python (Intermediate), Git/Github, UI/UX Fundamentals."
+        };
+
+        const systemPrompt = `Kamu adalah 'HARRY-VIRTUAL-ASISTEN'.
+        TUGAS: Menjawab pertanyaan tentang Harry Septoni Armando Nadapdap berdasarkan data CV-nya.
+        
+        DATA ASLI (Gunakan ini!):
+        - Pendidikan: ${harryData.identitas}
+        - Pengalaman Kerja: ${harryData.pengalaman}
+        - Organisasi & Achievement: ${harryData.organisasi} dan ${harryData.pencapaian}
+        - Skill Teknis: ${harryData.skill}
+        
+        GAYA: Profesional, ramah, gaya anime cyberpunk (seperti UI sistem canggih). Gunakan istilah 'Sektor data', 'Mengakses memori...', 'Query selesai'.
+        ATURAN: Jangan jawab di luar konteks Harry. Gunakan Bahasa Indonesia yang sopan tapi keren.`;
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const container = document.getElementById('chat-messages');
+            const message = input.value.trim();
+            if (!message) return;
+
+            container.innerHTML += `<div class="flex justify-end"><div class="bg-pink-600 p-2 rounded-lg text-white text-xs">${message}</div></div>`;
+            input.value = '';
+            
+            const typingId = 'typing-' + Date.now();
+            container.innerHTML += `<div id="${typingId}" class="bg-gray-800 p-3 rounded-lg border-l-4 border-blue-600 text-[10px] text-blue-400 animate-pulse uppercase">Mengakses Sektor Data...</div>`;
+            container.scrollTop = container.scrollHeight;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: message }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+
+                const data = await response.json();
+                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Koneksi database gagal.";
+                document.getElementById(typingId).remove();
+                container.innerHTML += `<div class="bg-gray-800 p-3 rounded-lg border-l-4 border-pink-600 text-gray-200 text-xs">${aiText}</div>`;
+            } catch (e) {
+                document.getElementById(typingId).innerHTML = "CRITICAL ERROR: ACCESS DENIED.";
+            }
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function toggleChat() {
+            const chat = document.getElementById('chat-window');
+            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        document.getElementById('user-input').addEventListener('keypress', (e) => e.key === 'Enter' && sendMessage());
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        });
+
+        document.querySelectorAll('section').forEach(s => {
+            s.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(s);
+        });
+    </script>
+</body>
+</html>
