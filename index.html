@@ -1,398 +1,1427 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HarryPortofolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syne:wght@400;700;800&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HARRY.EXE — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nes-red: #e60012;
+    --nes-yellow: #f7d000;
+    --nes-blue: #0070d1;
+    --nes-green: #3dba4e;
+    --nes-white: #f8f8f8;
+    --nes-black: #1a1a2e;
+    --nes-dark: #0d0d1a;
+    --nes-purple: #6a0dad;
+    --nes-cyan: #00d4ff;
+    --nes-gray: #3a3a5c;
+    --pixel: 4px;
+    --screen-bg: #0a0a1a;
+  }
 
-        :root {
-            --anime-accent: #ff0055;
-            --anime-bg: #0a0a0c;
-            --anime-secondary: #00f2ff;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background-color: var(--anime-bg);
-            color: #e0e0e0;
-            font-family: 'Space+Grotesk', sans-serif;
-            overflow-x: hidden;
-        }
+  body {
+    background: var(--nes-dark);
+    color: var(--nes-white);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    line-height: 1.8;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect x='0' y='0' width='8' height='8' fill='%23f7d000'/%3E%3Crect x='8' y='8' width='8' height='8' fill='%23f7d000'/%3E%3Crect x='16' y='16' width='8' height='8' fill='%23f7d000'/%3E%3Crect x='24' y='24' width='8' height='8' fill='%23f7d000'/%3E%3C/svg%3E"), auto;
+  }
 
-        h1, h2, h3 {
-            font-family: 'Syne', sans-serif;
-            text-transform: uppercase;
-        }
+  /* SCANLINE EFFECT */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.05) 2px,
+      rgba(0,0,0,0.05) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
+  /* PIXEL BORDER MIXIN */
+  .pixel-border {
+    border: 4px solid var(--nes-white);
+    box-shadow: 
+      inset -4px -4px 0 rgba(0,0,0,0.5),
+      inset 4px 4px 0 rgba(255,255,255,0.2),
+      4px 4px 0 rgba(0,0,0,0.8);
+  }
 
-        .glass-card:hover {
-            border-color: var(--anime-accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px var(--anime-accent);
-        }
+  .pixel-border-yellow {
+    border: 4px solid var(--nes-yellow);
+    box-shadow: 
+      inset -4px -4px 0 rgba(0,0,0,0.5),
+      4px 4px 0 rgba(0,0,0,0.8);
+  }
 
-        .cyber-button {
-            position: relative;
-            padding: 10px 25px;
-            background: transparent;
-            border: 1px solid var(--anime-accent);
-            color: white;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
-            transition: 0.3s;
-        }
+  .pixel-border-cyan {
+    border: 4px solid var(--nes-cyan);
+    box-shadow: 
+      inset -4px -4px 0 rgba(0,0,0,0.5),
+      4px 4px 0 rgba(0,0,0,0.8);
+  }
 
-        .cyber-button:hover {
-            background: var(--anime-accent);
-            color: black;
-            font-weight: bold;
-        }
+  /* STAR BACKGROUND */
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-        .grid-bg {
-            background-image: 
-                linear-gradient(rgba(255, 0, 85, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 85, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
+  .star {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: white;
+    animation: twinkle 2s infinite alternate;
+  }
 
-        .timeline-item {
-            position: relative;
-            padding-left: 3rem;
-            border-left: 2px solid rgba(255, 0, 85, 0.2);
-            margin-bottom: 2rem;
-        }
+  @keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+  }
 
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -9px;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            background: var(--anime-accent);
-            border-radius: 2px;
-            box-shadow: 0 0 10px var(--anime-accent);
-        }
+  /* MAIN WRAPPER */
+  .game-container {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
 
-        #ai-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-        }
+  /* ===================== HEADER / BOOT SCREEN ===================== */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    background: radial-gradient(ellipse at center, #0a0a2e 0%, #000000 100%);
+  }
 
-        .chat-window {
-            width: 350px;
-            height: 480px;
-            display: none;
-            flex-direction: column;
-            border: 2px solid var(--anime-accent);
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.3);
-        }
+  .nintendo-logo {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(8px, 2vw, 14px);
+    color: var(--nes-red);
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 0 #8b0000;
+    animation: flicker 4s infinite;
+  }
 
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--anime-accent) transparent;
-        }
-    </style>
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.5; }
+    97% { opacity: 1; }
+    98% { opacity: 0.3; }
+  }
+
+  .cartridge-art {
+    width: clamp(200px, 60vw, 400px);
+    margin: 20px auto;
+    background: linear-gradient(135deg, #1a1a3e, #0d0d2e);
+    border: 6px solid #555;
+    box-shadow: 
+      inset 0 0 20px rgba(0,212,255,0.1),
+      0 0 40px rgba(0,212,255,0.2),
+      8px 8px 0 #000;
+    padding: 24px;
+    position: relative;
+  }
+
+  .cartridge-art::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 16px;
+    background: #333;
+    border-top: 2px solid #555;
+  }
+
+  .pixel-avatar {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 16px;
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  .game-title {
+    font-size: clamp(16px, 5vw, 32px);
+    color: var(--nes-yellow);
+    text-shadow: 4px 4px 0 #b8860b, 8px 8px 0 rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+    animation: titlePulse 2s infinite alternate;
+  }
+
+  @keyframes titlePulse {
+    from { text-shadow: 4px 4px 0 #b8860b, 8px 8px 0 rgba(0,0,0,0.5); }
+    to { text-shadow: 4px 4px 0 #ffd700, 8px 8px 0 rgba(247,208,0,0.3), 0 0 20px rgba(247,208,0,0.5); }
+  }
+
+  .game-subtitle {
+    font-size: clamp(6px, 1.5vw, 10px);
+    color: var(--nes-cyan);
+    margin-bottom: 4px;
+  }
+
+  .rating-badge {
+    display: inline-block;
+    background: var(--nes-red);
+    color: white;
+    font-size: 8px;
+    padding: 4px 8px;
+    margin-top: 8px;
+  }
+
+  .press-start {
+    font-size: clamp(8px, 2vw, 12px);
+    color: var(--nes-white);
+    animation: blink 1s step-end infinite;
+    margin-top: 30px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* ===================== NAV / MENU ===================== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nes-black);
+    border-bottom: 4px solid var(--nes-yellow);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.5);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nav-logo {
+    font-size: clamp(6px, 1.5vw, 10px);
+    color: var(--nes-yellow);
+  }
+
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .nav-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    color: var(--nes-white);
+    text-decoration: none;
+    font-size: clamp(5px, 1.2vw, 8px);
+    border: 2px solid transparent;
+    transition: all 0.1s;
+    white-space: nowrap;
+  }
+
+  .nav-menu li a:hover {
+    border: 2px solid var(--nes-yellow);
+    color: var(--nes-yellow);
+    background: rgba(247,208,0,0.1);
+  }
+
+  .nav-icon {
+    font-size: 14px;
+  }
+
+  /* ===================== SECTIONS ===================== */
+  section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .section-num {
+    font-size: clamp(8px, 2vw, 12px);
+    color: var(--nes-yellow);
+    background: rgba(247,208,0,0.1);
+    border: 2px solid var(--nes-yellow);
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  .section-title {
+    font-size: clamp(12px, 3vw, 20px);
+    color: var(--nes-cyan);
+    text-shadow: 3px 3px 0 rgba(0,212,255,0.3);
+  }
+
+  .divider {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--nes-cyan), var(--nes-cyan) 8px,
+      transparent 8px, transparent 16px
+    );
+  }
+
+  /* ===================== ABOUT ME ===================== */
+  #about {
+    background: linear-gradient(180deg, #0a0a1a 0%, #0d0d2e 100%);
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+
+  #about .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .dialog-box {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-white);
+    box-shadow: inset -4px -4px 0 rgba(0,0,0,0.5), 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 24px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .dialog-box::before {
+    content: '▼';
+    position: absolute;
+    bottom: -24px;
+    right: 20px;
+    color: var(--nes-white);
+    font-size: 12px;
+    animation: bounceArrow 0.8s infinite alternate;
+  }
+
+  @keyframes bounceArrow {
+    from { bottom: -24px; }
+    to { bottom: -28px; }
+  }
+
+  .dialog-text {
+    font-size: clamp(7px, 1.5vw, 9px);
+    line-height: 2;
+    color: var(--nes-white);
+  }
+
+  .dialog-text span {
+    color: var(--nes-cyan);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  @media (max-width: 600px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+
+  .character-card {
+    background: var(--nes-gray);
+    border: 4px solid var(--nes-cyan);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .char-sprite {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: var(--nes-black);
+    border: 2px solid var(--nes-cyan);
+    image-rendering: pixelated;
+  }
+
+  .char-name {
+    font-size: clamp(7px, 1.5vw, 9px);
+    color: var(--nes-yellow);
+    margin-bottom: 8px;
+  }
+
+  .char-class {
+    font-size: clamp(6px, 1.2vw, 7px);
+    color: var(--nes-cyan);
+    margin-bottom: 16px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 7px;
+  }
+
+  .stat-label { color: var(--nes-white); }
+
+  .stat-bar {
+    flex: 1;
+    height: 8px;
+    background: #333;
+    margin: 0 8px;
+    border: 1px solid #555;
+    overflow: hidden;
+  }
+
+  .stat-fill {
+    height: 100%;
+    background: var(--nes-green);
+    animation: fillBar 1.5s ease-out both;
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+  }
+
+  .stat-val { color: var(--nes-yellow); min-width: 20px; text-align: right; }
+
+  /* ===================== WORK EXPERIENCE ===================== */
+  #experience {
+    background: var(--nes-dark);
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+
+  #experience .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .level-card {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-green);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .level-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--nes-green) 0 8px, transparent 8px 16px);
+    animation: scanMove 2s linear infinite;
+  }
+
+  @keyframes scanMove {
+    from { background-position: 0 0; }
+    to { background-position: 16px 0; }
+  }
+
+  .level-badge {
+    display: inline-block;
+    background: var(--nes-green);
+    color: var(--nes-black);
+    font-size: 8px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }
+
+  .level-title {
+    font-size: clamp(8px, 2vw, 12px);
+    color: var(--nes-yellow);
+    margin-bottom: 6px;
+  }
+
+  .level-company {
+    font-size: clamp(6px, 1.5vw, 8px);
+    color: var(--nes-cyan);
+    margin-bottom: 16px;
+  }
+
+  .level-period {
+    font-size: 7px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+
+  .quest-list {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .quest-list li {
+    font-size: clamp(6px, 1.2vw, 7px);
+    color: var(--nes-white);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.8;
+    border-bottom: 1px dashed #333;
+  }
+
+  .quest-list li::before {
+    content: '►';
+    position: absolute;
+    left: 0;
+    color: var(--nes-green);
+  }
+
+  .achievement-bar {
+    margin-top: 12px;
+  }
+
+  .achievement-label {
+    font-size: 7px;
+    color: var(--nes-yellow);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bar-outer {
+    height: 16px;
+    background: #222;
+    border: 2px solid #555;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-inner {
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--nes-yellow) 0 12px,
+      #b8860b 12px 16px
+    );
+    animation: fillBar 2s ease-out both;
+  }
+
+  .bar-text {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 7px;
+    color: var(--nes-black);
+    font-weight: bold;
+  }
+
+  /* ===================== SKILLS ===================== */
+  #skills {
+    background: linear-gradient(180deg, #0d0d2e 0%, #0a0a1a 100%);
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+
+  #skills .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .inventory-category {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-purple);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 16px;
+  }
+
+  .inv-cat-title {
+    font-size: clamp(7px, 1.5vw, 9px);
+    color: var(--nes-yellow);
+    border-bottom: 2px solid var(--nes-purple);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .inv-icon { font-size: 16px; }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: clamp(6px, 1.2vw, 7px);
+    color: var(--nes-white);
+    border-bottom: 1px dashed #333;
+    cursor: pointer;
+    transition: color 0.1s;
+  }
+
+  .skill-item:hover { color: var(--nes-cyan); }
+
+  .skill-item::before {
+    content: '◆';
+    color: var(--nes-purple);
+    font-size: 8px;
+  }
+
+  .cert-section {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-yellow);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 20px;
+  }
+
+  .cert-title {
+    font-size: clamp(8px, 2vw, 11px);
+    color: var(--nes-yellow);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .unlock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1a1a0a;
+    border: 2px solid var(--nes-yellow);
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    width: 100%;
+    font-size: 7px;
+    color: var(--nes-yellow);
+  }
+
+  .unlock-badge .lock-icon { font-size: 14px; color: var(--nes-green); }
+
+  /* ===================== ACHIEVEMENTS ===================== */
+  #achievements {
+    background: var(--nes-dark);
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+
+  #achievements .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .leaderboard {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-red);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .lb-header {
+    background: var(--nes-red);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(7px, 1.5vw, 9px);
+  }
+
+  .lb-row {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 2px dashed #333;
+    gap: 12px;
+    transition: background 0.1s;
+  }
+
+  .lb-row:hover { background: rgba(230,0,18,0.1); }
+
+  .lb-rank {
+    font-size: clamp(10px, 2.5vw, 16px);
+    color: var(--nes-yellow);
+    min-width: 30px;
+  }
+
+  .lb-info { flex: 1; }
+
+  .lb-name {
+    font-size: clamp(7px, 1.5vw, 9px);
+    color: var(--nes-white);
+    margin-bottom: 4px;
+  }
+
+  .lb-desc {
+    font-size: clamp(5px, 1.2vw, 7px);
+    color: #888;
+  }
+
+  .lb-score {
+    font-size: clamp(8px, 2vw, 11px);
+    color: var(--nes-green);
+    white-space: nowrap;
+  }
+
+  .org-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .org-card {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-blue);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 20px;
+  }
+
+  .org-role {
+    font-size: clamp(7px, 1.5vw, 9px);
+    color: var(--nes-cyan);
+    margin-bottom: 8px;
+  }
+
+  .org-name {
+    font-size: clamp(6px, 1.2vw, 7px);
+    color: #888;
+    margin-bottom: 16px;
+    line-height: 2;
+  }
+
+  .org-period {
+    font-size: 7px;
+    color: var(--nes-yellow);
+    margin-bottom: 12px;
+  }
+
+  .org-bullet {
+    font-size: clamp(6px, 1.2vw, 7px);
+    color: var(--nes-white);
+    padding: 5px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.8;
+    border-bottom: 1px dashed #333;
+  }
+
+  .org-bullet::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: var(--nes-blue);
+    font-size: 8px;
+  }
+
+  /* ===================== EDUCATION ===================== */
+  #education {
+    background: linear-gradient(180deg, #0a0a1a 0%, #0d0d2e 100%);
+    max-width: 100%;
+    padding: 60px 20px;
+  }
+
+  #education .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .edu-card {
+    background: var(--nes-black);
+    border: 4px solid var(--nes-cyan);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .edu-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+  }
+
+  .edu-info { flex: 1; min-width: 200px; }
+
+  .edu-degree {
+    font-size: clamp(8px, 2vw, 12px);
+    color: var(--nes-yellow);
+    margin-bottom: 8px;
+  }
+
+  .edu-school {
+    font-size: clamp(7px, 1.5vw, 9px);
+    color: var(--nes-cyan);
+    margin-bottom: 6px;
+  }
+
+  .edu-period {
+    font-size: 7px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+
+  .gpa-display {
+    display: inline-block;
+    background: var(--nes-green);
+    color: var(--nes-black);
+    font-size: clamp(8px, 2vw, 12px);
+    padding: 8px 16px;
+    border: 2px solid var(--nes-white);
+  }
+
+  /* ===================== CONTACT / FOOTER ===================== */
+  #contact {
+    background: var(--nes-black);
+    border-top: 4px solid var(--nes-yellow);
+    max-width: 100%;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  #contact .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-title {
+    font-size: clamp(12px, 3vw, 20px);
+    color: var(--nes-yellow);
+    margin-bottom: 8px;
+    text-shadow: 3px 3px 0 #b8860b;
+  }
+
+  .contact-sub {
+    font-size: clamp(6px, 1.5vw, 8px);
+    color: var(--nes-cyan);
+    margin-bottom: 32px;
+  }
+
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(6px, 1.2vw, 7px);
+    text-decoration: none;
+    border: 4px solid;
+    transition: all 0.1s;
+    cursor: pointer;
+  }
+
+  .contact-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+  }
+
+  .btn-email { color: var(--nes-white); border-color: var(--nes-white); background: transparent; }
+  .btn-linkedin { color: var(--nes-cyan); border-color: var(--nes-cyan); background: transparent; }
+  .btn-phone { color: var(--nes-green); border-color: var(--nes-green); background: transparent; }
+
+  .footer-text {
+    font-size: clamp(5px, 1.2vw, 7px);
+    color: #555;
+    margin-top: 40px;
+  }
+
+  .copyright {
+    font-size: 7px;
+    color: #444;
+    margin-top: 12px;
+  }
+
+  /* ===================== PIXEL ART SPRITE ===================== */
+  .pixel-sprite {
+    display: grid;
+    grid-template-columns: repeat(16, 6px);
+    grid-template-rows: repeat(20, 6px);
+    gap: 0;
+    image-rendering: pixelated;
+    margin: 0 auto;
+  }
+
+  /* ===================== FLOATING COINS ===================== */
+  .floating-coin {
+    position: fixed;
+    font-size: 20px;
+    animation: floatCoin 6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes floatCoin {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ===================== SCROLLBAR ===================== */
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: var(--nes-dark); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--nes-yellow);
+    border: 2px solid var(--nes-dark);
+  }
+
+  /* ===================== SECTION WRAPPER ===================== */
+  .section-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
+</style>
 </head>
-<body class="grid-bg">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-opacity-90 bg-[#0a0a0c] border-b border-gray-800">
-        <div class="text-2xl font-bold tracking-tighter">
-            <span class="text-pink-600 uppercase">Harry</span>.SAN
-        </div>
-        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
-            <a href="#home" class="hover:text-pink-500 transition">Beranda</a>
-            <a href="#about" class="hover:text-pink-500 transition">Profil</a>
-            <a href="#experience" class="hover:text-pink-500 transition">Pengalaman</a>
-            <a href="#skills" class="hover:text-pink-500 transition">Skill</a>
-            <a href="#contact" class="hover:text-pink-500 transition">Kontak</a>
-        </div>
-        <a href="https://www.linkedin.com/in/harry-septoni-an" target="_blank" class="cyber-button">LinkedIn</a>
-    </nav>
+<body>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="container mx-auto px-6 grid md:grid-cols-2 items-center gap-12">
-            <div class="z-10">
-                <h2 class="text-pink-600 font-bold mb-2 tracking-[0.3em]">PORTOF ONLINE</h2>
-                <h1 class="text-6xl md:text-7xl font-black leading-none mb-6">
-                    HARRY SEPTONI ARMANDO<br> <span class="text-transparent border-t-2 border-b-2 border-pink-600 px-2" style="-webkit-text-stroke: 1px white;"></span> <span class="text-transparent border-t-2 border-b-2 border-pink-600 px-2" style="-webkit-text-stroke: 1px white;">NADAPDAP</span>
-                </h1>
-                <p class="text-gray-400 max-w-md mb-8 text-lg leading-relaxed">
-                    Mahasiswa Teknik Informatika spesialis IT Support & Web Development. Membangun sistem digital yang reliabel dan efisien.
-                </p>
-                <div class="flex space-x-4">
-                    <button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})" class="bg-pink-600 text-white px-8 py-3 font-bold hover:bg-white hover:text-pink-600 transition uppercase tracking-tighter">Riwayat Log</button>
-                    <button onclick="toggleChat()" class="border border-pink-600 text-pink-600 px-8 py-3 font-bold hover:bg-pink-600 hover:text-white transition uppercase tracking-tighter">Chat AI Support</button>
-                </div>
-            </div>
-            <div class="relative flex justify-center">
-                <div class="w-64 h-64 md:w-80 md:h-80 glass-card rounded-2xl overflow-hidden border-2 border-pink-600/30 p-4 relative rotate-3">
-                    <div class="w-full h-full bg-gray-900 rounded-xl flex items-center justify-center overflow-hidden">
-                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=HarryNadapdap" alt="Profil Harry" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- STAR BACKGROUND -->
+<div class="stars" id="stars"></div>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-[#0d0d0f] relative overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="glass-card p-12 border-l-4 border-l-pink-600">
-                <h2 class="text-4xl font-bold mb-8 tracking-tighter">Dekripsi Profil</h2>
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div>
-                        <p class="text-gray-300 text-lg leading-relaxed">
-                            Mahasiswa IT di Universitas Tangerang Raya (IPK 3.95). Berpengalaman sebagai IT Help Desk dan pengembang sistem internal. Fokus pada pemecahan masalah teknis, reliabilitas sistem, dan produktivitas pengguna.
-                        </p>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex justify-between border-b border-gray-800 pb-2 text-sm">
-                            <span class="text-pink-500 font-bold uppercase tracking-widest">Institusi</span>
-                            <span>Universitas Tangerang Raya</span>
-                        </div>
-                        <div class="flex justify-between border-b border-gray-800 pb-2 text-sm">
-                            <span class="text-pink-500 font-bold uppercase tracking-widest">Lokasi</span>
-                            <span>Kabupaten Tangerang</span>
-                        </div>
-                        <div class="flex justify-between border-b border-gray-800 pb-2 text-sm">
-                            <span class="text-pink-500 font-bold uppercase tracking-widest">Bidang</span>
-                            <span>IT Support & Web Dev</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- NAV BAR -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-logo">HARRY.EXE v1.0</div>
+    <ul class="nav-menu">
+      <li><a href="#home"><span class="nav-icon">🏠</span> HOME</a></li>
+      <li><a href="#about"><span class="nav-icon">👤</span> ABOUT</a></li>
+      <li><a href="#experience"><span class="nav-icon">⚔️</span> EXPERIENCE</a></li>
+      <li><a href="#skills"><span class="nav-icon">🎒</span> SKILLS</a></li>
+      <li><a href="#achievements"><span class="nav-icon">🏆</span> ACHIEVEMENTS</a></li>
+      <li><a href="#education"><span class="nav-icon">🎓</span> EDUCATION</a></li>
+      <li><a href="#contact"><span class="nav-icon">📡</span> CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-24 relative overflow-hidden">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-black mb-16 tracking-tighter">LOG <span class="text-pink-600">AKTIVITAS</span> KERJA</h2>
-            
-            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="space-y-8">
-                    <div class="timeline-item">
-                        <div class="text-xs text-blue-400 font-bold mb-1 uppercase tracking-widest">Mei 2025 - Ags 2025</div>
-                        <h4 class="text-lg font-bold text-white uppercase">Intern Sistem Informasi</h4>
-                        <p class="text-sm text-pink-500 mb-2 italic">Disnaker Kab. Tangerang</p>
-                        <ul class="text-gray-400 text-sm list-disc pl-4 space-y-1">
-                            <li>Membangun sistem web internal untuk absensi dan pengarsipan.</li>
-                            <li>Digitalisasi arsip, mengurangi waktu pencarian hingga 50%.</li>
-                            <li>Troubleshooting software dan memberikan dukungan teknis harian.</li>
-                        </ul>
-                    </div>
+<!-- ===== HOME ===== -->
+<section id="home">
+  <div class="nintendo-logo">★ HARRY PRODUCTIONS ★</div>
 
-                    <div class="timeline-item">
-                        <div class="text-xs text-blue-400 font-bold mb-1 uppercase tracking-widest">Mei 2024 - Nov 2024</div>
-                        <h4 class="text-lg font-bold text-white uppercase">Asisten Lab Komputer</h4>
-                        <p class="text-sm text-pink-500 mb-2 italic">Universitas Tangerang Raya</p>
-                        <ul class="text-gray-400 text-sm list-disc pl-4 space-y-1">
-                            <li>Troubleshooting hardware/software untuk mahasiswa dan dosen.</li>
-                            <li>Mengurangi downtime sistem sebesar 35% melalui pengecekan proaktif.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="space-y-8">
-                    <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase flex items-center">
-                        <i class="fas fa-users mr-3"></i> Organisasi & Misi
-                    </h3>
-                    <div class="glass-card p-6 border-r-4 border-blue-600 mb-4">
-                        <h4 class="font-bold text-white mb-2 uppercase text-sm">Ketua Departemen LEM - HIMATIF</h4>
-                        <p class="text-[11px] text-gray-400 leading-relaxed">Memimpin perencanaan event IT, diskusi teknis, dan koordinasi tim pembicara (2024-2025).</p>
-                    </div>
-                    <div class="glass-card p-6 border-r-4 border-purple-600 mb-4">
-                        <h4 class="font-bold text-white mb-2 uppercase text-sm">Participant CTF - Telkom University</h4>
-                        <p class="text-[11px] text-gray-400 leading-relaxed">Berkompetisi dalam tantangan kriptografi, web exploitation, dan reverse engineering (2025).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-24 bg-[#0d0d0f]">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-black mb-12 tracking-tighter text-center uppercase">Matrix <span class="text-pink-600">Kemampuan</span></h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="glass-card p-6 text-center">
-                    <i class="fas fa-tools text-3xl text-pink-500 mb-4"></i>
-                    <h4 class="font-bold text-xs uppercase">IT Support</h4>
-                    <p class="text-[10px] text-gray-500 mt-2">Troubleshooting, Maintenance</p>
-                </div>
-                <div class="glass-card p-6 text-center">
-                    <i class="fas fa-code text-3xl text-blue-500 mb-4"></i>
-                    <h4 class="font-bold text-xs uppercase">Web Dev</h4>
-                    <p class="text-[10px] text-gray-500 mt-2">PHP, Laravel, Bootstrap</p>
-                </div>
-                <div class="glass-card p-6 text-center">
-                    <i class="fab fa-python text-3xl text-yellow-500 mb-4"></i>
-                    <h4 class="font-bold text-xs uppercase">Python</h4>
-                    <p class="text-[10px] text-gray-500 mt-2">Intermediate Level</p>
-                </div>
-                <div class="glass-card p-6 text-center">
-                    <i class="fas fa-project-diagram text-3xl text-green-500 mb-4"></i>
-                    <h4 class="font-bold text-xs uppercase">Data Entry</h4>
-                    <p class="text-[10px] text-gray-500 mt-2">Archiving, Reporting</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 border-t border-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-black mb-12 tracking-tighter uppercase">HUBUNGI <span class="text-pink-600">TERMINAL</span></h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <a href="https://www.linkedin.com/in/harry-septoni-an" target="_blank" class="glass-card p-8 group">
-                    <i class="fab fa-linkedin-in text-3xl mb-4 group-hover:text-blue-500 transition"></i>
-                    <h3 class="text-xl font-bold uppercase">LinkedIn</h3>
-                    <p class="text-xs text-gray-500 mt-2">@harry-septoni-an</p>
-                </a>
-                <a href="mailto:harryseptoni27@gmail.com" class="glass-card p-8 group">
-                    <i class="fas fa-envelope text-3xl mb-4 group-hover:text-pink-500 transition"></i>
-                    <h3 class="text-xl font-bold uppercase">Email</h3>
-                    <p class="text-xs text-gray-500 mt-2">harryseptoni27@gmail.com</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Chat Widget -->
-    <div id="ai-widget">
-        <button onclick="toggleChat()" class="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-            <i class="fas fa-robot text-2xl text-white"></i>
-        </button>
-
-        <div id="chat-window" class="chat-window glass-card rounded-lg mb-4 flex flex-col overflow-hidden">
-            <div class="bg-pink-600 p-4 flex justify-between items-center text-white">
-                <div class="flex flex-col">
-                    <span class="font-bold text-xs tracking-widest">HARRY-VIRTUAL ASISTEN</span>
-                    <span class="text-[10px] uppercase">Status: Terhubung</span>
-                </div>
-                <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="chat-messages" class="chat-messages text-sm space-y-4 bg-black/40 p-4">
-                <div class="bg-gray-800 p-3 rounded-lg border-l-4 border-pink-600 text-gray-200">
-                    Halo! Saya asisten digital Harry Septoni Armando Nadapdap. Ada yang bisa saya bantu terkait pengalaman Harry di Disnaker atau skill teknisnya?
-                </div>
-            </div>
-            <div class="p-4 border-t border-gray-800 bg-black">
-                <div class="flex gap-2">
-                    <input type="text" id="user-input" placeholder="Tanya Harry..." class="flex-1 bg-gray-900 border border-gray-700 p-2 text-xs text-white focus:outline-none focus:border-pink-600">
-                    <button onclick="sendMessage()" class="bg-pink-600 px-4 text-white hover:bg-white hover:text-pink-600 transition"><i class="fas fa-paper-plane"></i></button>
-                </div>
-            </div>
-        </div>
+  <div class="cartridge-art pixel-border">
+    <div class="char-sprite" style="width:80px;height:80px;margin:0 auto 12px;background:#0a0a1a;border:2px solid #00d4ff;display:flex;align-items:center;justify-content:center;">
+      <svg width="64" height="64" viewBox="0 0 16 20" style="image-rendering:pixelated;" xmlns="http://www.w3.org/2000/svg">
+        <!-- hair -->
+        <rect x="3" y="0" width="10" height="3" fill="#4a2c00"/>
+        <rect x="2" y="1" width="12" height="3" fill="#4a2c00"/>
+        <!-- face -->
+        <rect x="2" y="3" width="12" height="6" fill="#f5c5a0"/>
+        <!-- eyes -->
+        <rect x="4" y="5" width="2" height="2" fill="#1a1a1a"/>
+        <rect x="10" y="5" width="2" height="2" fill="#1a1a1a"/>
+        <!-- glasses -->
+        <rect x="3" y="4" width="4" height="3" fill="none" stroke="#555" stroke-width="0.5"/>
+        <rect x="9" y="4" width="4" height="3" fill="none" stroke="#555" stroke-width="0.5"/>
+        <rect x="7" y="5" width="2" height="1" fill="#555"/>
+        <!-- smile -->
+        <rect x="6" y="7" width="4" height="1" fill="#c0707a"/>
+        <!-- body / shirt -->
+        <rect x="1" y="9" width="14" height="8" fill="#0070d1"/>
+        <!-- collar -->
+        <rect x="5" y="9" width="2" height="2" fill="#f5c5a0"/>
+        <rect x="9" y="9" width="2" height="2" fill="#f5c5a0"/>
+        <!-- arms -->
+        <rect x="0" y="9" width="2" height="7" fill="#0070d1"/>
+        <rect x="14" y="9" width="2" height="7" fill="#0070d1"/>
+        <!-- hands -->
+        <rect x="0" y="16" width="2" height="2" fill="#f5c5a0"/>
+        <rect x="14" y="16" width="2" height="2" fill="#f5c5a0"/>
+        <!-- pants -->
+        <rect x="1" y="17" width="6" height="3" fill="#1a1a2e"/>
+        <rect x="9" y="17" width="6" height="3" fill="#1a1a2e"/>
+      </svg>
     </div>
 
-    <script>
-        const apiKey = "AIzaSyDJStoBUNe47s30MwQ9QLR6sDbPxNch5qA"; 
-        
-        const harryData = {
-            identitas: "Harry Septoni Armando Nadapdap. Mahasiswa IT di Universitas Tangerang Raya (IPK 3.95).",
-            pengalaman: "1. Intern Sistem Informasi di Disnaker Kab. Tangerang (Mei-Ags 2025): Membangun sistem web absensi & arsip. 2. Asisten Lab Komputer (Mei-Nov 2024): Troubleshooting & maintenance lab.",
-            organisasi: "Staf Humas (2023-2024) dan Ketua Departemen Pemberdayaan Mahasiswa (2024-2025) di HIMATIF Universitas Tangerang Raya.",
-            pencapaian: "Koordinator Event Diskusi IT (105 peserta) dan Peserta Capture The Flag (CTF) Telkom University 2025.",
-            skill: "IT Support, Troubleshooting, Web Dev (HTML, CSS, Bootstrap, PHP, Laravel, MySQL), Python (Intermediate), Git/Github, UI/UX Fundamentals."
-        };
+    <div class="game-title">HARRY.EXE</div>
+    <div class="game-subtitle">IT STUDENT & DEVELOPER</div>
+    <div class="game-subtitle" style="margin-top:4px;">TANGERANG REGENCY, INDONESIA</div>
+    <div class="rating-badge">★ GPA: 3.95/4.00 ★</div>
+  </div>
 
-        const systemPrompt = `Kamu adalah 'HARRY-VIRTUAL-ASISTEN'.
-        TUGAS: Menjawab pertanyaan tentang Harry Septoni Armando Nadapdap berdasarkan data CV-nya.
-        
-        DATA ASLI (Gunakan ini!):
-        - Pendidikan: ${harryData.identitas}
-        - Pengalaman Kerja: ${harryData.pengalaman}
-        - Organisasi & Achievement: ${harryData.organisasi} dan ${harryData.pencapaian}
-        - Skill Teknis: ${harryData.skill}
-        
-        GAYA: Profesional, ramah, gaya anime cyberpunk. Gunakan istilah 'Sektor data', 'Mengakses memori...'.
-        ATURAN: Jangan jawab di luar konteks Harry. Gunakan Bahasa Indonesia.`;
+  <div class="press-start">▶ PRESS START TO BEGIN ◀</div>
+  <div style="margin-top:12px;font-size:clamp(5px,1.2vw,7px);color:#555;">© 2025 HARRY PRODUCTIONS. ALL RIGHTS RESERVED.</div>
+</section>
 
-        async function fetchWithRetry(url, options, retries = 5, backoff = 1000) {
-            try {
-                const response = await fetch(url, options);
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                return await response.json();
-            } catch (error) {
-                if (retries > 0) {
-                    await new Promise(resolve => setTimeout(resolve, backoff));
-                    return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                }
-                throw error;
-            }
-        }
+<!-- ===== ABOUT ===== -->
+<div class="section-wrapper" id="about" style="background:linear-gradient(180deg,#0a0a1a 0%,#0d0d2e 100%);padding:60px 20px;">
+  <div class="inner" style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title">START GAME — ABOUT ME</div>
+      <div class="divider"></div>
+    </div>
 
-        async function sendMessage() {
-            const input = document.getElementById('user-input');
-            const container = document.getElementById('chat-messages');
-            const message = input.value.trim();
-            if (!message) return;
+    <div class="about-grid">
+      <div class="character-card">
+        <div class="char-sprite" style="width:80px;height:80px;margin:0 auto 12px;background:#0a0a1a;border:2px solid #00d4ff;display:flex;align-items:center;justify-content:center;">
+          <svg width="64" height="64" viewBox="0 0 16 20" style="image-rendering:pixelated;" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="0" width="10" height="3" fill="#4a2c00"/>
+            <rect x="2" y="1" width="12" height="3" fill="#4a2c00"/>
+            <rect x="2" y="3" width="12" height="6" fill="#f5c5a0"/>
+            <rect x="4" y="5" width="2" height="2" fill="#1a1a1a"/>
+            <rect x="10" y="5" width="2" height="2" fill="#1a1a1a"/>
+            <rect x="3" y="4" width="4" height="3" fill="none" stroke="#555" stroke-width="0.5"/>
+            <rect x="9" y="4" width="4" height="3" fill="none" stroke="#555" stroke-width="0.5"/>
+            <rect x="7" y="5" width="2" height="1" fill="#555"/>
+            <rect x="6" y="7" width="4" height="1" fill="#c0707a"/>
+            <rect x="1" y="9" width="14" height="8" fill="#0070d1"/>
+            <rect x="5" y="9" width="2" height="2" fill="#f5c5a0"/>
+            <rect x="9" y="9" width="2" height="2" fill="#f5c5a0"/>
+            <rect x="0" y="9" width="2" height="7" fill="#0070d1"/>
+            <rect x="14" y="9" width="2" height="7" fill="#0070d1"/>
+            <rect x="0" y="16" width="2" height="2" fill="#f5c5a0"/>
+            <rect x="14" y="16" width="2" height="2" fill="#f5c5a0"/>
+            <rect x="1" y="17" width="6" height="3" fill="#1a1a2e"/>
+            <rect x="9" y="17" width="6" height="3" fill="#1a1a2e"/>
+          </svg>
+        </div>
+        <div class="char-name">HARRY SEPTONI</div>
+        <div class="char-class">CLASS: IT STUDENT / DEV</div>
+        <div class="stat-row"><span class="stat-label">TECH</span><div class="stat-bar"><div class="stat-fill" style="width:90%;animation-delay:0.2s"></div></div><span class="stat-val">90</span></div>
+        <div class="stat-row"><span class="stat-label">WEB</span><div class="stat-bar"><div class="stat-fill" style="width:80%"></div></div><span class="stat-val">80</span></div>
+        <div class="stat-row"><span class="stat-label">PYTHON</span><div class="stat-bar"><div class="stat-fill" style="width:70%;animation-delay:0.4s"></div></div><span class="stat-val">70</span></div>
+        <div class="stat-row"><span class="stat-label">TEAMWORK</span><div class="stat-bar"><div class="stat-fill" style="width:95%;animation-delay:0.1s"></div></div><span class="stat-val">95</span></div>
+        <div class="stat-row"><span class="stat-label">PROBLEM</span><div class="stat-bar"><div class="stat-fill" style="width:85%;animation-delay:0.3s"></div></div><span class="stat-val">85</span></div>
+      </div>
 
-            container.innerHTML += `<div class="flex justify-end"><div class="bg-pink-600 p-2 rounded-lg text-white text-xs">${message}</div></div>`;
-            input.value = '';
-            
-            const typingId = 'typing-' + Date.now();
-            container.innerHTML += `<div id="${typingId}" class="bg-gray-800 p-3 rounded-lg border-l-4 border-blue-600 text-[10px] text-blue-400 animate-pulse uppercase">Mengakses Sektor Data...</div>`;
-            container.scrollTop = container.scrollHeight;
+      <div>
+        <div class="dialog-box">
+          <div class="dialog-text">
+            <span>HARRY:</span> "I'm an Information Technology student
+            at <span>Universitas Tangerang Raya</span> with a
+            strong passion for <span>IT support</span>,
+            <span>system troubleshooting</span>, and
+            <span>web development</span>."
+          </div>
+        </div>
 
-            try {
-                const data = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: message }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
+        <div class="dialog-box" style="border-color:#00d4ff;">
+          <div class="dialog-text">
+            Skilled in <span>software maintenance</span>, data management,
+            and basic programming. I've worked as an
+            <span>IT Help Desk Support</span> and
+            <span>Computer Lab Assistant</span>, ensuring technical
+            reliability and user productivity.
+          </div>
+        </div>
 
-                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Gagal mendapatkan respon data.";
-                const typingElem = document.getElementById(typingId);
-                if (typingElem) typingElem.remove();
-                
-                container.innerHTML += `<div class="bg-gray-800 p-3 rounded-lg border-l-4 border-pink-600 text-gray-200 text-xs">${aiText}</div>`;
-            } catch (e) {
-                const typingElem = document.getElementById(typingId);
-                if (typingElem) typingElem.innerHTML = "CRITICAL ERROR: KONEKSI DITOLAK. CEK API KEY ANDA.";
-            }
-            container.scrollTop = container.scrollHeight;
-        }
+        <div class="dialog-box" style="border-color:#3dba4e;margin-bottom:0;">
+          <div class="dialog-text">
+            During my internship, I also built
+            <span>internal web-based systems</span> for archiving
+            and attendance — turning manual processes
+            into efficient digital workflows. 🎮
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-        function toggleChat() {
-            const chat = document.getElementById('chat-window');
-            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
-        }
+<!-- ===== EXPERIENCE ===== -->
+<div class="section-wrapper" id="experience" style="background:var(--nes-dark);padding:60px 20px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title">LOAD GAME — WORK EXPERIENCE</div>
+      <div class="divider"></div>
+    </div>
 
-        document.getElementById('user-input').addEventListener('keypress', (e) => e.key === 'Enter' && sendMessage());
+    <!-- Level 1 -->
+    <div class="level-card">
+      <div class="level-badge">★ LEVEL 1 CLEARED ★</div>
+      <div class="level-title">COMPUTER LAB ASSISTANT</div>
+      <div class="level-company">📍 UNIVERSITAS TANGERANG RAYA</div>
+      <div class="level-period">🗓 MAY 2024 – NOVEMBER 2024</div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        });
+      <ul class="quest-list">
+        <li>Assisted students & faculty with hardware/software troubleshooting: printer setup, login errors, MS Office issues</li>
+        <li>Maintained & monitored lab computers and peripherals for consistent performance</li>
+        <li>Reduced system downtime by 35% via proactive equipment checks & routines</li>
+        <li>Improved UX by running mini-training sessions on Word, Excel & Google Workspace</li>
+      </ul>
 
-        document.querySelectorAll('section').forEach(s => {
-            s.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-            observer.observe(s);
-        });
-    </script>
+      <div class="achievement-bar">
+        <div class="achievement-label">
+          <span>⚡ ACHIEVEMENT: SYSTEM DOWNTIME REDUCED</span>
+          <span>35%</span>
+        </div>
+        <div class="bar-outer">
+          <div class="bar-inner" style="width:35%;animation-delay:0.5s"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level 2 -->
+    <div class="level-card" style="border-color:#00d4ff;">
+      <div class="level-badge" style="background:#00d4ff;">⚡ LEVEL 2 IN PROGRESS ⚡</div>
+      <div class="level-title">INFORMATION SYSTEM INTERN</div>
+      <div class="level-company">📍 DINAS TENAGA KERJA KAB. TANGERANG</div>
+      <div class="level-period">🗓 MAY 2025 – AUGUST 2025</div>
+
+      <ul class="quest-list">
+        <li>Digitally input & managed archive data for improved document accessibility</li>
+        <li>Troubleshot Microsoft Word/Excel glitches & provided daily technical support</li>
+        <li>Built & deployed a web-based system for employee attendance & archive management</li>
+        <li>Reduced manual archive search time by up to 50% via digitization & intuitive UI</li>
+        <li>Improved reliability of employee work systems with user guides & direct support</li>
+      </ul>
+
+      <div class="achievement-bar">
+        <div class="achievement-label">
+          <span>⚡ ACHIEVEMENT: ARCHIVE SEARCH TIME REDUCED</span>
+          <span>50%</span>
+        </div>
+        <div class="bar-outer">
+          <div class="bar-inner" style="width:50%;background:repeating-linear-gradient(90deg,#00d4ff 0 12px,#0090aa 12px 16px);animation-delay:0.5s"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SKILLS ===== -->
+<div class="section-wrapper" id="skills" style="background:linear-gradient(180deg,#0d0d2e 0%,#0a0a1a 100%);padding:60px 20px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title">OPTIONS — SKILLS & INVENTORY</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="inventory-grid">
+      <div class="inventory-category">
+        <div class="inv-cat-title"><span class="inv-icon">🛡️</span> IT SUPPORT TOOLS</div>
+        <div class="skill-item">Microsoft Office Suite</div>
+        <div class="skill-item">Data Entry & Archiving</div>
+        <div class="skill-item">System & Software Maintenance</div>
+        <div class="skill-item">Hardware Troubleshooting</div>
+      </div>
+
+      <div class="inventory-category" style="border-color:#e60012;">
+        <div class="inv-cat-title"><span class="inv-icon">⚔️</span> WEB DEV WEAPONS</div>
+        <div class="skill-item">HTML & CSS</div>
+        <div class="skill-item">Bootstrap Framework</div>
+        <div class="skill-item">PHP & Laravel</div>
+        <div class="skill-item">MySQL Database</div>
+      </div>
+
+      <div class="inventory-category" style="border-color:#f7d000;">
+        <div class="inv-cat-title"><span class="inv-icon">💻</span> PROGRAMMING POWER</div>
+        <div class="skill-item">Python (Intermediate)</div>
+        <div class="skill-item">Git & GitHub</div>
+        <div class="skill-item">UI/UX Fundamentals</div>
+      </div>
+
+      <div class="inventory-category" style="border-color:#3dba4e;">
+        <div class="inv-cat-title"><span class="inv-icon">🧠</span> SOFT SKILLS</div>
+        <div class="skill-item">Problem-Solving</div>
+        <div class="skill-item">Critical Thinking</div>
+        <div class="skill-item">Time Management</div>
+        <div class="skill-item">Collaboration & Teamwork</div>
+        <div class="skill-item">Attention to Detail</div>
+      </div>
+    </div>
+
+    <div class="cert-section">
+      <div class="cert-title">🏅 UNLOCKED CERTIFICATIONS</div>
+      <div class="unlock-badge">
+        <span class="lock-icon">✅</span>
+        <div>
+          <div style="font-size:8px;color:#f7d000;">THE COMPLETE PYTHON DEVELOPER</div>
+          <div style="font-size:6px;color:#888;margin-top:3px;">Udemy — June 2024</div>
+        </div>
+        <div style="margin-left:auto;font-size:7px;color:#3dba4e;">UNLOCKED</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;background:var(--nes-black);border:4px solid #555;box-shadow:6px 6px 0 rgba(0,0,0,0.8);padding:16px;">
+      <div class="cert-title" style="color:#555;">🌐 LANGUAGES</div>
+      <div class="unlock-badge" style="border-color:#555;">
+        <span class="lock-icon" style="color:#f7d000;">🇮🇩</span>
+        <div><div style="font-size:8px;color:#fff;">BAHASA INDONESIA</div><div style="font-size:6px;color:#888;margin-top:3px;">Native — Max Level</div></div>
+        <div style="margin-left:auto;font-size:7px;color:#f7d000;">★★★★★</div>
+      </div>
+      <div class="unlock-badge" style="border-color:#555;">
+        <span class="lock-icon" style="color:#f7d000;">🇬🇧</span>
+        <div><div style="font-size:8px;color:#fff;">ENGLISH</div><div style="font-size:6px;color:#888;margin-top:3px;">Limited Working Proficiency</div></div>
+        <div style="margin-left:auto;font-size:7px;color:#f7d000;">★★★☆☆</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ACHIEVEMENTS ===== -->
+<div class="section-wrapper" id="achievements" style="background:var(--nes-dark);padding:60px 20px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title">HIGH SCORE — ACHIEVEMENTS</div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="leaderboard">
+      <div class="lb-header">🏆 ACHIEVEMENT LEADERBOARD — PERSONAL RECORDS</div>
+
+      <div class="lb-row">
+        <div class="lb-rank">🥇</div>
+        <div class="lb-info">
+          <div class="lb-name">EVENT COORDINATOR — IT DISCUSSION</div>
+          <div class="lb-desc">Universitas Tangerang Raya | November 2024</div>
+          <div class="lb-desc">Led 25-member committee · Managed speakers, sponsorships & logistics</div>
+        </div>
+        <div class="lb-score">105 PARTICIPANTS</div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank">🥈</div>
+        <div class="lb-info">
+          <div class="lb-name">DIGITAL PROMO ENGAGEMENT BOOST</div>
+          <div class="lb-desc">Public Relations Division | HIMATIF</div>
+          <div class="lb-desc">Optimized digital promotions, boosted online registrations</div>
+        </div>
+        <div class="lb-score">+120% BOOST</div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank">🥉</div>
+        <div class="lb-info">
+          <div class="lb-name">WORKSHOP PARTICIPATION GROWTH</div>
+          <div class="lb-desc">Web Dev Workshop, TechBoost, HIMATIF Bootcamp</div>
+          <div class="lb-desc">Organized key events from 40 → 66 participants per event</div>
+        </div>
+        <div class="lb-score">+65% GROWTH</div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank">🎖️</div>
+        <div class="lb-info">
+          <div class="lb-name">CTF COMPETITION — CYBERSECURITY</div>
+          <div class="lb-desc">Telkom University | August 2025</div>
+          <div class="lb-desc">Cryptography · Web Exploitation · Reverse Engineering</div>
+        </div>
+        <div class="lb-score">COMPLETED</div>
+      </div>
+
+      <div class="lb-row" style="border-bottom:none;">
+        <div class="lb-rank">💾</div>
+        <div class="lb-info">
+          <div class="lb-name">ARCHIVE SYSTEM DIGITIZATION</div>
+          <div class="lb-desc">Dinas Tenaga Kerja Kab. Tangerang Internship</div>
+          <div class="lb-desc">Reduced manual archive search time significantly</div>
+        </div>
+        <div class="lb-score">-50% SEARCH TIME</div>
+      </div>
+    </div>
+
+    <!-- Organizations -->
+    <div style="font-size:clamp(8px,2vw,11px);color:var(--nes-cyan);margin-bottom:16px;">🎮 GUILD MEMBERSHIPS — ORGANIZATIONS</div>
+    <div class="org-section">
+      <div class="org-card">
+        <div class="org-role">⚡ STAFF — PUBLIC RELATIONS DIVISION</div>
+        <div class="org-name">HIMPUNAN MAHASISWA TEKNOLOGI INFORMASI<br>UNIVERSITAS TANGERANG RAYA</div>
+        <div class="org-period">🗓 JUNE 2023 – MAY 2024</div>
+        <div class="org-bullet">Organized Web Dev Workshop, TechBoost Workshop & HIMATIF Bootcamp</div>
+        <div class="org-bullet">Developed event evaluation system with 3 structured reports</div>
+        <div class="org-bullet">Boosted engagement +120% via optimized digital promotions</div>
+      </div>
+
+      <div class="org-card" style="border-color:#e60012;">
+        <div class="org-role" style="color:#e60012;">👑 CHAIR — STUDENT EMPOWERMENT DEPT</div>
+        <div class="org-name">HIMPUNAN MAHASISWA TEKNOLOGI INFORMASI<br>UNIVERSITAS TANGERANG RAYA</div>
+        <div class="org-period">🗓 MAY 2024 – APRIL 2025</div>
+        <div class="org-bullet">Led discussions for solving real-world IT problems</div>
+        <div class="org-bullet">Planned & executed events: theme selection, speaker invitations</div>
+        <div class="org-bullet">Coordinated teams for insightful and impactful IT discussions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EDUCATION ===== -->
+<div class="section-wrapper" id="education" style="background:linear-gradient(180deg,#0a0a1a 0%,#0d0d2e 100%);padding:60px 20px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title">SAVE DATA — EDUCATION</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div class="edu-info">
+        <div class="edu-degree">BACHELOR IN INFORMATION TECHNOLOGY</div>
+        <div class="edu-school">UNIVERSITAS TANGERANG RAYA | TANGERANG</div>
+        <div class="edu-period">🗓 SEPTEMBER 2022 – PRESENT (IN PROGRESS)</div>
+        <div class="gpa-display">★ GPA: 3.95 / 4.00 ★</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:7px;color:#888;margin-bottom:8px;">PROGRESS TO GRADUATION</div>
+        <div class="bar-outer" style="width:160px;">
+          <div class="bar-inner" style="width:75%;background:repeating-linear-gradient(90deg,#00d4ff 0 12px,#0090aa 12px 16px);"></div>
+        </div>
+        <div style="font-size:7px;color:#00d4ff;margin-top:4px;">YEAR 3 OF 4</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="section-wrapper" id="contact" style="background:var(--nes-black);border-top:4px solid var(--nes-yellow);padding:60px 20px;text-align:center;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="contact-title">INSERT COIN TO CONTINUE</div>
+    <div class="contact-sub">CONNECT WITH HARRY — READY PLAYER ONE?</div>
+
+    <div class="contact-grid">
+      <a href="mailto:harryseptoni27@gmail.com" class="contact-btn btn-email">
+        📧 harryseptoni27@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/harry-septoni-an" target="_blank" class="contact-btn btn-linkedin">
+        💼 linkedin.com/in/harry-septoni-an
+      </a>
+      <a href="tel:+6281291804882" class="contact-btn btn-phone">
+        📱 +62 812 9180 4882
+      </a>
+    </div>
+
+    <div style="font-size:clamp(7px,1.5vw,9px);color:#555;margin-top:24px;border-top:2px dashed #333;padding-top:24px;">
+      📍 TANGERANG REGENCY, BANTEN, INDONESIA
+    </div>
+
+    <div class="footer-text">
+      HARRY SEPTONI ARMANDO NADAPDAP — PORTFOLIO v1.0<br>
+      BUILT WITH: HTML · CSS · JS · ❤️
+    </div>
+    <div class="copyright">© 2025 HARRY PRODUCTIONS. 1 PLAYER ONLY. CONTINUE? 9...8...7...</div>
+  </div>
+</div>
+
+<script>
+  // Generate stars
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      animation-delay: ${Math.random() * 3}s;
+      animation-duration: ${1.5 + Math.random() * 2}s;
+      width: ${Math.random() > 0.8 ? 6 : 4}px;
+      height: ${Math.random() > 0.8 ? 6 : 4}px;
+    `;
+    starsContainer.appendChild(star);
+  }
+
+  // Floating coins
+  const coinEmojis = ['🪙','⭐','💎','🔮'];
+  function spawnCoin() {
+    const coin = document.createElement('div');
+    coin.className = 'floating-coin';
+    coin.textContent = coinEmojis[Math.floor(Math.random() * coinEmojis.length)];
+    coin.style.cssText = `
+      left: ${Math.random() * 100}vw;
+      animation-duration: ${4 + Math.random() * 4}s;
+      animation-delay: ${Math.random() * 2}s;
+      font-size: ${12 + Math.random() * 12}px;
+    `;
+    document.body.appendChild(coin);
+    setTimeout(() => coin.remove(), 8000);
+  }
+  setInterval(spawnCoin, 2000);
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Click sound simulation (visual flash)
+  document.querySelectorAll('.nav-menu a, .contact-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      if (!this.href || this.href.startsWith('#') || this.href.includes('mailto') || this.href.includes('tel')) return;
+      const flash = document.createElement('div');
+      flash.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(247,208,0,0.1);pointer-events:none;z-index:9998;animation:fadeOut 0.3s forwards;';
+      document.body.appendChild(flash);
+      setTimeout(() => flash.remove(), 300);
+    });
+  });
+
+  // Typewriter for press start text
+  const pressStart = document.querySelector('.press-start');
+  if (pressStart) {
+    const text = pressStart.textContent;
+    pressStart.textContent = '';
+    let i = 0;
+    const type = () => {
+      if (i < text.length) {
+        pressStart.textContent += text[i++];
+        setTimeout(type, 80);
+      }
+    };
+    setTimeout(type, 800);
+  }
+
+  // Add CSS animation for fade out
+  const style = document.createElement('style');
+  style.textContent = '@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }';
+  document.head.appendChild(style);
+
+  // Intersection observer for stat bars
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.stat-fill, .bar-inner').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
