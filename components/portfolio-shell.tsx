@@ -416,61 +416,100 @@ function ProjectsSection() {
 }
 
 function ExperienceSection() {
+  const workLogs = experienceLogs.filter(
+    (item) => item.type === "Work Experience" || item.type === "Internship"
+  );
+  const orgLogs = experienceLogs.filter((item) => item.type === "Organization");
+  const awardLogs = experienceLogs.filter(
+    (item) => item.type === "Achievement" || item.type === "Certification"
+  );
+
   return (
     <section id="experience" className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl">
-        <SectionHeader
-          eyebrow="EXPERIENCE_LOG.TIMELINE"
-          title="Signal History"
-          description="Internship, lab support, organization work, achievements, and certification presented as a glowing system event log."
+      <div className="mx-auto max-w-5xl space-y-32">
+        <TimelineBlock
+          eyebrow="EXPERIENCE.WORK"
+          title="Professional Experience"
+          description="Freelance web development, internship, and technical support roles."
+          logs={workLogs}
         />
-        <div className="relative">
-          <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-matrix via-cyanex to-violetx md:left-1/2" />
-          <div className="space-y-6">
-            {experienceLogs.map((item, index) => (
-              <motion.article
-                key={`${item.title}-${item.date}`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -22 : 22 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5 }}
-                className="relative grid gap-4 pl-12 md:grid-cols-2 md:pl-0"
-              >
-                <div className="absolute left-[9px] top-6 z-10 grid h-4 w-4 place-items-center rounded-full bg-matrix shadow-neon md:left-[calc(50%-8px)]" />
-                <div
-                  className={`cyber-panel rounded-lg p-5 ${
-                    index % 2 === 0 ? "md:col-start-1 md:mr-6" : "md:col-start-2 md:ml-6"
-                  }`}
-                >
-                  <div
-                    className={`flex items-start gap-3 ${
-                      index % 2 === 0 ? "md:flex-row-reverse md:text-right" : ""
-                    }`}
-                  >
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-matrix/30 bg-matrix/10 text-matrix">
-                      <item.icon size={19} />
-                    </div>
-                    <div>
-                      <p className="terminal-title text-xs text-cyanex">{item.type}</p>
-                      <h3 className="mt-1 text-lg font-bold text-white">{item.title}</h3>
-                      <p className="mt-1 text-sm text-emerald-100/60">{item.org}</p>
-                      <p className="mt-2 font-mono text-xs text-matrix">{item.date}</p>
-                    </div>
-                  </div>
-                  <p
-                    className={`mt-4 text-sm leading-7 text-emerald-100/70 ${
-                      index % 2 === 0 ? "md:text-right" : ""
-                    }`}
-                  >
-                    {item.details}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
+        <TimelineBlock
+          eyebrow="EXPERIENCE.ORG"
+          title="Organizational Experience"
+          description="Leadership, event management, and public relations within university associations."
+          logs={orgLogs}
+        />
+        <TimelineBlock
+          eyebrow="EXPERIENCE.AWARDS"
+          title="Achievements & Certifications"
+          description="Medals from national science competitions and technical skill certifications."
+          logs={awardLogs}
+        />
       </div>
     </section>
+  );
+}
+
+function TimelineBlock({
+  eyebrow,
+  title,
+  description,
+  logs,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  logs: typeof experienceLogs;
+}) {
+  return (
+    <div>
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+      <div className="relative mt-8">
+        <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-matrix via-cyanex to-violetx md:left-1/2" />
+        <div className="space-y-6">
+          {logs.map((item, index) => (
+            <motion.article
+              key={`${item.title}-${item.date}`}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -22 : 22 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5 }}
+              className="relative grid gap-4 pl-12 md:grid-cols-2 md:pl-0"
+            >
+              <div className="absolute left-[9px] top-6 z-10 grid h-4 w-4 place-items-center rounded-full bg-matrix shadow-neon md:left-[calc(50%-8px)]" />
+              <div
+                className={`cyber-panel rounded-lg p-5 ${
+                  index % 2 === 0 ? "md:col-start-1 md:mr-6" : "md:col-start-2 md:ml-6"
+                }`}
+              >
+                <div
+                  className={`flex items-start gap-3 ${
+                    index % 2 === 0 ? "md:flex-row-reverse md:text-right" : ""
+                  }`}
+                >
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-matrix/30 bg-matrix/10 text-matrix">
+                    <item.icon size={19} />
+                  </div>
+                  <div>
+                    <p className="terminal-title text-xs text-cyanex">{item.type}</p>
+                    <h3 className="mt-1 text-lg font-bold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm text-emerald-100/60">{item.org}</p>
+                    <p className="mt-2 font-mono text-xs text-matrix">{item.date}</p>
+                  </div>
+                </div>
+                <p
+                  className={`mt-4 text-sm leading-7 text-emerald-100/70 ${
+                    index % 2 === 0 ? "md:text-right" : ""
+                  }`}
+                >
+                  {item.details}
+                </p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
