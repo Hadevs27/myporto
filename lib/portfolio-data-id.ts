@@ -214,15 +214,15 @@ export const experienceLogs = [
 ];
 
 export const quickReplies = {
-  Proyek:
+  Projects:
     "Harry telah membangun Sistem Penjadwalan Rapat, platform E-Commerce untuk material prefab, dan Sistem Informasi Penjualan Hasil Pertanian.",
-  Keahlian:
+  Skills:
     "Teknologi inti: Next.js, React.js, Tailwind, PHP, Laravel, Flutter, PostgreSQL, Python, Git, dan Pengembangan REST API.",
-  Pengalaman:
+  Experience:
     "Harry bekerja sebagai Freelance Web Developer, sebelumnya sebagai Pekerja Magang IT di Disnaker Kab. Tangerang, dan Asisten Lab Komputer. Ia juga punya rekam jejak juara di olimpiade sains nasional.",
-  Kontak:
+  Contact:
     "Hubungi Harry melalui email, LinkedIn, GitHub, WhatsApp, atau unduh CV-nya melalui terminal kontak.",
-  IPK: "IPK Harry adalah 3.99 / 4.00 di Universitas Tangerang Raya.",
+  GPA: "IPK Harry adalah 3.99 / 4.00 di Universitas Tangerang Raya.",
 };
 
 export const commandLines = [
