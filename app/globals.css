@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --panel: rgba(4, 12, 12, 0.72);
+  --panel-strong: rgba(5, 18, 20, 0.9);
+  --line: rgba(105, 255, 135, 0.24);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #030507;
+  color: #d8ffe6;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+body::selection {
+  background: rgba(105, 255, 135, 0.32);
+  color: #f7fff9;
+}
+
+@layer components {
+  .cyber-panel {
+    position: relative;
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(135deg, rgba(105, 255, 135, 0.08), transparent 28%),
+      linear-gradient(315deg, rgba(56, 232, 255, 0.07), transparent 32%),
+      var(--panel);
+    box-shadow:
+      0 0 0 1px rgba(56, 232, 255, 0.04),
+      0 0 32px rgba(105, 255, 135, 0.08),
+      inset 0 0 28px rgba(56, 232, 255, 0.05);
+    backdrop-filter: blur(18px);
+  }
+
+  .cyber-panel::before,
+  .cyber-panel::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+  }
+
+  .cyber-panel::before {
+    left: -1px;
+    top: -1px;
+    border-left: 2px solid #69ff87;
+    border-top: 2px solid #69ff87;
+  }
+
+  .cyber-panel::after {
+    right: -1px;
+    bottom: -1px;
+    border-right: 2px solid #38e8ff;
+    border-bottom: 2px solid #38e8ff;
+  }
+
+  .terminal-title {
+    font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .text-glow {
+    text-shadow:
+      0 0 12px rgba(105, 255, 135, 0.42),
+      0 0 30px rgba(56, 232, 255, 0.18);
+  }
+
+  .hud-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border: 1px solid rgba(105, 255, 135, 0.42);
+    background: rgba(4, 14, 13, 0.78);
+    color: #eafff0;
+    box-shadow: 0 0 22px rgba(105, 255, 135, 0.12);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      background 180ms ease;
+  }
+
+  .hud-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 232, 255, 0.74);
+    background: rgba(8, 25, 25, 0.92);
+    box-shadow: 0 0 26px rgba(56, 232, 255, 0.24);
+  }
+
+  .scan-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
