@@ -38,13 +38,13 @@ export const skillGroups = [
     title: "Frontend",
     icon: Code2,
     level: 86,
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "Tailwind", "Bootstrap"],
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "React.js", "Tailwind", "Bootstrap"],
   },
   {
-    title: "Backend",
+    title: "Backend & Mobile",
     icon: ServerCog,
     level: 78,
-    skills: ["PHP", "Laravel", "Python", "REST API Development"],
+    skills: ["PHP", "Laravel", "Python", "Dart", "Flutter", "REST API"],
   },
   {
     title: "Database",
@@ -149,6 +149,15 @@ export const experienceLogs = [
       "Organized workshops and bootcamps, boosting participation by 65%. Developed an event evaluation system and boosted engagement by 120% through digital promotions.",
   },
   {
+    icon: Layers3,
+    type: "Organization",
+    title: "Event Coordinator - Diskusi Kasus Dunia IT",
+    org: "Universitas Tangerang Raya",
+    date: "November 2024",
+    details:
+      "Led a 25-member committee to organize a university-level IT discussion event with 105 participants. Coordinated speakers, sponsorships, and logistics.",
+  },
+  {
     icon: Trophy,
     type: "Achievement",
     title: "Gold Medalist",
@@ -176,6 +185,24 @@ export const experienceLogs = [
       "Earned a silver medal in an international-level science competition, demonstrating strong analytical thinking and problem-solving skills.",
   },
   {
+    icon: Trophy,
+    type: "Achievement",
+    title: "CTF Participant",
+    org: "Capture The Flag Competition | Telkom University",
+    date: "August 2025",
+    details:
+      "Gained hands-on experience in cybersecurity challenges, including cryptography, web exploitation, and reverse engineering.",
+  },
+  {
+    icon: ShieldCheck,
+    type: "Certification",
+    title: "Junior Web Programmer (JWP)",
+    org: "LSP Media Informatika – TUK HAS",
+    date: "June 2026",
+    details:
+      "Competency Assessment. Official Certificate Pending.",
+  },
+  {
     icon: ShieldCheck,
     type: "Certification",
     title: "The Complete Python Developer",
@@ -190,7 +217,7 @@ export const quickReplies = {
   Projects:
     "Harry has built a Meeting Scheduling System, an E-Commerce platform for prefab building materials, and an Agricultural Production System.",
   Skills:
-    "Core stack: Next.js, React, Tailwind, PHP, Laravel, MySQL, PostgreSQL, Python, Git, and REST API Development.",
+    "Core stack: Next.js, React.js, Tailwind, PHP, Laravel, Flutter, PostgreSQL, Python, Git, and REST API Development.",
   Experience:
     "Harry works as a Freelance Web Developer, previously an IT Intern at Disnaker Kab. Tangerang, and a Computer Lab Assistant. He also has a strong record in national science olympiads.",
   Contact:

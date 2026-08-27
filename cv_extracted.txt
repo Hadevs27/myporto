@@ -1,0 +1,96 @@
+HARRY SEPTONI ARMANDO NADAPDAP
+📧 harryseptoni27@gmail.com | 📱 +62 812-9180-4882
+🔗 linkedin.com/in/harry-septoni-an | 💻 github.com/Hadevs27
+🌐 harryfolio.my.id | 📍 Tangerang Regency, Indonesia
+Final-year Information Technology student at Universitas Tangerang Raya with hands-on experience in developing web-based information systems using Laravel, Next.js, PHP, JavaScript, MySQL, and PostgreSQL. Experienced in designing and implementing archive management, attendance, meeting scheduling, and business information systems through internships and academic projects. Strong analytical and problem-solving skills with a passion for backend development, web application architecture, and delivering practical digital solutions.
+WORK EXPERIENCES
+Universitas Tangerang Raya | Tangerang
+Computer Lab AssistantMay 2024 – November
+2024
+Assisted students and faculty with troubleshooting basic hardware and software issues, including printer setup, login errors, and Microsoft Office problems.
+Maintained and monitored lab computers and peripherals to ensure they function properly and consistently.
+Reduced system downtime by 35% through proactive equipment checks and basic troubleshooting routines.
+Improved user experience by providing guidance and mini-training sessions on using productivity tools like Word, Excel, and Google Workspace.
+Dinas Tenaga Kerja Kab.Tangerang | Tangerang
+Information System InternMay 2025 – August 2025
+Digitally input and manage archive data to improve the order and accessibility of internal documents.
+Troubleshoot software glitches such as Microsoft Word and Excel, and provide basic solutions to daily technical issues.
+Developed and implemented a web-based archive management and employee attendance system using Laravel and MySQL.
+Reduced manual archive searching by approximately 50% through digitization and optimized document management.
+Delivered technical support, software troubleshooting, and user guidance to improve operational efficiency.
+Freelance Web & Mobile Developer | Self-Employed
+TangerangMaret 2025 - Present
+Developed web-based and mobile applications for university students, including practical assignments, semester projects, and final-year projects. 
+Analyzed project requirements and designed application workflows, database structures, and user interfaces. 
+Developed applications using Laravel, Next.js, PHP, JavaScript/TypeScript, MySQL, and PostgreSQL. 
+Implemented authentication, CRUD operations, dashboards, reporting, database management, and API integrations. 
+Conducted application testing, debugging, revisions, and deployment based on project requirements. 
+Managed development projects independently from requirements analysis through application delivery.
+PROJECTS
+Meeting Scheduling Information System
+BAPENDA Kabupaten Tangerang
+Next.js • TypeScript • PostgreSQL • Tailwind CSS • Telegram Bot
+Developed a web-based meeting scheduling and agenda management system. 
+Implemented role-based authentication and meeting management features. 
+Integrated Telegram notifications for meeting reminders. 
+Built responsive dashboard, reporting, and agenda management modules. 
+Designed database structure and implemented CRUD operations. 
+GitHub : github.com/Hadevs27/Sistem-Informasi-Penjadwalan-Agenda-Rapat-berbasis-Web-pada-BAPENDA-
+E-Commerce Prefab Building Materials
+Next.js • TypeScript • PostgreSQL • Tailwind CSS
+Developed an e-commerce platform for prefab building materials. 
+Implemented product management, shopping cart, and checkout features. 
+Built responsive user interface and admin dashboard. 
+Designed relational database structure and product management workflow. 
+GitHub :github.com/Hadevs27/aplikasi-ecommerce-bangunanprefab
+Agricultural Production & Sales Information System
+Laravel • PHP • MySQL
+Developed a web-based production and sales management system. 
+Implemented product management, sales transactions, and reporting modules. 
+Designed database schema and optimized business workflow. 
+Built responsive dashboard for monitoring operational activities. 
+GitHub :github.com/Hadevs27/Sistem-Informasi-Produksi-dan-Penjualan-Hasil-Pertanian
+EDUCATION
+Universitas Tangerang Raya | TangerangSept 2022 - Present
+Bachelor in Information Technology[GPA: 3,99/4.00]
+ORGANIZATIONAL EXPERIENCES
+Staff of The Public Relations DivisionJune 2023 – May 2024
+Himpunan Mahasiswa Teknologi Informasi Universitas Tangerang Raya
+Organized and led key events, including the Web Development Workshop, TechBoost Workshop, and HIMATIF Bootcamp, increasing participation by 65% (from 40 to 66 participants per event).
+Developed an event evaluation system, producing 3 reports on participation, material effectiveness, and improvement recommendations.
+Boosted engagement by 120% through optimized digital promotions, increasing online registrations and interactions.
+Chair of the Student Empowerment Institution DepartmentMay 2024 – April 2025
+Himpunan Mahasiswa Teknologi Infomarsi Universitas Tangerang Raya
+Chair of the Student Empowerment Institution Department
+Lead discussions that result in deep understanding and recommendations for solving real- world IT problems.
+Led the planning and execution of the event, coordinated the team in theme selection, speaker invitations, and ensured an engaging and insightful discussion.
+ACHIEVEMENTS & PARTICIPATION
+Gold Medalist – Olimpiade Sains Nasional (OSP) 2026
+Achieved a gold medal in a national science olympiad, demonstrating strong analytical thinking, logical reasoning, and problem-solving skills.
+Silver Medalist – Olimpiade Sains & Kesehatan Hari Pendidikan Nasional (OSPENAS) 2026
+Achieved a silver medal in a national-level competition, reflecting strong academic capability, consistency, and competitive learning achievement.
+Silver Medalist – Indonesia Youth Science Competition (IYSC) 2026Mey 2026
+Achieved silver medal in an international-level science competition, demonstrating strong analytical thinking and problem-solving skills.
+Event Coordinator – Diskusi Kasus Dunia IT | Universitas Tangerang RayaNovember 2024
+Led a 25-member committee to organize a university-level IT discussion event with 105 participants.
+Coordinated speakers, sponsorships, and logistics, ensuring smooth and impactful execution.
+Participant – Capture The Flag (CTF) Competition | Telkom UniversityAugust 2025
+Gained hands-on experience in cybersecurity challenges, including cryptography, web exploitation, and reverse engineering.
+COURSES & CERTIFICATIONS
+UdemyJune 2024
+The Complete Python Developer
+Junior Web Programmer (JWP)June 2026LSP Media Informatika – TUK HASCompetent | Competency Assessment
+Official Certificate Pending
+SKILLS
+Technical Skill
+Programming Language: PHP, JavaScript, TypeScript, Python, Dart
+Full Stack : HTML5, CSS3, Bootstrap, Tailwind CSS, Laravel, Next.JS, React JS, Flutter, REST API Development
+Database: MySQL and PostgreSQL
+Tools: Git, GitHub, Figma, Visual Studio Code
+Others: System Analysis, Software Testing, Documentation, UI/UX Design, Troubleshooting, Microsoft Office, Google Workspace
+Analytical & Project Skills
+System Analysis (Basic), Web-based System Implementation, Documentation & Reporting, Workflow Optimization, Software Testing & Debugging (Basic).
+Soft Skills
+Problem-Solving, Critical Thinking, Time Management, Collaboration & Teamwork, Adaptability, Attention to Detail, Communication (Written & Verbal).
+Languages
+Bahasa Indonesia (Native), English (Limited Working Proficiency).
