@@ -1,0 +1,141 @@
+import * as enData from "./portfolio-data";
+import * as idData from "./portfolio-data-id";
+
+export type Language = "en" | "id";
+
+export const translations = {
+  en: {
+    data: enData,
+    ui: {
+      nav: { cv: "CV", toggle: "ID" },
+      hero: {
+        init: "recruiter interface initialized",
+        subtitle: "Information Systems Student | AI Enthusiast | Web Developer",
+        typing: [
+          "Building operational web systems with a futuristic edge.",
+          "Connecting AI workflows, clean interfaces, and real-world support.",
+          "Recruiter mode: profile, quests, skills, contact channels online.",
+        ],
+        btnProjects: "View Projects",
+        btnContact: "Contact Me",
+        hudSync: "HUD_SYNC 99.7%",
+        online: "ONLINE",
+        signal: "> profile.signal.detected",
+        mission: "> mission-ready web developer interface",
+      },
+      profile: {
+        eyebrow: "PLAYER_PROFILE.DAT",
+        title: "Character Stats Panel",
+        desc: "A recruiter-friendly profile rendered like a playable system operator: academic signal, technical support experience, web systems, and AI curiosity in one dashboard.",
+        operator: "operator",
+        bio: "I am an Information Technology student at Universitas Tangerang Raya with hands-on experience in IT support, system troubleshooting, data management, and web-based internal systems for attendance and archive workflows.",
+      },
+      skills: {
+        eyebrow: "SKILL_TREE.SYS",
+        title: "Interactive Skill Matrix",
+        desc: "A glowing grid of practical engineering tools, support skills, AI-ready interfaces, and deployment workflows.",
+        nodeLevel: "node level",
+      },
+      projects: {
+        eyebrow: "QUEST_LOG.MISSION",
+        title: "Project Mission Panels",
+        desc: "Three recruiter-readable quests: internal systems, attendance workflows, and an AI chatbot surface prepared for backend intelligence.",
+        btnLive: "Live",
+        btnGithub: "GitHub",
+        btnCase: "Case",
+      },
+      experience: {
+        workTitle: "Professional Experience",
+        workDesc: "Freelance web development, internship, and technical support roles.",
+        orgTitle: "Organizational Experience",
+        orgDesc: "Leadership, event management, and public relations within university associations.",
+        awardsTitle: "Achievements & Certifications",
+        awardsDesc: "Medals from national science competitions and technical skill certifications.",
+      },
+      contact: {
+        eyebrow: "CONTACT_TERMINAL.OPEN",
+        title: "Open Recruiter Channel",
+        desc: "Fast access to email, professional profile links, WhatsApp, and the latest CV artifact.",
+        btnEmail: "Email",
+        btnLinkedin: "LinkedIn",
+        btnGithub: "GitHub",
+        btnWhatsapp: "WhatsApp",
+        btnCv: "Download CV",
+      },
+      chat: {
+        greeting: "Hello, recruiter. I'm HARRY.EXE Assistant. Ask me anything about Harry's projects, skills, and experience.",
+        placeholder: "type a recruiter query...",
+        typing: "Frontend simulation ready. Gemini API integration can be connected later through a secure server route.",
+        title: "assistant.gemini-ready",
+      },
+      footer: "> SYSTEM ONLINE // HARRY.EXE",
+    },
+  },
+  id: {
+    data: idData,
+    ui: {
+      nav: { cv: "CV", toggle: "EN" },
+      hero: {
+        init: "antarmuka rekrutmen diinisialisasi",
+        subtitle: "Mahasiswa Sistem Informasi | Penggiat AI | Web Developer",
+        typing: [
+          "Membangun sistem web operasional dengan sentuhan futuristik.",
+          "Menghubungkan alur kerja AI, antarmuka bersih, dan dukungan teknis dunia nyata.",
+          "Mode rekrutmen: profil, misi, keahlian, dan saluran kontak aktif.",
+        ],
+        btnProjects: "Lihat Proyek",
+        btnContact: "Hubungi Saya",
+        hudSync: "HUD_SYNC 99.7%",
+        online: "ONLINE",
+        signal: "> profil.sinyal.terdeteksi",
+        mission: "> antarmuka web developer siap misi",
+      },
+      profile: {
+        eyebrow: "PLAYER_PROFILE.DAT",
+        title: "Panel Status Karakter",
+        desc: "Profil ramah rekruter yang dirender menyerupai operator sistem yang dapat dimainkan: jejak akademik, pengalaman dukungan teknis, sistem web, dan ketertarikan pada AI dalam satu dasbor.",
+        operator: "operator",
+        bio: "Saya adalah mahasiswa Teknologi Informasi di Universitas Tangerang Raya dengan pengalaman langsung dalam dukungan IT, pemecahan masalah sistem, manajemen data, dan sistem internal berbasis web untuk alur kerja presensi dan arsip.",
+      },
+      skills: {
+        eyebrow: "SKILL_TREE.SYS",
+        title: "Matriks Keahlian Interaktif",
+        desc: "Jaringan teknologi dari alat teknik praktis, keterampilan dukungan, antarmuka siap-AI, dan alur kerja penerapan (deployment).",
+        nodeLevel: "level node",
+      },
+      projects: {
+        eyebrow: "QUEST_LOG.MISSION",
+        title: "Panel Misi Proyek",
+        desc: "Tiga pencarian yang dapat dibaca rekruter: sistem internal, alur kerja kehadiran, dan antarmuka chatbot AI yang disiapkan untuk kecerdasan backend.",
+        btnLive: "Live",
+        btnGithub: "GitHub",
+        btnCase: "Studi Kasus",
+      },
+      experience: {
+        workTitle: "Pengalaman Profesional",
+        workDesc: "Peran pengembangan web freelance, magang, dan dukungan teknis.",
+        orgTitle: "Pengalaman Organisasi",
+        orgDesc: "Kepemimpinan, manajemen acara, dan hubungan masyarakat di asosiasi universitas.",
+        awardsTitle: "Pencapaian & Sertifikasi",
+        awardsDesc: "Medali dari kompetisi sains nasional dan sertifikasi keterampilan teknis.",
+      },
+      contact: {
+        eyebrow: "CONTACT_TERMINAL.OPEN",
+        title: "Saluran Rekruter Terbuka",
+        desc: "Akses cepat ke email, tautan profil profesional, WhatsApp, dan artefak CV terbaru.",
+        btnEmail: "Email",
+        btnLinkedin: "LinkedIn",
+        btnGithub: "GitHub",
+        btnWhatsapp: "WhatsApp",
+        btnCv: "Unduh CV",
+      },
+      chat: {
+        greeting: "Halo, rekruter. Saya Asisten HARRY.EXE. Tanyakan apa saja tentang proyek, keahlian, dan pengalaman Harry.",
+        placeholder: "ketik pertanyaan rekruter...",
+        typing: "Simulasi frontend siap. Integrasi Gemini API dapat disambungkan nanti melalui rute server yang aman.",
+        title: "asisten.gemini-siap",
+      },
+      footer: "> SISTEM ONLINE // HARRY.EXE",
+    },
+  },
+};

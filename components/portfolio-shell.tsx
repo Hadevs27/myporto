@@ -12,25 +12,30 @@ import {
   Mail,
   Menu,
   MessageSquareText,
+  MessageCircle,
   SendHorizontal,
   X,
+  Languages
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import {
-  commandLines,
-  experienceLogs,
-  heroBadges,
-  navItems,
-  profileStats,
-  projects,
-  quickReplies,
-  skillGroups,
-} from "@/lib/portfolio-data";
+import { useEffect, useState, createContext, useContext } from "react";
 import { BackgroundFx } from "@/components/background-fx";
 import { CyberWindow } from "@/components/cyber-window";
 import { SectionHeader } from "@/components/section-header";
 import { TypingText } from "@/components/typing-text";
+import { translations, Language } from "@/lib/i18n";
+
+// Language Context
+const LanguageContext = createContext<{
+  lang: Language;
+  setLang: (l: Language) => void;
+  t: typeof translations.en;
+}>({
+  lang: "en",
+  setLang: () => {},
+  t: translations.en,
+});
+const useLanguage = () => useContext(LanguageContext);
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
@@ -52,24 +57,31 @@ type ChatMessage = {
 };
 
 export function PortfolioShell() {
+  const [lang, setLang] = useState<Language>("en");
+  const t = translations[lang];
+
   return (
-    <main className="relative min-h-screen overflow-hidden">
-      <BackgroundFx />
-      <SystemNav />
-      <HeroSection />
-      <ProfileSection />
-      <SkillTreeSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <ContactSection />
-      <Footer />
-      <Chatbot />
-    </main>
+    <LanguageContext.Provider value={{ lang, setLang, t }}>
+      <main className="relative min-h-screen overflow-hidden">
+        <BackgroundFx />
+        <SystemNav />
+        <HeroSection />
+        <ProfileSection />
+        <SkillTreeSection />
+        <ProjectsSection />
+        <ExperienceSection />
+        <ContactSection />
+        <Footer />
+        <Chatbot />
+      </main>
+    </LanguageContext.Provider>
   );
 }
 
 function SystemNav() {
   const [open, setOpen] = useState(false);
+  const { lang, setLang, t } = useLanguage();
+  const { data, ui } = t;
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-matrix/15 bg-black/55 backdrop-blur-xl">
@@ -78,7 +90,7 @@ function SystemNav() {
           HARRY.EXE
         </a>
         <div className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
+          {data.navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -88,13 +100,22 @@ function SystemNav() {
             </a>
           ))}
         </div>
-        <a
-          href="/files/CV%20HARRY%20UPDATED%201.pdf"
-          className="hud-button hidden rounded-md px-3 py-2 text-xs terminal-title md:inline-flex"
-          download
-        >
-          <Download size={15} /> CV
-        </a>
+        
+        <div className="hidden md:flex items-center gap-2">
+          <button 
+            onClick={() => setLang(lang === "en" ? "id" : "en")}
+            className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5"
+          >
+            <Languages size={15} /> {ui.nav.toggle}
+          </button>
+          <a
+            href="/files/CV%20HARRY%20UPDATED%201.pdf"
+            className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5"
+            download
+          >
+            <Download size={15} /> {ui.nav.cv}
+          </a>
+        </div>
         <button
           type="button"
           aria-label="Toggle navigation"
@@ -113,7 +134,7 @@ function SystemNav() {
             className="overflow-hidden border-t border-matrix/15 bg-black/80 md:hidden"
           >
             <div className="mx-auto grid max-w-7xl gap-1 px-4 py-3">
-              {navItems.map((item) => (
+              {data.navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -123,6 +144,22 @@ function SystemNav() {
                   {item.label}
                 </a>
               ))}
+              <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-matrix/15">
+                <button 
+                  onClick={() => { setLang(lang === "en" ? "id" : "en"); setOpen(false); }}
+                  className="terminal-title rounded-md px-3 py-3 text-xs text-matrix bg-matrix/10 text-center"
+                >
+                  {ui.nav.toggle}
+                </button>
+                <a
+                  href="/files/CV%20HARRY%20UPDATED%201.pdf"
+                  download
+                  onClick={() => setOpen(false)}
+                  className="terminal-title rounded-md px-3 py-3 text-xs text-cyanex bg-cyanex/10 text-center flex items-center justify-center gap-1.5"
+                >
+                  <Download size={15} /> {ui.nav.cv}
+                </a>
+              </div>
             </div>
           </motion.div>
         ) : null}
@@ -132,24 +169,19 @@ function SystemNav() {
 }
 
 function HeroSection() {
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
   return (
-    <section
-      id="hero"
-      className="relative flex min-h-screen items-center px-4 pb-16 pt-28 sm:px-6 lg:px-8"
-    >
+    <section id="hero" className="relative flex min-h-screen items-center px-4 pb-16 pt-28 sm:px-6 lg:px-8">
       <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1.02fr_0.98fr]">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-          className="relative z-10"
-        >
+        <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10">
           <motion.div
             variants={reveal}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyanex/35 bg-cyanex/10 px-4 py-2 text-xs text-cyanex shadow-cyan terminal-title"
           >
             <span className="h-2 w-2 rounded-full bg-matrix animate-pulse-glow" />
-            recruiter interface initialized
+            {ui.hero.init}
           </motion.div>
           <motion.h1
             variants={reveal}
@@ -157,41 +189,23 @@ function HeroSection() {
           >
             HARRY.EXE
           </motion.h1>
-          <motion.p
-            variants={reveal}
-            className="mt-5 max-w-2xl text-lg text-emerald-100/80 sm:text-xl"
-          >
-            Information Systems Student | AI Enthusiast | Web Developer
+          <motion.p variants={reveal} className="mt-5 max-w-2xl text-lg text-emerald-100/80 sm:text-xl">
+            {ui.hero.subtitle}
           </motion.p>
-          <motion.div
-            variants={reveal}
-            className="mt-5 min-h-8 font-mono text-sm text-matrix sm:text-base"
-          >
-            <TypingText
-              phrases={[
-                "Building operational web systems with a futuristic edge.",
-                "Connecting AI workflows, clean interfaces, and real-world support.",
-                "Recruiter mode: profile, quests, skills, contact channels online.",
-              ]}
-            />
+          <motion.div variants={reveal} className="mt-5 min-h-8 font-mono text-sm text-matrix sm:text-base">
+            <TypingText phrases={ui.hero.typing} />
           </motion.div>
           <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#projects" className="hud-button rounded-md px-5 py-3 text-sm font-semibold">
-              View Projects <ArrowDownRight size={18} />
+              {ui.hero.btnProjects} <ArrowDownRight size={18} />
             </a>
-            <a
-              href="#contact"
-              className="hud-button rounded-md border-cyanex/50 px-5 py-3 text-sm font-semibold"
-            >
-              Contact Me <SendHorizontal size={18} />
+            <a href="#contact" className="hud-button rounded-md border-cyanex/50 px-5 py-3 text-sm font-semibold">
+              {ui.hero.btnContact} <SendHorizontal size={18} />
             </a>
           </motion.div>
           <motion.div variants={reveal} className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {heroBadges.map((badge) => (
-              <div
-                key={badge.label}
-                className="cyber-panel rounded-md px-3 py-3 text-center text-xs text-emerald-100/75"
-              >
+            {data.heroBadges.map((badge) => (
+              <div key={badge.label} className="cyber-panel rounded-md px-3 py-3 text-center text-xs text-emerald-100/75">
                 <badge.icon className="mx-auto mb-2 h-4 w-4 text-cyanex" />
                 {badge.label}
               </div>
@@ -219,10 +233,10 @@ function HeroSection() {
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(3,5,7,0.62))]" />
               <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
                 <span className="terminal-title rounded border border-matrix/40 bg-black/50 px-3 py-2 text-xs text-matrix">
-                  HUD_SYNC 99.7%
+                  {ui.hero.hudSync}
                 </span>
                 <span className="terminal-title rounded border border-cyanex/40 bg-black/50 px-3 py-2 text-xs text-cyanex">
-                  ONLINE
+                  {ui.hero.online}
                 </span>
               </div>
               <motion.div
@@ -230,8 +244,8 @@ function HeroSection() {
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <p className="text-matrix">&gt; profile.signal.detected</p>
-                <p className="mt-2 text-cyanex">&gt; mission-ready web developer interface</p>
+                <p className="text-matrix">{ui.hero.signal}</p>
+                <p className="mt-2 text-cyanex">{ui.hero.mission}</p>
               </motion.div>
             </div>
           </CyberWindow>
@@ -242,14 +256,13 @@ function HeroSection() {
 }
 
 function ProfileSection() {
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
   return (
     <section id="profile" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="PLAYER_PROFILE.DAT"
-          title="Character Stats Panel"
-          description="A recruiter-friendly profile rendered like a playable system operator: academic signal, technical support experience, web systems, and AI curiosity in one dashboard."
-        />
+        <SectionHeader eyebrow={ui.profile.eyebrow} title={ui.profile.title} description={ui.profile.desc} />
         <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
           <CyberWindow title="identity.core">
             <div className="p-5 sm:p-7">
@@ -257,15 +270,13 @@ function ProfileSection() {
                 <div className="absolute inset-5 rounded-full border border-cyanex/25" />
                 <div className="absolute inset-10 rounded-full border border-violetx/25" />
                 <div className="text-center">
-                  <p className="terminal-title text-xs text-cyanex">operator</p>
+                  <p className="terminal-title text-xs text-cyanex">{ui.profile.operator}</p>
                   <p className="mt-2 text-4xl font-black text-white text-glow">H</p>
                   <p className="mt-2 font-mono text-xs text-matrix">HARRY.EXE</p>
                 </div>
               </div>
               <p className="leading-7 text-emerald-100/75">
-                I am an Information Technology student at Universitas Tangerang Raya with
-                hands-on experience in IT support, system troubleshooting, data management,
-                and web-based internal systems for attendance and archive workflows.
+                {ui.profile.bio}
               </p>
             </div>
           </CyberWindow>
@@ -276,7 +287,7 @@ function ProfileSection() {
             viewport={{ once: true, margin: "-80px" }}
             className="grid gap-4 sm:grid-cols-2"
           >
-            {profileStats.map((stat) => (
+            {data.profileStats.map((stat) => (
               <motion.div key={stat.label} variants={reveal} className="cyber-panel rounded-lg p-5">
                 <p className="terminal-title text-xs text-cyanex">{stat.label}</p>
                 <p className="mt-3 text-lg font-semibold text-white">{stat.value}</p>
@@ -290,14 +301,13 @@ function ProfileSection() {
 }
 
 function SkillTreeSection() {
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
   return (
     <section id="skills" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="SKILL_TREE.SYS"
-          title="Interactive Skill Matrix"
-          description="A glowing grid of practical engineering tools, support skills, AI-ready interfaces, and deployment workflows."
-        />
+        <SectionHeader eyebrow={ui.skills.eyebrow} title={ui.skills.title} description={ui.skills.desc} />
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -305,7 +315,7 @@ function SkillTreeSection() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
         >
-          {skillGroups.map((group) => (
+          {data.skillGroups.map((group) => (
             <motion.article
               key={group.title}
               variants={reveal}
@@ -318,7 +328,7 @@ function SkillTreeSection() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white">{group.title}</h3>
-                  <p className="terminal-title text-xs text-emerald-100/50">node level {group.level}</p>
+                  <p className="terminal-title text-xs text-emerald-100/50">{ui.skills.nodeLevel} {group.level}</p>
                 </div>
               </div>
               <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
@@ -349,16 +359,15 @@ function SkillTreeSection() {
 }
 
 function ProjectsSection() {
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
   return (
     <section id="projects" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="QUEST_LOG.MISSION"
-          title="Project Mission Panels"
-          description="Three recruiter-readable quests: internal systems, attendance workflows, and an AI chatbot surface prepared for backend intelligence."
-        />
+        <SectionHeader eyebrow={ui.projects.eyebrow} title={ui.projects.title} description={ui.projects.desc} />
         <div className="grid gap-6 lg:grid-cols-3">
-          {projects.map((project, index) => (
+          {data.projects.map((project, index) => (
             <motion.article
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
@@ -399,11 +408,11 @@ function ProjectsSection() {
                 <div className="mt-6 flex gap-2">
                   {project.github ? (
                     <a href={project.github} target="_blank" rel="noreferrer" className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
-                      <Github size={14} /> GitHub
+                      <Github size={14} /> {ui.projects.btnGithub}
                     </a>
                   ) : null}
                   <a href="#" className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
-                    <ExternalLink size={14} /> Live
+                    <ExternalLink size={14} /> {ui.projects.btnLive}
                   </a>
                 </div>
               </div>
@@ -416,11 +425,14 @@ function ProjectsSection() {
 }
 
 function ExperienceSection() {
-  const workLogs = experienceLogs.filter(
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
+  const workLogs = data.experienceLogs.filter(
     (item) => item.type === "Work Experience" || item.type === "Internship"
   );
-  const orgLogs = experienceLogs.filter((item) => item.type === "Organization");
-  const awardLogs = experienceLogs.filter(
+  const orgLogs = data.experienceLogs.filter((item) => item.type === "Organization");
+  const awardLogs = data.experienceLogs.filter(
     (item) => item.type === "Achievement" || item.type === "Certification"
   );
 
@@ -429,20 +441,20 @@ function ExperienceSection() {
       <div className="mx-auto max-w-5xl space-y-32">
         <TimelineBlock
           eyebrow="EXPERIENCE.WORK"
-          title="Professional Experience"
-          description="Freelance web development, internship, and technical support roles."
+          title={ui.experience.workTitle}
+          description={ui.experience.workDesc}
           logs={workLogs}
         />
         <TimelineBlock
           eyebrow="EXPERIENCE.ORG"
-          title="Organizational Experience"
-          description="Leadership, event management, and public relations within university associations."
+          title={ui.experience.orgTitle}
+          description={ui.experience.orgDesc}
           logs={orgLogs}
         />
         <TimelineBlock
           eyebrow="EXPERIENCE.AWARDS"
-          title="Achievements & Certifications"
-          description="Medals from national science competitions and technical skill certifications."
+          title={ui.experience.awardsTitle}
+          description={ui.experience.awardsDesc}
           logs={awardLogs}
         />
       </div>
@@ -459,7 +471,7 @@ function TimelineBlock({
   eyebrow: string;
   title: string;
   description: string;
-  logs: typeof experienceLogs;
+  logs: any[];
 }) {
   return (
     <div>
@@ -514,25 +526,24 @@ function TimelineBlock({
 }
 
 function ContactSection() {
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
   return (
     <section id="contact" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <SectionHeader
-          eyebrow="CONTACT_TERMINAL.OPEN"
-          title="Open Recruiter Channel"
-          description="Fast access to email, professional profile links, and the latest CV artifact."
-        />
+        <SectionHeader eyebrow={ui.contact.eyebrow} title={ui.contact.title} description={ui.contact.desc} />
         <CyberWindow title="contact.sh">
           <div className="grid gap-6 p-5 md:grid-cols-[0.92fr_1.08fr] md:p-8">
             <div className="space-y-3 font-mono text-sm text-emerald-100/80">
-              {commandLines.map((line, index) => (
+              {data.commandLines.map((line, index) => (
                 <motion.p
                   key={line}
                   initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.14 }}
-                  className={index === commandLines.length - 1 ? "text-matrix" : ""}
+                  className={index === data.commandLines.length - 1 ? "text-matrix" : ""}
                 >
                   {line}
                 </motion.p>
@@ -540,7 +551,7 @@ function ContactSection() {
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               <a href="mailto:harryseptoni27@gmail.com" className="hud-button rounded-md px-4 py-4">
-                <Mail size={18} /> Email
+                <Mail size={18} /> {ui.contact.btnEmail}
               </a>
               <a
                 href="https://linkedin.com/in/harry-septoni-an"
@@ -548,7 +559,7 @@ function ContactSection() {
                 rel="noreferrer"
                 className="hud-button rounded-md px-4 py-4"
               >
-                <Linkedin size={18} /> LinkedIn
+                <Linkedin size={18} /> {ui.contact.btnLinkedin}
               </a>
               <a
                 href="https://github.com/Hadevs27"
@@ -556,14 +567,22 @@ function ContactSection() {
                 rel="noreferrer"
                 className="hud-button rounded-md px-4 py-4"
               >
-                <Github size={18} /> GitHub
+                <Github size={18} /> {ui.contact.btnGithub}
+              </a>
+              <a
+                href="https://wa.me/6281291804882"
+                target="_blank"
+                rel="noreferrer"
+                className="hud-button rounded-md px-4 py-4"
+              >
+                <MessageCircle size={18} /> {ui.contact.btnWhatsapp}
               </a>
               <a
                 href="/files/CV%20HARRY%20UPDATED%201.pdf"
                 download
-                className="hud-button rounded-md px-4 py-4"
+                className="hud-button rounded-md px-4 py-4 sm:col-span-2 text-center flex justify-center"
               >
-                <Download size={18} /> Download CV
+                <Download size={18} className="mr-2" /> {ui.contact.btnCv}
               </a>
             </div>
           </div>
@@ -574,15 +593,22 @@ function ContactSection() {
 }
 
 function Chatbot() {
+  const { t } = useLanguage();
+  const { data, ui } = t;
+
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      role: "assistant",
-      text: "Hello, recruiter. I’m HARRY.EXE Assistant. Ask me anything about Harry’s projects, skills, and experience.",
-    },
-  ]);
-  const [typing, setTyping] = useState(false);
+  // Reset messages when language changes by using an effect, or just rely on state
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+  useEffect(() => {
+    setMessages([
+      {
+        role: "assistant",
+        text: ui.chat.greeting,
+      },
+    ]);
+  }, [ui.chat.greeting]);
 
   useEffect(() => {
     if (!open) {
@@ -597,14 +623,16 @@ function Chatbot() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const sendReply = (topic: keyof typeof quickReplies) => {
+  const sendReply = (topic: keyof typeof data.quickReplies) => {
     setMessages((items) => [...items, { role: "user", text: topic }]);
     setTyping(true);
     window.setTimeout(() => {
-      setMessages((items) => [...items, { role: "assistant", text: quickReplies[topic] }]);
+      setMessages((items) => [...items, { role: "assistant", text: data.quickReplies[topic] }]);
       setTyping(false);
     }, 580);
   };
+
+  const [typing, setTyping] = useState(false);
 
   const sendInput = () => {
     const value = input.trim();
@@ -619,7 +647,7 @@ function Chatbot() {
         ...items,
         {
           role: "assistant",
-          text: "Frontend simulation ready. Gemini API integration can be connected later through a secure server route.",
+          text: ui.chat.typing,
         },
       ]);
       setTyping(false);
@@ -647,7 +675,7 @@ function Chatbot() {
             <div className="flex items-center justify-between border-b border-matrix/20 px-4 py-3">
               <div className="flex items-center gap-2">
                 <MessageSquareText className="h-4 w-4 text-cyanex" />
-                <p className="terminal-title text-xs text-cyanex">assistant.gemini-ready</p>
+                <p className="terminal-title text-xs text-cyanex">{ui.chat.title}</p>
               </div>
               <button
                 type="button"
@@ -686,11 +714,11 @@ function Chatbot() {
             </div>
             <div className="border-t border-matrix/20 p-4">
               <div className="mb-3 flex flex-wrap gap-2">
-                {Object.keys(quickReplies).map((topic) => (
+                {Object.keys(data.quickReplies).map((topic) => (
                   <button
                     key={topic}
                     type="button"
-                    onClick={() => sendReply(topic as keyof typeof quickReplies)}
+                    onClick={() => sendReply(topic as keyof typeof data.quickReplies)}
                     className="rounded border border-cyanex/25 bg-cyanex/10 px-2.5 py-1.5 font-mono text-xs text-cyanex hover:border-matrix/55 hover:text-matrix"
                   >
                     {topic}
@@ -706,7 +734,7 @@ function Chatbot() {
                       sendInput();
                     }
                   }}
-                  placeholder="type a recruiter query..."
+                  placeholder={ui.chat.placeholder}
                   className="min-w-0 flex-1 rounded-md border border-matrix/25 bg-black/55 px-3 py-2 font-mono text-sm text-white outline-none placeholder:text-emerald-100/35 focus:border-cyanex/60"
                 />
                 <button
@@ -727,9 +755,10 @@ function Chatbot() {
 }
 
 function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="border-t border-matrix/15 px-4 py-8 text-center font-mono text-sm text-matrix sm:px-6 lg:px-8">
-      &gt; SYSTEM ONLINE // HARRY.EXE
+      {t.ui.footer}
     </footer>
   );
 }
