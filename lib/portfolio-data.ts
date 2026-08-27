@@ -26,10 +26,10 @@ export const navItems = [
 
 export const profileStats = [
   { label: "Name", value: "Harry Septoni A. Nadapdap" },
-  { label: "GPA", value: "3.96 / 4.00" },
+  { label: "GPA", value: "3.99 / 4.00" },
   { label: "University", value: "Universitas Tangerang Raya" },
   { label: "Role", value: "Information Systems Student" },
-  { label: "Experience", value: "IT Support, Lab Assistant, Web Systems" },
+  { label: "Experience", value: "IT Support, Web Developer, Intern" },
   { label: "System Status", value: "Level 21 // Online" },
 ];
 
@@ -38,68 +38,80 @@ export const skillGroups = [
     title: "Frontend",
     icon: Code2,
     level: 86,
-    skills: ["HTML", "CSS", "JavaScript", "Next.js", "Tailwind"],
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "Tailwind", "Bootstrap"],
   },
   {
     title: "Backend",
     icon: ServerCog,
     level: 78,
-    skills: ["PHP", "Laravel", "REST Logic", "System Testing"],
+    skills: ["PHP", "Laravel", "Python", "REST API Development"],
   },
   {
     title: "Database",
     icon: Database,
     level: 80,
-    skills: ["MySQL", "Data Entry", "Archive Workflows"],
+    skills: ["MySQL", "PostgreSQL", "Database Design"],
   },
   {
-    title: "AI Tools",
+    title: "Analytical Skills",
     icon: BrainCircuit,
     level: 74,
-    skills: ["Gemini API", "AI Chatbot UI", "Prompting", "Automation"],
+    skills: ["System Analysis", "Software Testing", "Workflow Optimization", "Documentation"],
   },
   {
-    title: "UI/UX",
+    title: "UI/UX & Tools",
     icon: Figma,
     level: 76,
-    skills: ["Wireframes", "Dashboards", "Usability", "Documentation"],
+    skills: ["Figma", "Visual Studio Code", "UI/UX Design", "Microsoft Office"],
   },
   {
     title: "Deployment",
     icon: Rocket,
     level: 72,
-    skills: ["GitHub", "Vercel", "Version Control", "Release Checks"],
+    skills: ["Git", "GitHub", "Version Control", "Application Deployment"],
   },
 ];
 
 export const projects = [
   {
-    title: "AI Archive Management System",
-    label: "Quest 01",
+    title: "Meeting Scheduling Information System",
+    label: "BAPENDA Kab. Tangerang",
     description:
-      "Internal web system concept for digitizing archive lookup, reducing manual search time, and preparing AI-assisted document discovery.",
-    stack: ["Laravel", "MySQL", "Gemini API", "Tailwind"],
+      "Web-based meeting scheduling and agenda management system with role-based authentication, meeting management features, and integrated Telegram notifications for reminders.",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind", "Telegram Bot"],
     accent: "matrix",
+    github: "https://github.com/Hadevs27/Sistem-Informasi-Penjadwalan-Agenda-Rapat-berbasis-Web-pada-BAPENDA-",
   },
   {
-    title: "Attendance System",
-    label: "Quest 02",
+    title: "E-Commerce Prefab Building Materials",
+    label: "E-Commerce",
     description:
-      "Operational attendance workflow for internship needs, designed around faster daily reporting, clean data entry, and simple admin monitoring.",
-    stack: ["PHP", "Laravel", "MySQL", "Bootstrap"],
+      "E-commerce platform for prefab building materials featuring product management, shopping cart, checkout, responsive admin dashboard, and relational database workflow.",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind"],
     accent: "cyanex",
+    github: "https://github.com/Hadevs27/aplikasi-ecommerce-bangunanprefab",
   },
   {
-    title: "AI Portfolio Chatbot",
-    label: "Quest 03",
+    title: "Agricultural Production & Sales System",
+    label: "Management System",
     description:
-      "Recruiter-facing assistant interface prepared for Gemini API integration, with quick prompts for projects, skills, GPA, and experience.",
-    stack: ["Next.js", "Framer Motion", "Gemini API", "Vercel"],
+      "Web-based production and sales management system. Includes product management, sales transactions, reporting modules, and a responsive operational dashboard.",
+    stack: ["Laravel", "PHP", "MySQL"],
     accent: "violetx",
+    github: "https://github.com/Hadevs27/Sistem-Informasi-Produksi-dan-Penjualan-Hasil-Pertanian",
   },
 ];
 
 export const experienceLogs = [
+  {
+    icon: Code2,
+    type: "Work Experience",
+    title: "Freelance Web & Mobile Developer",
+    org: "Self-Employed, Tangerang",
+    date: "March 2025 - Present",
+    details:
+      "Developed web-based and mobile applications for university students. Handled requirement analysis, database design, authentication, API integrations, and deployment using Laravel, Next.js, and PostgreSQL.",
+  },
   {
     icon: BriefcaseBusiness,
     type: "Internship",
@@ -107,7 +119,7 @@ export const experienceLogs = [
     org: "Dinas Tenaga Kerja Kab. Tangerang",
     date: "May 2025 - August 2025",
     details:
-      "Built and implemented internal attendance and archive web systems while supporting document digitization, workflow optimization, and daily technical troubleshooting.",
+      "Developed a web-based archive management and employee attendance system using Laravel and MySQL. Reduced manual archive searching by 50% through digitization.",
   },
   {
     icon: Terminal,
@@ -116,12 +128,12 @@ export const experienceLogs = [
     org: "Universitas Tangerang Raya",
     date: "May 2024 - November 2024",
     details:
-      "Supported students and faculty with hardware, software, printer, login, and productivity-tool issues while reducing downtime through proactive checks.",
+      "Supported students and faculty with hardware/software issues. Reduced system downtime by 35% through proactive equipment checks and provided mini-training sessions.",
   },
   {
     icon: Layers3,
     type: "Organization",
-    title: "Chair, Student Empowerment Institution Department",
+    title: "Chair, Student Empowerment Institution Dept.",
     org: "Himpunan Mahasiswa Teknologi Informasi",
     date: "May 2024 - April 2025",
     details:
@@ -134,34 +146,34 @@ export const experienceLogs = [
     org: "Himpunan Mahasiswa Teknologi Informasi",
     date: "June 2023 - May 2024",
     details:
-      "Organized workshops and bootcamps, improved digital promotions, and produced event evaluation reports for participation and material quality.",
-  },
-  {
-    icon: Trophy,
-    type: "Achievement",
-    title: "Silver Medalist",
-    org: "Indonesia Youth Science Competition 2026",
-    date: "May 2026",
-    details:
-      "Earned a silver medal in an international-level science competition, showing analytical thinking and problem-solving ability.",
+      "Organized workshops and bootcamps, boosting participation by 65%. Developed an event evaluation system and boosted engagement by 120% through digital promotions.",
   },
   {
     icon: Trophy,
     type: "Achievement",
     title: "Gold Medalist",
-    org: "Olimpiade Sains Nasional 2026",
+    org: "Olimpiade Sains Nasional (OSP) 2026",
     date: "2026",
     details:
-      "Received a gold medal in the National Science Olympiad, demonstrating strong academic discipline, analytical reasoning, and competitive problem-solving.",
+      "Achieved a gold medal in a national science olympiad, demonstrating strong analytical thinking, logical reasoning, and problem-solving skills.",
   },
   {
     icon: Trophy,
     type: "Achievement",
     title: "Silver Medalist",
-    org: "Olimpiade Sains & Kesehatan Hari Pendidikan Nasional (OSPENAS) 2026",
+    org: "OSPENAS 2026",
     date: "2026",
     details:
-      "Received a silver medal at OSPENAS 2026, strengthening Harry's achievement profile across science, health, and academic competition fields.",
+      "Achieved a silver medal in a national-level competition, reflecting strong academic capability, consistency, and competitive learning achievement.",
+  },
+  {
+    icon: Trophy,
+    type: "Achievement",
+    title: "Silver Medalist",
+    org: "Indonesia Youth Science Competition (IYSC) 2026",
+    date: "May 2026",
+    details:
+      "Earned a silver medal in an international-level science competition, demonstrating strong analytical thinking and problem-solving skills.",
   },
   {
     icon: ShieldCheck,
@@ -176,14 +188,14 @@ export const experienceLogs = [
 
 export const quickReplies = {
   Projects:
-    "Harry has built archive and attendance systems, plus this recruiter-ready AI chatbot interface for Gemini integration.",
+    "Harry has built a Meeting Scheduling System, an E-Commerce platform for prefab building materials, and an Agricultural Production System.",
   Skills:
-    "Core stack: HTML, CSS, JavaScript, Next.js, Tailwind, Laravel, MySQL, Python, GitHub, Vercel, and Gemini API concepts.",
+    "Core stack: Next.js, React, Tailwind, PHP, Laravel, MySQL, PostgreSQL, Python, Git, and REST API Development.",
   Experience:
-    "Harry has experience as an Information System Intern and Computer Lab Assistant, organization leadership in HIMATIF, and medal achievements in national science competitions.",
+    "Harry works as a Freelance Web Developer, previously an IT Intern at Disnaker Kab. Tangerang, and a Computer Lab Assistant. He also has a strong record in national science olympiads.",
   Contact:
     "Reach Harry through email, LinkedIn, GitHub, or download the CV from the contact terminal.",
-  GPA: "Harry's GPA is 3.96 / 4.00 at Universitas Tangerang Raya.",
+  GPA: "Harry's GPA is 3.99 / 4.00 at Universitas Tangerang Raya.",
 };
 
 export const commandLines = [

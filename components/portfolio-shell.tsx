@@ -396,15 +396,14 @@ function ProjectsSection() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 grid grid-cols-3 gap-2">
-                  <a href="#" className="hud-button rounded-md px-2 py-2 text-xs">
+                <div className="mt-6 flex gap-2">
+                  {project.github ? (
+                    <a href={project.github} target="_blank" rel="noreferrer" className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
+                      <Github size={14} /> GitHub
+                    </a>
+                  ) : null}
+                  <a href="#" className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
                     <ExternalLink size={14} /> Live
-                  </a>
-                  <a href="https://github.com/" className="hud-button rounded-md px-2 py-2 text-xs">
-                    <Github size={14} /> GitHub
-                  </a>
-                  <a href="#" className="hud-button rounded-md px-2 py-2 text-xs">
-                    <ChevronRight size={14} /> Case
                   </a>
                 </div>
               </div>
@@ -513,7 +512,7 @@ function ContactSection() {
                 <Linkedin size={18} /> LinkedIn
               </a>
               <a
-                href="https://github.com/"
+                href="https://github.com/Hadevs27"
                 target="_blank"
                 rel="noreferrer"
                 className="hud-button rounded-md px-4 py-4"
