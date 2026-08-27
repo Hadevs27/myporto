@@ -89,7 +89,7 @@ function SystemNav() {
           ))}
         </div>
         <a
-          href="/files/harry-septoni-cv.pdf"
+          href="/files/CV%20HARRY%20UPDATED%201.pdf"
           className="hud-button hidden rounded-md px-3 py-2 text-xs terminal-title md:inline-flex"
           download
         >
@@ -521,7 +521,7 @@ function ContactSection() {
                 <Github size={18} /> GitHub
               </a>
               <a
-                href="/files/harry-septoni-cv.pdf"
+                href="/files/CV%20HARRY%20UPDATED%201.pdf"
                 download
                 className="hud-button rounded-md px-4 py-4"
               >
