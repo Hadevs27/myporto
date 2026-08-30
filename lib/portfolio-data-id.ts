@@ -200,7 +200,8 @@ export const experienceLogs = [
     org: "LSP Media Informatika – TUK HAS",
     date: "Juni 2026",
     details:
-      "Asesmen Kompetensi (Competency Assessment). Sertifikat resmi sedang dalam proses.",
+      "Sertifikat Asesmen Kompetensi (Competency Assessment) untuk Junior Web Programmer.",
+    link: "/files/ukom.pdf",
   },
   {
     icon: ShieldCheck,

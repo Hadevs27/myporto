@@ -504,7 +504,14 @@ function TimelineBlock({
                   </div>
                   <div>
                     <p className="terminal-title text-xs text-cyanex">{item.type}</p>
-                    <h3 className="mt-1 text-lg font-bold text-white">{item.title}</h3>
+                    {item.link ? (
+                      <a href={item.link} target="_blank" rel="noreferrer" className="group mt-1 inline-flex items-center gap-1.5 text-lg font-bold text-white transition hover:text-cyanex">
+                        {item.title}
+                        <ExternalLink size={16} className="opacity-50 transition group-hover:opacity-100" />
+                      </a>
+                    ) : (
+                      <h3 className="mt-1 text-lg font-bold text-white">{item.title}</h3>
+                    )}
                     <p className="mt-1 text-sm text-emerald-100/60">{item.org}</p>
                     <p className="mt-2 font-mono text-xs text-matrix">{item.date}</p>
                   </div>

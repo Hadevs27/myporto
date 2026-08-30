@@ -200,7 +200,8 @@ export const experienceLogs = [
     org: "LSP Media Informatika – TUK HAS",
     date: "June 2026",
     details:
-      "Competency Assessment. Official Certificate Pending.",
+      "Competency Assessment Certificate for Junior Web Programmer.",
+    link: "/files/ukom.pdf",
   },
   {
     icon: ShieldCheck,
