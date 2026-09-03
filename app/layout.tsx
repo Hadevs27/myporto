@@ -13,9 +13,9 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HARRY.EXE | Cyber Portfolio",
+  title: "Harry Septoni Armando Nadapdap | Junior Web Developer",
   description:
-    "Modern futuristic portfolio for Harry Septoni Armando Nadapdap, Information Systems student, AI enthusiast, and web developer.",
+    "Portfolio of Harry Septoni Armando Nadapdap, an Information Systems graduate and junior web developer focused on building practical web and mobile applications.",
 };
 
 export default function RootLayout({

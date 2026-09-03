@@ -17,57 +17,55 @@ import {
 } from "lucide-react";
 
 export const navItems = [
+  { label: "Beranda", href: "#hero" },
   { label: "Profil", href: "#profile" },
   { label: "Keahlian", href: "#skills" },
   { label: "Proyek", href: "#projects" },
   { label: "Pengalaman", href: "#experience" },
+  { label: "Pendidikan", href: "#education" },
+  { label: "Sertifikasi", href: "#certifications" },
+  { label: "Pencapaian", href: "#achievements" },
   { label: "Kontak", href: "#contact" },
 ];
 
 export const profileStats = [
-  { label: "Nama", value: "Harry Septoni A. Nadapdap" },
-  { label: "IPK", value: "3.99 / 4.00" },
+  { label: "Nama", value: "Harry Septoni Armando Nadapdap" },
+  { label: "Gelar", value: "Lulusan Sistem Informasi" },
   { label: "Universitas", value: "Universitas Tangerang Raya" },
-  { label: "Peran", value: "Mahasiswa Sistem Informasi" },
-  { label: "Pengalaman", value: "IT Support, Web Developer, Intern" },
-  { label: "Status Sistem", value: "Level 21 // Online" },
+  { label: "IPK", value: "3.99 / 4.00" },
+  { label: "Fokus", value: "Pengembangan Web & Mobile" },
+  { label: "Lokasi", value: "Tangerang, Indonesia" },
 ];
 
 export const skillGroups = [
   {
     title: "Frontend",
     icon: Code2,
-    level: 86,
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "React.js", "Tailwind", "Bootstrap"],
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "React.js", "Tailwind CSS", "Bootstrap"],
   },
   {
     title: "Backend & Mobile",
     icon: ServerCog,
-    level: 78,
     skills: ["PHP", "Laravel", "Python", "Dart", "Flutter", "REST API"],
   },
   {
     title: "Database",
     icon: Database,
-    level: 80,
     skills: ["MySQL", "PostgreSQL", "Desain Database"],
   },
   {
     title: "Kemampuan Analitis",
     icon: BrainCircuit,
-    level: 74,
     skills: ["Analisis Sistem", "Pengujian Software", "Optimasi Workflow", "Dokumentasi"],
   },
   {
     title: "UI/UX & Tools",
     icon: Figma,
-    level: 76,
     skills: ["Figma", "Visual Studio Code", "Desain UI/UX", "Microsoft Office"],
   },
   {
-    title: "Deployment",
+    title: "Deployment & Version Control",
     icon: Rocket,
-    level: 72,
     skills: ["Git", "GitHub", "Version Control", "Deployment Aplikasi"],
   },
 ];
@@ -78,7 +76,7 @@ export const projects = [
     label: "BAPENDA Kab. Tangerang",
     description:
       "Sistem manajemen agenda dan penjadwalan rapat berbasis web dengan autentikasi berbasis peran, fitur manajemen rapat, dan integrasi notifikasi pengingat via Telegram.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind", "Bot Telegram"],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Bot Telegram"],
     accent: "matrix",
     github: "https://github.com/Hadevs27/Sistem-Informasi-Penjadwalan-Agenda-Rapat-berbasis-Web-pada-BAPENDA-",
   },
@@ -87,7 +85,7 @@ export const projects = [
     label: "E-Commerce",
     description:
       "Platform e-commerce untuk material bangunan prefabrikasi dengan fitur manajemen produk, keranjang belanja, checkout, dasbor admin yang responsif, dan alur database relasional.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind"],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
     accent: "cyanex",
     github: "https://github.com/Hadevs27/aplikasi-ecommerce-bangunanprefab",
   },
@@ -104,13 +102,22 @@ export const projects = [
 
 export const experienceLogs = [
   {
+    icon: GraduationCap,
+    type: "Education",
+    title: "Sarjana Sistem Informasi",
+    org: "Universitas Tangerang Raya",
+    date: "2022 - 2026",
+    details:
+      "Lulus dengan IPK 3.99 / 4.00. Fokus pada pengembangan perangkat lunak, analisis sistem, dan manajemen database.",
+  },
+  {
     icon: Code2,
     type: "Work Experience",
     title: "Freelance Web & Mobile Developer",
     org: "Pekerja Lepas, Tangerang",
     date: "Maret 2025 - Sekarang",
     details:
-      "Mengembangkan aplikasi web dan seluler untuk mahasiswa. Menangani analisis kebutuhan, desain database, autentikasi, integrasi API, dan deployment menggunakan Laravel, Next.js, dan PostgreSQL.",
+      "Mengembangkan aplikasi web dan seluler. Menangani analisis kebutuhan, desain database, autentikasi, integrasi API, dan deployment menggunakan Laravel, Next.js, dan PostgreSQL.",
   },
   {
     icon: BriefcaseBusiness,
@@ -119,7 +126,7 @@ export const experienceLogs = [
     org: "Dinas Tenaga Kerja Kab. Tangerang",
     date: "Mei 2025 - Agustus 2025",
     details:
-      "Mengembangkan sistem manajemen arsip dan absensi karyawan berbasis web menggunakan Laravel dan MySQL. Mengurangi pencarian arsip manual sebesar 50% melalui digitalisasi.",
+      "Mengembangkan sistem manajemen arsip dan absensi karyawan berbasis web menggunakan Laravel dan MySQL. Mendigitalisasi alur kerja arsip untuk membuat pencarian dokumen menjadi lebih cepat dan terorganisir.",
   },
   {
     icon: Terminal,
@@ -128,7 +135,7 @@ export const experienceLogs = [
     org: "Universitas Tangerang Raya",
     date: "Mei 2024 - November 2024",
     details:
-      "Mendukung mahasiswa dan dosen terkait masalah perangkat keras/lunak. Menurunkan waktu henti sistem sebesar 35% melalui pemeriksaan peralatan proaktif dan sesi pelatihan singkat.",
+      "Mendukung mahasiswa dan dosen terkait masalah perangkat keras dan lunak. Meningkatkan keandalan sistem melalui pemeriksaan peralatan secara proaktif dan memberikan sesi pelatihan singkat.",
   },
   {
     icon: Layers3,
@@ -146,7 +153,7 @@ export const experienceLogs = [
     org: "Himpunan Mahasiswa Teknologi Informasi",
     date: "Juni 2023 - Mei 2024",
     details:
-      "Menyelenggarakan workshop dan bootcamp, meningkatkan partisipasi sebesar 65%. Mengembangkan sistem evaluasi acara dan mendorong interaksi online hingga 120% melalui promosi digital.",
+      "Menyelenggarakan workshop dan bootcamp, secara signifikan meningkatkan partisipasi mahasiswa. Mengembangkan sistem evaluasi acara dan meningkatkan keterlibatan melalui promosi digital.",
   },
   {
     icon: Layers3,
@@ -218,24 +225,24 @@ export const quickReplies = {
   Projects:
     "Harry telah membangun Sistem Penjadwalan Rapat, platform E-Commerce untuk material prefab, dan Sistem Informasi Penjualan Hasil Pertanian.",
   Skills:
-    "Teknologi inti: Next.js, React.js, Tailwind, PHP, Laravel, Flutter, PostgreSQL, Python, Git, dan Pengembangan REST API.",
+    "Teknologi inti: Next.js, React.js, Tailwind CSS, PHP, Laravel, Flutter, PostgreSQL, Python, Git, dan Pengembangan REST API.",
   Experience:
     "Harry bekerja sebagai Freelance Web Developer, sebelumnya sebagai Pekerja Magang IT di Disnaker Kab. Tangerang, dan Asisten Lab Komputer. Ia juga punya rekam jejak juara di olimpiade sains nasional.",
   Contact:
-    "Hubungi Harry melalui email, LinkedIn, GitHub, WhatsApp, atau unduh CV-nya melalui terminal kontak.",
+    "Hubungi Harry melalui email, LinkedIn, GitHub, atau unduh CV-nya melalui bagian kontak.",
   GPA: "IPK Harry adalah 3.99 / 4.00 di Universitas Tangerang Raya.",
 };
 
 export const commandLines = [
-  "> boot HARRY.EXE",
-  "> scan profile --recruiter-mode",
-  "> load projects --mission-log",
-  "> contact --open-channel",
+  "> init developer_portfolio",
+  "> load profile --format=professional",
+  "> fetch projects --latest",
+  "> open contact_channels",
 ];
 
 export const heroBadges = [
-  { icon: GraduationCap, label: "Sistem Informasi" },
-  { icon: BrainCircuit, label: "Penggiat AI" },
-  { icon: Sparkles, label: "Web Developer" },
-  { icon: Github, label: "Ahli Git" },
+  { icon: Code2, label: "Pengembangan Web" },
+  { icon: Layers3, label: "Full-Stack Development" },
+  { icon: Database, label: "Database & API" },
+  { icon: Github, label: "Git & GitHub" },
 ];

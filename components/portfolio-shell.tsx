@@ -87,7 +87,7 @@ function SystemNav() {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-matrix/15 bg-black/55 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#hero" className="terminal-title text-sm font-bold text-matrix text-glow">
-          HARRY.EXE
+          HARRY.DEV
         </a>
         <div className="hidden items-center gap-1 md:flex">
           {data.navItems.map((item) => (
@@ -181,13 +181,13 @@ function HeroSection() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyanex/35 bg-cyanex/10 px-4 py-2 text-xs text-cyanex shadow-cyan terminal-title"
           >
             <span className="h-2 w-2 rounded-full bg-matrix animate-pulse-glow" />
-            {ui.hero.init}
+            HARRY.EXE // {ui.hero.init}
           </motion.div>
           <motion.h1
             variants={reveal}
-            className="text-5xl font-black leading-none text-white text-glow sm:text-7xl lg:text-8xl"
+            className="text-5xl font-black leading-none text-white text-glow sm:text-6xl lg:text-7xl"
           >
-            HARRY.EXE
+            Harry Septoni Armando Nadapdap
           </motion.h1>
           <motion.p variants={reveal} className="mt-5 max-w-2xl text-lg text-emerald-100/80 sm:text-xl">
             {ui.hero.subtitle}
@@ -220,33 +220,34 @@ function HeroSection() {
           className="relative"
         >
           <div className="absolute -inset-10 rounded-full bg-cyanex/10 blur-3xl" />
-          <CyberWindow title="visual_hud.render">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image
-                src="/assets/cyber-hud.png"
-                alt="Futuristic cyber operating system dashboard artwork"
-                fill
-                priority
-                sizes="(min-width: 1024px) 48vw, 100vw"
-                className="object-cover opacity-90"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(3,5,7,0.62))]" />
-              <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
-                <span className="terminal-title rounded border border-matrix/40 bg-black/50 px-3 py-2 text-xs text-matrix">
-                  {ui.hero.hudSync}
-                </span>
-                <span className="terminal-title rounded border border-cyanex/40 bg-black/50 px-3 py-2 text-xs text-cyanex">
-                  {ui.hero.online}
-                </span>
+          <CyberWindow title="developer.profile">
+            <div className="relative aspect-[4/3] overflow-y-auto bg-black/80 p-5 sm:p-8 font-mono text-xs sm:text-sm text-emerald-100/90 border-t border-matrix/20">
+              <p className="text-cyanex font-bold text-base mb-6">{ui.hero.hudSync}</p>
+              
+              <p className="text-matrix font-bold mt-5 mb-2">PROJECTS</p>
+              <ul className="list-none space-y-1.5 pl-0 text-emerald-100/80">
+                <li>- Meeting Scheduling Information System</li>
+                <li>- E-Commerce Prefab Building Materials</li>
+                <li>- Agricultural Production & Sales System</li>
+              </ul>
+
+              <p className="text-matrix font-bold mt-6 mb-2">TECH STACK</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {['Next.js', 'TypeScript', 'React.js', 'Laravel', 'PostgreSQL', 'MySQL', 'Git'].map(tech => (
+                  <span key={tech} className="bg-cyanex/10 text-cyanex px-2 py-0.5 rounded border border-cyanex/30">{tech}</span>
+                ))}
               </div>
-              <motion.div
-                className="absolute inset-x-8 bottom-8 rounded-md border border-matrix/35 bg-black/60 p-4 font-mono text-xs text-emerald-100/80"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <p className="text-matrix">{ui.hero.signal}</p>
-                <p className="mt-2 text-cyanex">{ui.hero.mission}</p>
-              </motion.div>
+
+              <div className="mt-8 flex flex-wrap gap-8">
+                <div>
+                  <p className="text-matrix font-bold mb-1">STATUS</p>
+                  <p className="text-emerald-100/80">{ui.hero.online}</p>
+                </div>
+                <div>
+                  <p className="text-matrix font-bold mb-1">SOURCE</p>
+                  <p className="text-emerald-100/80">GitHub</p>
+                </div>
+              </div>
             </div>
           </CyberWindow>
         </motion.div>
@@ -272,10 +273,10 @@ function ProfileSection() {
                 <div className="text-center">
                   <p className="terminal-title text-xs text-cyanex">{ui.profile.operator}</p>
                   <p className="mt-2 text-4xl font-black text-white text-glow">H</p>
-                  <p className="mt-2 font-mono text-xs text-matrix">HARRY.EXE</p>
+                  <p className="mt-2 font-mono text-xs text-matrix">HARRY.DEV</p>
                 </div>
               </div>
-              <p className="leading-7 text-emerald-100/75">
+              <p className="leading-7 text-emerald-100/75 whitespace-pre-wrap">
                 {ui.profile.bio}
               </p>
             </div>
@@ -328,17 +329,7 @@ function SkillTreeSection() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white">{group.title}</h3>
-                  <p className="terminal-title text-xs text-emerald-100/50">{ui.skills.nodeLevel} {group.level}</p>
                 </div>
-              </div>
-              <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${group.level}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.9, ease: "easeOut" }}
-                  className="h-full rounded-full bg-gradient-to-r from-matrix via-cyanex to-violetx"
-                />
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
@@ -411,9 +402,6 @@ function ProjectsSection() {
                       <Github size={14} /> {ui.projects.btnGithub}
                     </a>
                   ) : null}
-                  <a href="#" className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
-                    <ExternalLink size={14} /> {ui.projects.btnLive}
-                  </a>
                 </div>
               </div>
             </motion.article>
@@ -431,31 +419,48 @@ function ExperienceSection() {
   const workLogs = data.experienceLogs.filter(
     (item) => item.type === "Work Experience" || item.type === "Internship"
   );
+  const eduLogs = data.experienceLogs.filter((item) => item.type === "Education");
+  const certLogs = data.experienceLogs.filter((item) => item.type === "Certification");
+  const awardLogs = data.experienceLogs.filter((item) => item.type === "Achievement");
   const orgLogs = data.experienceLogs.filter((item) => item.type === "Organization");
-  const awardLogs = data.experienceLogs.filter(
-    (item) => item.type === "Achievement" || item.type === "Certification"
-  );
 
   return (
     <section id="experience" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl space-y-32">
         <TimelineBlock
-          eyebrow="EXPERIENCE.WORK"
+          id="experience-work"
+          eyebrow="EXPERIENCE // 02"
           title={ui.experience.workTitle}
           description={ui.experience.workDesc}
           logs={workLogs}
         />
         <TimelineBlock
-          eyebrow="EXPERIENCE.ORG"
-          title={ui.experience.orgTitle}
-          description={ui.experience.orgDesc}
-          logs={orgLogs}
+          id="education"
+          eyebrow="EDUCATION // 03"
+          title={ui.experience.eduTitle}
+          description={ui.experience.eduDesc}
+          logs={eduLogs}
         />
         <TimelineBlock
-          eyebrow="EXPERIENCE.AWARDS"
+          id="certifications"
+          eyebrow="CERTIFICATIONS // 04"
+          title={ui.experience.certTitle}
+          description={ui.experience.certDesc}
+          logs={certLogs}
+        />
+        <TimelineBlock
+          id="achievements"
+          eyebrow="ACHIEVEMENTS // 05"
           title={ui.experience.awardsTitle}
           description={ui.experience.awardsDesc}
           logs={awardLogs}
+        />
+        <TimelineBlock
+          id="organizations"
+          eyebrow="ORGANIZATION // 06"
+          title={ui.experience.orgTitle}
+          description={ui.experience.orgDesc}
+          logs={orgLogs}
         />
       </div>
     </section>
@@ -463,18 +468,21 @@ function ExperienceSection() {
 }
 
 function TimelineBlock({
+  id,
   eyebrow,
   title,
   description,
   logs,
 }: {
+  id?: string;
   eyebrow: string;
   title: string;
   description: string;
   logs: any[];
 }) {
+  if (!logs || logs.length === 0) return null;
   return (
-    <div>
+    <div id={id}>
       <SectionHeader eyebrow={eyebrow} title={title} description={description} />
       <div className="relative mt-8">
         <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-matrix via-cyanex to-violetx md:left-1/2" />

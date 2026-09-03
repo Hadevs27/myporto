@@ -17,57 +17,55 @@ import {
 } from "lucide-react";
 
 export const navItems = [
-  { label: "Profile", href: "#profile" },
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#profile" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "Achievements", href: "#achievements" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const profileStats = [
-  { label: "Name", value: "Harry Septoni A. Nadapdap" },
-  { label: "GPA", value: "3.99 / 4.00" },
+  { label: "Name", value: "Harry Septoni Armando Nadapdap" },
+  { label: "Degree", value: "Information Systems Graduate" },
   { label: "University", value: "Universitas Tangerang Raya" },
-  { label: "Role", value: "Information Systems Student" },
-  { label: "Experience", value: "IT Support, Web Developer, Intern" },
-  { label: "System Status", value: "Level 21 // Online" },
+  { label: "GPA", value: "3.99 / 4.00" },
+  { label: "Focus", value: "Web & Mobile Development" },
+  { label: "Location", value: "Tangerang, Indonesia" },
 ];
 
 export const skillGroups = [
   {
     title: "Frontend",
     icon: Code2,
-    level: 86,
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "React.js", "Tailwind", "Bootstrap"],
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Next.js", "React.js", "Tailwind CSS", "Bootstrap"],
   },
   {
     title: "Backend & Mobile",
     icon: ServerCog,
-    level: 78,
     skills: ["PHP", "Laravel", "Python", "Dart", "Flutter", "REST API"],
   },
   {
     title: "Database",
     icon: Database,
-    level: 80,
     skills: ["MySQL", "PostgreSQL", "Database Design"],
   },
   {
     title: "Analytical Skills",
     icon: BrainCircuit,
-    level: 74,
     skills: ["System Analysis", "Software Testing", "Workflow Optimization", "Documentation"],
   },
   {
     title: "UI/UX & Tools",
     icon: Figma,
-    level: 76,
     skills: ["Figma", "Visual Studio Code", "UI/UX Design", "Microsoft Office"],
   },
   {
-    title: "Deployment",
+    title: "Deployment & Version Control",
     icon: Rocket,
-    level: 72,
     skills: ["Git", "GitHub", "Version Control", "Application Deployment"],
   },
 ];
@@ -77,8 +75,8 @@ export const projects = [
     title: "Meeting Scheduling Information System",
     label: "BAPENDA Kab. Tangerang",
     description:
-      "Web-based meeting scheduling and agenda management system with role-based authentication, meeting management features, and integrated Telegram notifications for reminders.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind", "Telegram Bot"],
+      "Web-based meeting scheduling system for managing meeting agendas and schedules, with role-based authentication, PostgreSQL integration, and Telegram notification support.",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Telegram Bot"],
     accent: "matrix",
     github: "https://github.com/Hadevs27/Sistem-Informasi-Penjadwalan-Agenda-Rapat-berbasis-Web-pada-BAPENDA-",
   },
@@ -87,7 +85,7 @@ export const projects = [
     label: "E-Commerce",
     description:
       "E-commerce platform for prefab building materials featuring product management, shopping cart, checkout, responsive admin dashboard, and relational database workflow.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind"],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
     accent: "cyanex",
     github: "https://github.com/Hadevs27/aplikasi-ecommerce-bangunanprefab",
   },
@@ -104,13 +102,22 @@ export const projects = [
 
 export const experienceLogs = [
   {
+    icon: GraduationCap,
+    type: "Education",
+    title: "Bachelor of Information Systems",
+    org: "Universitas Tangerang Raya",
+    date: "2022 - 2026",
+    details:
+      "Graduated with a GPA of 3.99 / 4.00. Focus on software development, system analysis, and database management.",
+  },
+  {
     icon: Code2,
     type: "Work Experience",
     title: "Freelance Web & Mobile Developer",
     org: "Self-Employed, Tangerang",
     date: "March 2025 - Present",
     details:
-      "Developed web-based and mobile applications for university students. Handled requirement analysis, database design, authentication, API integrations, and deployment using Laravel, Next.js, and PostgreSQL.",
+      "Developed web-based and mobile applications. Handled requirement analysis, database design, authentication, API integrations, and deployment using Laravel, Next.js, and PostgreSQL.",
   },
   {
     icon: BriefcaseBusiness,
@@ -119,7 +126,7 @@ export const experienceLogs = [
     org: "Dinas Tenaga Kerja Kab. Tangerang",
     date: "May 2025 - August 2025",
     details:
-      "Developed a web-based archive management and employee attendance system using Laravel and MySQL. Reduced manual archive searching by 50% through digitization.",
+      "Developed a web-based archive management and employee attendance system using Laravel and MySQL. Digitized the archive workflow to make document retrieval faster and more organized.",
   },
   {
     icon: Terminal,
@@ -128,7 +135,7 @@ export const experienceLogs = [
     org: "Universitas Tangerang Raya",
     date: "May 2024 - November 2024",
     details:
-      "Supported students and faculty with hardware/software issues. Reduced system downtime by 35% through proactive equipment checks and provided mini-training sessions.",
+      "Supported students and faculty with hardware and software issues. Improved system reliability through proactive equipment checks and provided mini-training sessions.",
   },
   {
     icon: Layers3,
@@ -146,7 +153,7 @@ export const experienceLogs = [
     org: "Himpunan Mahasiswa Teknologi Informasi",
     date: "June 2023 - May 2024",
     details:
-      "Organized workshops and bootcamps, boosting participation by 65%. Developed an event evaluation system and boosted engagement by 120% through digital promotions.",
+      "Organized workshops and bootcamps, significantly increasing participation. Developed an event evaluation system and improved engagement through digital promotions.",
   },
   {
     icon: Layers3,
@@ -218,24 +225,24 @@ export const quickReplies = {
   Projects:
     "Harry has built a Meeting Scheduling System, an E-Commerce platform for prefab building materials, and an Agricultural Production System.",
   Skills:
-    "Core stack: Next.js, React.js, Tailwind, PHP, Laravel, Flutter, PostgreSQL, Python, Git, and REST API Development.",
+    "Core stack: Next.js, React.js, Tailwind CSS, PHP, Laravel, Flutter, PostgreSQL, Python, Git, and REST API Development.",
   Experience:
     "Harry works as a Freelance Web Developer, previously an IT Intern at Disnaker Kab. Tangerang, and a Computer Lab Assistant. He also has a strong record in national science olympiads.",
   Contact:
-    "Reach Harry through email, LinkedIn, GitHub, or download the CV from the contact terminal.",
+    "Reach Harry through email, LinkedIn, GitHub, or download the CV from the contact section.",
   GPA: "Harry's GPA is 3.99 / 4.00 at Universitas Tangerang Raya.",
 };
 
 export const commandLines = [
-  "> boot HARRY.EXE",
-  "> scan profile --recruiter-mode",
-  "> load projects --mission-log",
-  "> contact --open-channel",
+  "> init developer_portfolio",
+  "> load profile --format=professional",
+  "> fetch projects --latest",
+  "> open contact_channels",
 ];
 
 export const heroBadges = [
-  { icon: GraduationCap, label: "Information Systems" },
-  { icon: BrainCircuit, label: "AI Enthusiast" },
-  { icon: Sparkles, label: "Web Developer" },
-  { icon: Github, label: "Git Ready" },
+  { icon: Code2, label: "Web Development" },
+  { icon: Layers3, label: "Full-Stack Development" },
+  { icon: Database, label: "Database & API" },
+  { icon: Github, label: "Git & GitHub" },
 ];
