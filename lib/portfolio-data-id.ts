@@ -32,7 +32,7 @@ export const profileStats = [
   { label: "Nama", value: "Harry Septoni Armando Nadapdap" },
   { label: "Gelar", value: "Lulusan Sistem Informasi" },
   { label: "Universitas", value: "Universitas Tangerang Raya" },
-  { label: "IPK", value: "3.99 / 4.00" },
+  { label: "IPK", value: "3.98 / 4.00" },
   { label: "Fokus", value: "Pengembangan Web & Mobile" },
   { label: "Lokasi", value: "Tangerang, Indonesia" },
 ];
@@ -108,7 +108,7 @@ export const experienceLogs = [
     org: "Universitas Tangerang Raya",
     date: "2022 - 2026",
     details:
-      "Lulus dengan IPK 3.99 / 4.00. Fokus pada pengembangan perangkat lunak, analisis sistem, dan manajemen database.",
+      "Lulus dengan IPK 3.98 / 4.00. Fokus pada pengembangan perangkat lunak, analisis sistem, dan manajemen database.",
   },
   {
     icon: Code2,
@@ -230,7 +230,7 @@ export const quickReplies = {
     "Harry bekerja sebagai Freelance Web Developer, sebelumnya sebagai Pekerja Magang IT di Disnaker Kab. Tangerang, dan Asisten Lab Komputer. Ia juga punya rekam jejak juara di olimpiade sains nasional.",
   Contact:
     "Hubungi Harry melalui email, LinkedIn, GitHub, atau unduh CV-nya melalui bagian kontak.",
-  GPA: "IPK Harry adalah 3.99 / 4.00 di Universitas Tangerang Raya.",
+  GPA: "IPK Harry adalah 3.98 / 4.00 di Universitas Tangerang Raya.",
 };
 
 export const commandLines = [
