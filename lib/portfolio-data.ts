@@ -32,7 +32,7 @@ export const profileStats = [
   { label: "Name", value: "Harry Septoni Armando Nadapdap" },
   { label: "Degree", value: "Information Systems Graduate" },
   { label: "University", value: "Universitas Tangerang Raya" },
-  { label: "GPA", value: "3.99 / 4.00" },
+  { label: "GPA", value: "3.98 / 4.00" },
   { label: "Focus", value: "Web & Mobile Development" },
   { label: "Location", value: "Tangerang, Indonesia" },
 ];
@@ -108,7 +108,7 @@ export const experienceLogs = [
     org: "Universitas Tangerang Raya",
     date: "2022 - 2026",
     details:
-      "Graduated with a GPA of 3.99 / 4.00. Focus on software development, system analysis, and database management.",
+      "Graduated with a GPA of 3.98 / 4.00. Focus on software development, system analysis, and database management.",
   },
   {
     icon: Code2,
@@ -230,7 +230,7 @@ export const quickReplies = {
     "Harry works as a Freelance Web Developer, previously an IT Intern at Disnaker Kab. Tangerang, and a Computer Lab Assistant. He also has a strong record in national science olympiads.",
   Contact:
     "Reach Harry through email, LinkedIn, GitHub, or download the CV from the contact section.",
-  GPA: "Harry's GPA is 3.99 / 4.00 at Universitas Tangerang Raya.",
+  GPA: "Harry's GPA is 3.98 / 4.00 at Universitas Tangerang Raya.",
 };
 
 export const commandLines = [
