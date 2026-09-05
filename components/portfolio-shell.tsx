@@ -109,7 +109,7 @@ function SystemNav() {
             <Languages size={15} /> {ui.nav.toggle}
           </button>
           <a
-            href="/files/CV_HARRY_UPDATED.pdf"
+            href="/files/NEWS_CV_HARRY_UPDATED.pdf"
             className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5"
             download
           >
@@ -152,7 +152,7 @@ function SystemNav() {
                   {ui.nav.toggle}
                 </button>
                 <a
-                  href="/files/CV_HARRY_UPDATED.pdf"
+                  href="/files/NEWS_CV_HARRY_UPDATED.pdf"
                   download
                   onClick={() => setOpen(false)}
                   className="terminal-title rounded-md px-3 py-3 text-xs text-cyanex bg-cyanex/10 text-center flex items-center justify-center gap-1.5"
@@ -593,7 +593,7 @@ function ContactSection() {
                 <MessageCircle size={18} /> {ui.contact.btnWhatsapp}
               </a>
               <a
-                href="/files/CV_HARRY_UPDATED.pdf"
+                href="/files/NEWS_CV_HARRY_UPDATED.pdf"
                 download
                 className="hud-button rounded-md px-4 py-4 sm:col-span-2 text-center flex justify-center"
               >
