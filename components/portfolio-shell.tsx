@@ -63,7 +63,27 @@ type ChatMessage = {
 export function PortfolioShell() {
   const [lang, setLang] = useState<Language>("en");
   const [gameState, setGameState] = useState<"PLAYING" | "DONE">("PLAYING");
+  const [isMounted, setIsMounted] = useState(false);
   const t = translations[lang];
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== "undefined") {
+      const visited = localStorage.getItem("harry_visited");
+      if (visited === "true") {
+        setGameState("DONE");
+      }
+    }
+  }, []);
+
+  const handleGameEndOrSkip = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("harry_visited", "true");
+    }
+    setGameState("DONE");
+  };
+
+  if (!isMounted) return null; // Avoid hydration mismatch on first render
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
@@ -87,11 +107,11 @@ export function PortfolioShell() {
                 lang={lang}
                 onGameEnd={(won, score, xp) => {
                   playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.4);
-                  setGameState("DONE");
+                  handleGameEndOrSkip();
                 }}
                 onSkip={() => {
                   playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
-                  setGameState("DONE");
+                  handleGameEndOrSkip();
                 }}
               />
             </div>

@@ -332,12 +332,23 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
         <div className="text-center z-10 flex flex-col items-center p-8 bg-black/50 rounded-lg border border-cyanex/20 backdrop-blur-sm">
           <h2 className="text-4xl font-bold text-cyanex mb-2 drop-shadow-[0_0_10px_rgba(56,232,255,0.8)]">HARRY.EXE</h2>
           <p className="text-matrix mb-8 tracking-[0.2em] font-bold">BUILD. DEBUG. DEFEND.</p>
-          <button 
-            onClick={startGame}
-            className="text-lg px-8 py-3 rounded border border-cyanex bg-cyanex/10 hover:bg-cyanex/30 hover:scale-105 transition-all text-cyanex font-bold shadow-[0_0_15px_rgba(56,232,255,0.4)]"
-          >
-            {lang === "id" ? "[ PERTAHANKAN SISTEM ]" : "[ DEFEND SYSTEM ]"}
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
+            <button 
+              onClick={startGame}
+              className="text-sm sm:text-base px-6 py-3 rounded border border-cyanex bg-cyanex/10 hover:bg-cyanex/30 transition-all text-cyanex font-bold shadow-[0_0_15px_rgba(56,232,255,0.4)]"
+            >
+              {lang === "id" ? "[ PERTAHANKAN SISTEM ]" : "[ DEFEND SYSTEM ]"}
+            </button>
+            <button 
+              onClick={() => {
+                playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
+                onSkip();
+              }}
+              className="text-sm sm:text-base px-6 py-3 rounded border border-matrix bg-matrix/10 hover:bg-matrix/30 transition-all text-matrix font-bold shadow-[0_0_15px_rgba(105,255,135,0.4)]"
+            >
+              {lang === "id" ? "[ MASUK PORTOFOLIO ]" : "[ ENTER PORTFOLIO ]"}
+            </button>
+          </div>
         </div>
       )}
 
