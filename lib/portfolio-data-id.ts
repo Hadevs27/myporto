@@ -170,8 +170,7 @@ export const experienceLogs = [
     title: "Medali Emas",
     org: "Olimpiade Sains Nasional (OSP) 2026",
     date: "2026",
-    details:
-      "Meraih medali emas dalam olimpiade sains nasional, menunjukkan kemampuan pemikiran analitis yang kuat, penalaran logis, dan keahlian pemecahan masalah.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: Trophy,
@@ -179,8 +178,7 @@ export const experienceLogs = [
     title: "Medali Perak",
     org: "OSPENAS 2026",
     date: "2026",
-    details:
-      "Meraih medali perak dalam kompetisi tingkat nasional, mencerminkan kemampuan akademik yang tangguh, konsistensi, dan pencapaian belajar yang kompetitif.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: Trophy,
@@ -188,8 +186,7 @@ export const experienceLogs = [
     title: "Medali Perak",
     org: "Indonesia Youth Science Competition (IYSC) 2026",
     date: "Mei 2026",
-    details:
-      "Mendapatkan medali perak dalam kompetisi sains tingkat internasional, memperlihatkan keahlian analitis dan kemampuan pemecahan masalah yang luar biasa.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: Trophy,
@@ -197,8 +194,7 @@ export const experienceLogs = [
     title: "Peserta CTF",
     org: "Capture The Flag Competition | Telkom University",
     date: "Agustus 2025",
-    details:
-      "Mendapatkan pengalaman praktis dalam tantangan keamanan siber, termasuk kriptografi, eksploitasi web, dan rekayasa balik (reverse engineering).",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: ShieldCheck,
@@ -206,8 +202,7 @@ export const experienceLogs = [
     title: "Junior Web Programmer (JWP)",
     org: "LSP Media Informatika – TUK HAS",
     date: "Juni 2026",
-    details:
-      "Sertifikat Asesmen Kompetensi (Competency Assessment) untuk Junior Web Programmer.",
+    details: "Sertifikat Asesmen Kompetensi (Competency Assessment) untuk Junior Web Programmer.",
     link: "/files/ukom.pdf",
   },
   {
@@ -216,8 +211,7 @@ export const experienceLogs = [
     title: "The Complete Python Developer",
     org: "Udemy",
     date: "Juni 2024",
-    details:
-      "Memperkuat dasar-dasar pemrograman Python untuk kebutuhan otomatisasi, pengelolaan data, dan alur penyelesaian masalah.",
+    details: "Dasar-dasar pemrograman Python.",
   },
 ];
 

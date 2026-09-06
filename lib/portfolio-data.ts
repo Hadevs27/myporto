@@ -170,8 +170,7 @@ export const experienceLogs = [
     title: "Gold Medalist",
     org: "Olimpiade Sains Nasional (OSP) 2026",
     date: "2026",
-    details:
-      "Achieved a gold medal in a national science olympiad, demonstrating strong analytical thinking, logical reasoning, and problem-solving skills.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: Trophy,
@@ -179,8 +178,7 @@ export const experienceLogs = [
     title: "Silver Medalist",
     org: "OSPENAS 2026",
     date: "2026",
-    details:
-      "Achieved a silver medal in a national-level competition, reflecting strong academic capability, consistency, and competitive learning achievement.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: Trophy,
@@ -188,8 +186,7 @@ export const experienceLogs = [
     title: "Silver Medalist",
     org: "Indonesia Youth Science Competition (IYSC) 2026",
     date: "May 2026",
-    details:
-      "Earned a silver medal in an international-level science competition, demonstrating strong analytical thinking and problem-solving skills.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: Trophy,
@@ -197,8 +194,7 @@ export const experienceLogs = [
     title: "CTF Participant",
     org: "Capture The Flag Competition | Telkom University",
     date: "August 2025",
-    details:
-      "Gained hands-on experience in cybersecurity challenges, including cryptography, web exploitation, and reverse engineering.",
+    details: "ACHIEVEMENT UNLOCKED ✓",
   },
   {
     icon: ShieldCheck,
@@ -206,8 +202,7 @@ export const experienceLogs = [
     title: "Junior Web Programmer (JWP)",
     org: "LSP Media Informatika – TUK HAS",
     date: "June 2026",
-    details:
-      "Competency Assessment Certificate for Junior Web Programmer.",
+    details: "Competency Assessment Certificate for Junior Web Programmer.",
     link: "/files/ukom.pdf",
   },
   {
@@ -216,8 +211,7 @@ export const experienceLogs = [
     title: "The Complete Python Developer",
     org: "Udemy",
     date: "June 2024",
-    details:
-      "Strengthened Python programming fundamentals for automation, data handling, and problem-solving workflows.",
+    details: "Python programming fundamentals.",
   },
 ];
 

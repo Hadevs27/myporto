@@ -56,23 +56,48 @@ type ChatMessage = {
   text: string;
 };
 
+import { SystemDefender } from "@/components/system-defender";
+
 export function PortfolioShell() {
   const [lang, setLang] = useState<Language>("en");
+  const [gameState, setGameState] = useState<"PLAYING" | "DONE">("PLAYING");
   const t = translations[lang];
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>
       <main className="relative min-h-screen overflow-hidden">
         <BackgroundFx />
-        <SystemNav />
-        <HeroSection />
-        <ProfileSection />
-        <SkillTreeSection />
-        <ProjectsSection />
-        <ExperienceSection />
-        <ContactSection />
-        <Footer />
-        <Chatbot />
+        {gameState === "PLAYING" ? (
+          <div className="absolute inset-0 z-50 flex flex-col p-4 bg-void/90 backdrop-blur-md overflow-hidden">
+            <div className="flex justify-end mb-4">
+              <button 
+                onClick={() => setLang(lang === "en" ? "id" : "en")}
+                className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5 z-50"
+              >
+                <Languages size={15} /> {t.ui.nav.toggle}
+              </button>
+            </div>
+            <div className="flex-1 w-full max-w-5xl mx-auto h-full flex items-center justify-center">
+              <SystemDefender 
+                lang={lang}
+                onGameEnd={(won, score, xp) => setGameState("DONE")}
+                onSkip={() => setGameState("DONE")}
+              />
+            </div>
+          </div>
+        ) : (
+          <>
+            <SystemNav />
+            <HeroSection />
+            <ProfileSection />
+            <SkillTreeSection />
+            <ProjectsSection />
+            <ExperienceSection />
+            <ContactSection />
+            <Footer />
+            <Chatbot />
+          </>
+        )}
       </main>
     </LanguageContext.Provider>
   );
@@ -368,17 +393,50 @@ function ProjectsSection() {
               whileHover={{ y: -8 }}
               className="cyber-panel flex min-h-[520px] flex-col overflow-hidden rounded-lg"
             >
-              <div className="relative h-48 overflow-hidden border-b border-matrix/20 bg-black/55">
-                <div className="absolute inset-0 bg-terminal-grid bg-[length:24px_24px] opacity-50" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(56,232,255,0.20),transparent_31%),radial-gradient(circle_at_74%_70%,rgba(168,107,255,0.14),transparent_30%)]" />
-                <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyanex/35 shadow-cyan" />
-                <div className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full border border-matrix/40" />
-                <div className="absolute bottom-5 left-5 right-5 h-14 rounded-md border border-matrix/25 bg-black/45">
-                  <div className="m-3 h-2 rounded-full bg-matrix/35" />
-                  <div className="mx-3 h-2 w-2/3 rounded-full bg-cyanex/25" />
-                </div>
-                <div className="absolute left-4 top-4 rounded border border-cyanex/40 bg-black/60 px-3 py-2 terminal-title text-xs text-cyanex">
-                  {project.label}
+              <div className="relative h-48 overflow-hidden border-b border-matrix/20 bg-black/55 group">
+                <div className="absolute inset-0 bg-terminal-grid bg-[length:24px_24px] opacity-50 group-hover:opacity-70 transition-opacity" />
+                
+                {/* Visual Logic per Project */}
+                {index === 0 && ( // Meeting Scheduling
+                  <div className="absolute inset-0 flex items-center justify-center opacity-70">
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-matrix stroke-current" fill="none">
+                      <rect x="25" y="25" width="50" height="50" rx="4" strokeWidth="2" strokeDasharray="4 4" className="animate-[spin_20s_linear_infinite]" />
+                      <path d="M40 40 L60 40 M40 50 L60 50 M40 60 L50 60" strokeWidth="2" />
+                      <circle cx="50" cy="50" r="8" className="fill-cyanex/20 stroke-cyanex shadow-cyan" />
+                      <path d="M30 30 L20 20 M70 70 L80 80 M70 30 L80 20 M30 70 L20 80" strokeWidth="1" strokeDasharray="2 2" className="text-cyanex" />
+                    </svg>
+                  </div>
+                )}
+                {index === 1 && ( // E-Commerce
+                  <div className="absolute inset-0 flex items-center justify-center opacity-70">
+                     <svg viewBox="0 0 100 100" className="w-full h-full text-cyanex stroke-current" fill="none">
+                      <polygon points="50,20 80,40 80,70 50,90 20,70 20,40" strokeWidth="2" className="animate-pulse" />
+                      <path d="M50 20 L50 50 L80 70 M50 50 L20 70" strokeWidth="2" strokeDasharray="4 4" />
+                      <circle cx="50" cy="50" r="4" className="fill-matrix" />
+                      <circle cx="80" cy="40" r="4" className="fill-matrix" />
+                      <circle cx="20" cy="40" r="4" className="fill-matrix" />
+                    </svg>
+                  </div>
+                )}
+                {index === 2 && ( // Agriculture
+                  <div className="absolute inset-0 flex items-center justify-center opacity-70">
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-violetx stroke-current" fill="none">
+                      <path d="M20 80 Q 50 80 50 40 Q 50 80 80 80" strokeWidth="2" />
+                      <path d="M50 80 L50 30" strokeWidth="2" strokeDasharray="4 4" className="text-matrix" />
+                      <circle cx="50" cy="30" r="10" className="stroke-matrix stroke-2 animate-[pulse_3s_ease-in-out_infinite]" />
+                      <path d="M35 55 Q 40 45 50 50" strokeWidth="2" />
+                      <path d="M65 65 Q 60 55 50 60" strokeWidth="2" />
+                    </svg>
+                  </div>
+                )}
+
+                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                  <div className="rounded border border-cyanex/40 bg-black/60 px-3 py-2 terminal-title text-[10px] text-cyanex backdrop-blur-sm">
+                    {project.label}
+                  </div>
+                  <div className="text-[10px] font-mono text-matrix/50">
+                    SYS_MOD_0{index + 1}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-1 flex-col p-5">
