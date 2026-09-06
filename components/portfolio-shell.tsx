@@ -8,6 +8,7 @@ import {
   Download,
   ExternalLink,
   Github,
+  Globe2,
   Linkedin,
   Mail,
   Menu,
