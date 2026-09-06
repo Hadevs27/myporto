@@ -500,18 +500,18 @@ function ProjectsSection() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <h4 className="text-matrix font-bold text-sm tracking-widest">[ PROBLEM ]</h4>
+                      <h4 className="text-matrix font-bold text-sm tracking-widest">{ui.projects.caseProblem || "[ PROBLEM ]"}</h4>
                       <p className="text-emerald-100/70 text-sm leading-relaxed">{caseStudy.problem}</p>
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <h4 className="text-matrix font-bold text-sm tracking-widest">[ FEATURES & ROLE ]</h4>
+                      <h4 className="text-matrix font-bold text-sm tracking-widest">{ui.projects.caseFeatures || "[ FEATURES & ROLE ]"}</h4>
                       <ul className="list-disc list-inside text-emerald-100/70 text-sm flex flex-col gap-1">
                         {caseStudy.features.slice(0, 3).map((f: string, i: number) => (
                           <li key={i}>{f}</li>
                         ))}
                         {caseStudy.role.slice(0, 2).map((r: string, i: number) => (
-                          <li key={i} className="text-cyanex">Role: {r}</li>
+                          <li key={i} className="text-cyanex">{ui.projects.caseRoleLabel || "Role:"} {r}</li>
                         ))}
                       </ul>
                     </div>
@@ -524,7 +524,7 @@ function ProjectsSection() {
                       )}
                       {(project as any).demo && (
                         <a href={(project as any).demo} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-5 py-3 text-sm flex items-center gap-2 text-matrix border-matrix/50 shadow-[0_0_15px_rgba(105,255,135,0.2)] hover:bg-matrix/20">
-                          <Globe2 size={16} /> LIVE DEMO
+                          <Globe2 size={16} /> {ui.projects.caseLiveDemo || "LIVE DEMO"}
                         </a>
                       )}
                     </div>
@@ -532,7 +532,7 @@ function ProjectsSection() {
 
                   <div className="flex-1 flex flex-col gap-6">
                     <div className="flex flex-col gap-3 border border-matrix/20 bg-black/40 rounded-lg p-5">
-                      <h4 className="text-matrix font-bold text-sm tracking-widest text-center">[ SYSTEM ARCHITECTURE FLOW ]</h4>
+                      <h4 className="text-matrix font-bold text-sm tracking-widest text-center">{ui.projects.caseArchitecture || "[ SYSTEM ARCHITECTURE FLOW ]"}</h4>
                       <div className="flex flex-col items-center gap-2 py-4">
                         {caseStudy.architecture.map((node: any, i: number) => (
                           <div key={i} className="flex flex-col items-center">
@@ -553,7 +553,7 @@ function ProjectsSection() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <h4 className="text-cyanex font-bold text-sm tracking-widest">[ TECH STACK ]</h4>
+                      <h4 className="text-cyanex font-bold text-sm tracking-widest">{ui.projects.caseTechStack || "[ TECH STACK ]"}</h4>
                       <div className="flex flex-wrap gap-2">
                         {project.stack.map((tech) => (
                           <span key={tech} className="rounded border border-cyanex/25 bg-cyanex/10 px-2.5 py-1.5 font-mono text-xs text-cyanex">
@@ -638,7 +638,7 @@ function ProjectsSection() {
                       )}
                       {(project as any).demo && (
                         <a href={(project as any).demo} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5 text-matrix border-matrix/50">
-                          <Globe2 size={14} /> LIVE DEMO
+                          <Globe2 size={14} /> {ui.projects.caseLiveDemo || "LIVE DEMO"}
                         </a>
                       )}
                     </div>
