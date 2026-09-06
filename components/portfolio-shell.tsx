@@ -15,7 +15,9 @@ import {
   MessageCircle,
   SendHorizontal,
   X,
-  Languages
+  Languages,
+  Volume2,
+  VolumeX
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState, createContext, useContext } from "react";
@@ -24,6 +26,8 @@ import { CyberWindow } from "@/components/cyber-window";
 import { SectionHeader } from "@/components/section-header";
 import { TypingText } from "@/components/typing-text";
 import { translations, Language } from "@/lib/i18n";
+import { SystemDefender } from "@/components/system-defender";
+import { audioManager, playAudio, AUDIO_ASSETS } from "@/lib/audio";
 
 // Language Context
 const LanguageContext = createContext<{
@@ -56,8 +60,6 @@ type ChatMessage = {
   text: string;
 };
 
-import { SystemDefender } from "@/components/system-defender";
-
 export function PortfolioShell() {
   const [lang, setLang] = useState<Language>("en");
   const [gameState, setGameState] = useState<"PLAYING" | "DONE">("PLAYING");
@@ -69,9 +71,12 @@ export function PortfolioShell() {
         <BackgroundFx />
         {gameState === "PLAYING" ? (
           <div className="absolute inset-0 z-50 flex flex-col p-4 bg-void/90 backdrop-blur-md overflow-hidden">
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end mb-4 gap-2">
               <button 
-                onClick={() => setLang(lang === "en" ? "id" : "en")}
+                onClick={() => {
+                  setLang(lang === "en" ? "id" : "en");
+                  playAudio(AUDIO_ASSETS.UI.CLICK, 0.2);
+                }}
                 className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5 z-50"
               >
                 <Languages size={15} /> {t.ui.nav.toggle}
@@ -80,8 +85,14 @@ export function PortfolioShell() {
             <div className="flex-1 w-full max-w-5xl mx-auto h-full flex items-center justify-center">
               <SystemDefender 
                 lang={lang}
-                onGameEnd={(won, score, xp) => setGameState("DONE")}
-                onSkip={() => setGameState("DONE")}
+                onGameEnd={(won, score, xp) => {
+                  playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.4);
+                  setGameState("DONE");
+                }}
+                onSkip={() => {
+                  playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
+                  setGameState("DONE");
+                }}
               />
             </div>
           </div>
@@ -107,11 +118,20 @@ function SystemNav() {
   const [open, setOpen] = useState(false);
   const { lang, setLang, t } = useLanguage();
   const { data, ui } = t;
+  const [soundOn, setSoundOn] = useState(audioManager.soundEnabled);
+
+  const toggleSound = () => {
+    const newState = audioManager.toggleSound();
+    setSoundOn(newState);
+    if (newState) {
+      playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.3);
+    }
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-matrix/15 bg-black/55 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#hero" className="terminal-title text-sm font-bold text-matrix text-glow">
+        <a href="#hero" className="terminal-title text-sm font-bold text-matrix text-glow" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)}>
           HARRY.DEV
         </a>
         <div className="hidden items-center gap-1 md:flex">
@@ -119,6 +139,7 @@ function SystemNav() {
             <a
               key={item.href}
               href={item.href}
+              onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.1)}
               className="terminal-title rounded-md px-3 py-2 text-xs text-emerald-100/70 transition hover:bg-matrix/10 hover:text-white"
             >
               {item.label}
@@ -128,7 +149,17 @@ function SystemNav() {
         
         <div className="hidden md:flex items-center gap-2">
           <button 
-            onClick={() => setLang(lang === "en" ? "id" : "en")}
+            onClick={toggleSound}
+            className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5"
+            title={soundOn ? "Mute Sound" : "Enable Sound"}
+          >
+            {soundOn ? <Volume2 size={15} /> : <VolumeX size={15} />}
+          </button>
+          <button 
+            onClick={() => {
+              setLang(lang === "en" ? "id" : "en");
+              playAudio(AUDIO_ASSETS.UI.CLICK, 0.2);
+            }}
             className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5"
           >
             <Languages size={15} /> {ui.nav.toggle}
@@ -137,6 +168,7 @@ function SystemNav() {
             href="/files/NEWS_CV_HARRY_UPDATED.pdf"
             className="hud-button rounded-md px-3 py-2 text-xs terminal-title flex items-center gap-1.5"
             download
+            onClick={() => playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.3)}
           >
             <Download size={15} /> {ui.nav.cv}
           </a>
@@ -144,7 +176,10 @@ function SystemNav() {
         <button
           type="button"
           aria-label="Toggle navigation"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => {
+            setOpen((value) => !value);
+            playAudio(open ? AUDIO_ASSETS.UI.CLOSE : AUDIO_ASSETS.UI.OPEN, 0.2);
+          }}
           className="hud-button rounded-md p-2 md:hidden"
         >
           {open ? <X size={18} /> : <Menu size={18} />}
@@ -163,7 +198,10 @@ function SystemNav() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setOpen(false);
+                    playAudio(AUDIO_ASSETS.UI.CLICK, 0.2);
+                  }}
                   className="terminal-title rounded-md px-3 py-3 text-xs text-emerald-100/75 hover:bg-matrix/10"
                 >
                   {item.label}
@@ -171,16 +209,32 @@ function SystemNav() {
               ))}
               <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-matrix/15">
                 <button 
-                  onClick={() => { setLang(lang === "en" ? "id" : "en"); setOpen(false); }}
+                  onClick={() => { 
+                    setLang(lang === "en" ? "id" : "en"); 
+                    setOpen(false); 
+                    playAudio(AUDIO_ASSETS.UI.CLICK, 0.2);
+                  }}
                   className="terminal-title rounded-md px-3 py-3 text-xs text-matrix bg-matrix/10 text-center"
                 >
                   {ui.nav.toggle}
                 </button>
+                <button 
+                  onClick={() => {
+                    toggleSound();
+                    setOpen(false);
+                  }}
+                  className="terminal-title rounded-md px-3 py-3 text-xs text-matrix bg-matrix/10 text-center flex items-center justify-center gap-1.5"
+                >
+                  {soundOn ? <Volume2 size={15} /> : <VolumeX size={15} />} SOUND
+                </button>
                 <a
                   href="/files/NEWS_CV_HARRY_UPDATED.pdf"
                   download
-                  onClick={() => setOpen(false)}
-                  className="terminal-title rounded-md px-3 py-3 text-xs text-cyanex bg-cyanex/10 text-center flex items-center justify-center gap-1.5"
+                  onClick={() => {
+                    setOpen(false);
+                    playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.3);
+                  }}
+                  className="terminal-title rounded-md px-3 py-3 text-xs col-span-2 text-cyanex bg-cyanex/10 text-center flex items-center justify-center gap-1.5"
                 >
                   <Download size={15} /> {ui.nav.cv}
                 </a>
@@ -221,10 +275,10 @@ function HeroSection() {
             <TypingText phrases={ui.hero.typing} />
           </motion.div>
           <motion.div variants={reveal} className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#projects" className="hud-button rounded-md px-5 py-3 text-sm font-semibold">
+            <a href="#projects" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-5 py-3 text-sm font-semibold">
               {ui.hero.btnProjects} <ArrowDownRight size={18} />
             </a>
-            <a href="#contact" className="hud-button rounded-md border-cyanex/50 px-5 py-3 text-sm font-semibold">
+            <a href="#contact" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md border-cyanex/50 px-5 py-3 text-sm font-semibold">
               {ui.hero.btnContact} <SendHorizontal size={18} />
             </a>
           </motion.div>
@@ -456,7 +510,7 @@ function ProjectsSection() {
                 </div>
                 <div className="mt-6 flex gap-2">
                   {project.github ? (
-                    <a href={project.github} target="_blank" rel="noreferrer" className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
+                    <a href={project.github} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
                       <Github size={14} /> {ui.projects.btnGithub}
                     </a>
                   ) : null}

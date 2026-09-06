@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Crosshair, SkipForward, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Crosshair, SkipForward, X, Volume2, VolumeX } from "lucide-react";
+import { playAudio, AUDIO_ASSETS, audioManager } from "@/lib/audio";
 
 type GameState = "BOOT" | "MENU" | "PLAYING" | "WAVE_COMPLETE" | "GAME_OVER" | "VICTORY";
 
@@ -18,6 +19,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
   const [xp, setXp] = useState(0);
   const [wave, setWave] = useState(1);
   const [bootText, setBootText] = useState("");
+  const [soundOn, setSoundOn] = useState(audioManager.soundEnabled);
   
   // Controls
   const keys = useRef({ left: false, right: false, shoot: false });
@@ -60,6 +62,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
   };
   
   useEffect(() => {
+    playAudio(AUDIO_ASSETS.UI.OPEN, 0.4);
     let bootSequence = [
       "HARRY.EXE",
       "SYSTEM BOOTING...",
@@ -80,6 +83,11 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
       if (step < bootSequence.length) {
         currentText += bootSequence[step] + "\n";
         setBootText(currentText);
+        if (step >= 8) {
+          playAudio(AUDIO_ASSETS.UI.ERROR, 0.3);
+        } else {
+          playAudio(AUDIO_ASSETS.UI.CLICK, 0.1);
+        }
         step++;
       } else {
         clearInterval(bootInterval);
@@ -117,6 +125,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
       if (keys.current.shoot && time - lastShotRef.current > 250) {
         b.push({ x: p.x + p.w / 2 - 2, y: p.y, w: 4, h: 10, isEnemy: false });
         lastShotRef.current = time;
+        playAudio(AUDIO_ASSETS.GAME.LASER1, 0.2);
       }
       
       let hitEdge = false;
@@ -129,6 +138,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
         }
         if (Math.random() < 0.001 + (wave * 0.0005)) {
            b.push({ x: enemy.x + enemy.w / 2 - 2, y: enemy.y + enemy.h, w: 4, h: 10, isEnemy: true });
+           playAudio(AUDIO_ASSETS.GAME.LASER2, 0.1);
         }
       }
       
@@ -138,6 +148,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
           enemy.y += 20;
           if (enemy.y + enemy.h >= p.y) {
             setGameState("GAME_OVER");
+            playAudio(AUDIO_ASSETS.GAME.GAME_OVER, 0.5);
           }
         }
       }
@@ -164,6 +175,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
               b.splice(i, 1);
               setScore(s => s + 10 * wave);
               setXp(x => x + 25 * wave);
+              playAudio(AUDIO_ASSETS.GAME.EXPLOSION, 0.3);
               break;
             }
           }
@@ -175,6 +187,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
             bullet.y + bullet.h > p.y
           ) {
             setGameState("GAME_OVER");
+            playAudio(AUDIO_ASSETS.GAME.GAME_OVER, 0.5);
           }
         }
       }
@@ -182,8 +195,10 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
       if (e.length === 0) {
         if (wave >= MAX_WAVES) {
           setGameState("VICTORY");
+          playAudio(AUDIO_ASSETS.GAME.VICTORY, 0.6);
         } else {
           setGameState("WAVE_COMPLETE");
+          playAudio(AUDIO_ASSETS.GAME.WAVE_CLEAR, 0.5);
         }
       }
       
@@ -263,6 +278,7 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
   }, []);
 
   const startGame = () => {
+    playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.4);
     setScore(0);
     setXp(0);
     setWave(1);
@@ -284,9 +300,22 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
 
   return (
     <div className="relative w-full h-full min-h-[500px] flex flex-col items-center justify-center bg-void font-mono overflow-hidden border border-cyanex/30 rounded-lg shadow-[0_0_20px_rgba(56,232,255,0.15)]">
-      <div className="absolute top-4 right-4 z-50">
+      <div className="absolute top-4 right-4 z-50 flex gap-2">
         <button 
-          onClick={onSkip}
+          onClick={() => {
+            const newState = audioManager.toggleSound();
+            setSoundOn(newState);
+            if (newState) playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.3);
+          }}
+          className="hud-button rounded px-3 py-1.5 text-xs text-matrix border border-matrix/50 flex items-center gap-2 bg-black/50 hover:bg-matrix/10"
+        >
+          {soundOn ? <Volume2 size={14} /> : <VolumeX size={14} />} {soundOn ? "ON" : "OFF"}
+        </button>
+        <button 
+          onClick={() => {
+            playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
+            onSkip();
+          }}
           className="hud-button rounded px-3 py-1.5 text-xs text-matrix border border-matrix/50 flex items-center gap-2 bg-black/50 hover:bg-matrix/10"
         >
           <SkipForward size={14} /> {lang === "id" ? "LEWATI GAME" : "SKIP GAME"}
@@ -354,14 +383,20 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
       )}
 
       {gameState === "WAVE_COMPLETE" && (
-        <div className="text-center z-10 flex flex-col items-center bg-black/80 p-8 rounded border border-matrix/30 shadow-[0_0_20px_rgba(105,255,135,0.2)]">
-          <h2 className="text-3xl font-bold text-matrix mb-4 animate-pulse">WAVE {wave} CLEARED</h2>
-          <p className="text-cyanex mb-6 font-bold text-lg">MODULE UNLOCKED</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 z-20 text-center p-4">
+          <h2 className="text-3xl text-matrix mb-4 font-bold">WAVE {wave} CLEARED</h2>
+          <p className="text-cyanex mb-8">SYS_MOD_0{wave} UNLOCKED</p>
           <button 
-            onClick={nextWave}
-            className="text-base px-6 py-2 rounded border border-matrix bg-matrix/10 hover:bg-matrix/30 text-matrix font-bold transition-all"
+            onClick={() => {
+              playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
+              const nextWave = wave + 1;
+              setWave(nextWave);
+              initWave(nextWave);
+              setGameState("PLAYING");
+            }}
+            className="text-sm px-6 py-3 rounded border border-matrix bg-matrix/10 hover:bg-matrix/30 text-matrix font-bold transition-all"
           >
-            {lang === "id" ? "[ LANJUTKAN ]" : "[ CONTINUE ]"}
+            [ NEXT WAVE ]
           </button>
         </div>
       )}
@@ -376,13 +411,19 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
           </div>
           <div className="flex gap-4 flex-col sm:flex-row">
             <button 
-              onClick={startGame}
+              onClick={() => {
+                playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
+                startGame();
+              }}
               className="text-sm px-6 py-3 rounded border border-red-500 bg-red-500/10 hover:bg-red-500/30 text-red-500 font-bold transition-all"
             >
               [ RETRY ]
             </button>
             <button 
-              onClick={() => onGameEnd(false, score, xp)}
+              onClick={() => {
+                playAudio(AUDIO_ASSETS.UI.CLICK, 0.3);
+                onGameEnd(false, score, xp);
+              }}
               className="text-sm px-6 py-3 rounded border border-cyanex bg-cyanex/10 hover:bg-cyanex/30 text-cyanex font-bold transition-all"
             >
               [ EXIT TO PORTFOLIO ]
@@ -392,18 +433,17 @@ export function SystemDefender({ onGameEnd, onSkip, lang }: SystemDefenderProps)
       )}
 
       {gameState === "VICTORY" && (
-        <div className="text-center z-10 flex flex-col items-center bg-black/90 p-8 rounded border border-matrix shadow-[0_0_30px_rgba(105,255,135,0.3)]">
-          <h2 className="text-4xl font-bold text-matrix mb-2 drop-shadow-[0_0_10px_rgba(105,255,135,0.8)]">SYSTEM RESTORED</h2>
-          <p className="text-white mb-6 font-bold tracking-widest">ALL MODULES ONLINE. BUGS CLEARED.</p>
-          <div className="flex gap-6 mb-8 text-sm text-matrix font-bold bg-matrix/10 px-4 py-2 rounded border border-matrix/30">
-            <span>SCORE: {score}</span>
-            <span>XP: {xp}</span>
-          </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 z-20 text-center p-4">
+          <h2 className="text-4xl text-matrix mb-2 font-bold animate-pulse">SYSTEM SECURED</h2>
+          <p className="text-matrix/70 mb-8">ALL THREATS ELIMINATED</p>
           <button 
-            onClick={() => onGameEnd(true, score, xp)}
-            className="text-base px-8 py-3 rounded border border-matrix bg-matrix/20 hover:bg-matrix/40 hover:scale-105 transition-all text-matrix font-bold shadow-[0_0_15px_rgba(105,255,135,0.4)]"
+            onClick={() => {
+              playAudio(AUDIO_ASSETS.UI.CONFIRM, 0.4);
+              onGameEnd(true, score, xp);
+            }}
+            className="text-sm px-6 py-3 rounded border border-cyanex bg-cyanex/10 hover:bg-cyanex/30 text-cyanex font-bold transition-all"
           >
-            [ ENTER PORTFOLIO ]
+            [ ENTER SECURE SYSTEM ]
           </button>
         </div>
       )}
