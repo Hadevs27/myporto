@@ -389,7 +389,7 @@ function ProfileSection() {
             className="grid gap-4 sm:grid-cols-2"
           >
             {data.profileStats.map((stat) => (
-              <motion.div key={stat.label} variants={reveal} className="cyber-panel rounded-lg p-5">
+              <motion.div key={stat.id} variants={reveal} className="cyber-panel rounded-lg p-5">
                 <p className="terminal-title text-xs text-cyanex">{stat.label}</p>
                 <p className="mt-3 text-lg font-semibold text-white">{stat.value}</p>
               </motion.div>
@@ -418,7 +418,7 @@ function SkillTreeSection() {
         >
           {data.skillGroups.map((group) => (
             <motion.article
-              key={group.title}
+              key={group.id}
               variants={reveal}
               whileHover={{ y: -6, scale: 1.01 }}
               className="cyber-panel rounded-lg p-5"
@@ -464,7 +464,7 @@ function ProjectsSection() {
             const caseStudy = (project as any).caseStudy;
             return (
               <motion.article
-                key={project.title}
+                key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -575,7 +575,7 @@ function ProjectsSection() {
 
               return (
                 <motion.article
-                  key={project.title}
+                  key={project.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -731,7 +731,7 @@ function TimelineBlock({
         <div className="space-y-6">
           {logs.map((item, index) => (
             <motion.article
-              key={`${item.title}-${item.date}`}
+              key={item.id}
               initial={{ opacity: 0, x: index % 2 === 0 ? -22 : 22 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
