@@ -457,97 +457,196 @@ function ProjectsSection() {
     <section id="projects" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeader eyebrow={ui.projects.eyebrow} title={ui.projects.title} description={ui.projects.desc} />
-        <div className="grid gap-6 lg:grid-cols-3">
-          {data.projects.map((project, index) => (
-            <motion.article
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.55, delay: index * 0.08 }}
-              whileHover={{ y: -8 }}
-              className="cyber-panel flex min-h-[520px] flex-col overflow-hidden rounded-lg"
-            >
-              <div className="relative h-48 overflow-hidden border-b border-matrix/20 bg-black/55 group">
-                <div className="absolute inset-0 bg-terminal-grid bg-[length:24px_24px] opacity-50 group-hover:opacity-70 transition-opacity" />
-                
-                {/* Visual Logic per Project */}
-                {index === 0 && ( // Digital Archive Chatbot
+        <div className="flex flex-col gap-12">
+          {data.projects.map((project, index) => {
+            const isFeatured = (project as any).isFeatured;
+            if (!isFeatured) return null;
+            const caseStudy = (project as any).caseStudy;
+            return (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.55 }}
+                className="cyber-panel flex flex-col overflow-hidden rounded-lg border-matrix/50"
+              >
+                <div className="relative h-64 sm:h-80 overflow-hidden border-b border-matrix/20 bg-black/55 group">
+                  <div className="absolute inset-0 bg-terminal-grid bg-[length:24px_24px] opacity-50 group-hover:opacity-70 transition-opacity" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-70">
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-matrix stroke-current" fill="none">
-                      {/* Document icon */}
+                    <svg viewBox="0 0 100 100" className="w-full h-full max-w-[200px] text-matrix stroke-current" fill="none">
                       <path d="M30 20 L55 20 L70 35 L70 80 L30 80 Z" strokeWidth="2" className="text-cyanex" />
                       <path d="M55 20 L55 35 L70 35" strokeWidth="2" className="text-cyanex" />
                       <path d="M40 45 L60 45 M40 55 L55 55 M40 65 L60 65" strokeWidth="1.5" strokeDasharray="3 3" />
-                      {/* AI Sparkles / Bot visual */}
                       <circle cx="50" cy="50" r="15" className="fill-void stroke-matrix stroke-2 animate-pulse" />
                       <path d="M42 45 L46 45 M54 45 L58 45 M45 55 Q50 60 55 55" strokeWidth="2" strokeLinecap="round" />
                       <path d="M50 20 L50 35" strokeWidth="2" strokeDasharray="2 2" className="animate-[spin_4s_linear_infinite] origin-center text-matrix" />
                     </svg>
                   </div>
-                )}
-                {index === 1 && ( // E-Commerce
-                  <div className="absolute inset-0 flex items-center justify-center opacity-70">
-                     <svg viewBox="0 0 100 100" className="w-full h-full text-cyanex stroke-current" fill="none">
-                      <polygon points="50,20 80,40 80,70 50,90 20,70 20,40" strokeWidth="2" className="animate-pulse" />
-                      <path d="M50 20 L50 50 L80 70 M50 50 L20 70" strokeWidth="2" strokeDasharray="4 4" />
-                      <circle cx="50" cy="50" r="4" className="fill-matrix" />
-                      <circle cx="80" cy="40" r="4" className="fill-matrix" />
-                      <circle cx="20" cy="40" r="4" className="fill-matrix" />
-                    </svg>
+                  <div className="absolute top-4 left-4">
+                    <div className="rounded bg-matrix/20 px-3 py-1 font-mono text-xs font-bold text-matrix border border-matrix/50 shadow-[0_0_10px_rgba(105,255,135,0.3)]">
+                      {project.label}
+                    </div>
                   </div>
-                )}
-                {index === 2 && ( // Agriculture
-                  <div className="absolute inset-0 flex items-center justify-center opacity-70">
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-violetx stroke-current" fill="none">
-                      <path d="M20 80 Q 50 80 50 40 Q 50 80 80 80" strokeWidth="2" />
-                      <path d="M50 80 L50 30" strokeWidth="2" strokeDasharray="4 4" className="text-matrix" />
-                      <circle cx="50" cy="30" r="10" className="stroke-matrix stroke-2 animate-[pulse_3s_ease-in-out_infinite]" />
-                      <path d="M35 55 Q 40 45 50 50" strokeWidth="2" />
-                      <path d="M65 65 Q 60 55 50 60" strokeWidth="2" />
-                    </svg>
-                  </div>
-                )}
+                </div>
+                
+                <div className="flex flex-col lg:flex-row gap-8 p-6 lg:p-10">
+                  <div className="flex-1 flex flex-col gap-6">
+                    <div>
+                      <h3 className="text-3xl font-bold text-white mb-4">{project.title}</h3>
+                      <p className="text-emerald-100/80 leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
 
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                  <div className="rounded border border-cyanex/40 bg-black/60 px-3 py-2 terminal-title text-[10px] text-cyanex backdrop-blur-sm">
-                    {project.label}
+                    <div className="flex flex-col gap-2">
+                      <h4 className="text-matrix font-bold text-sm tracking-widest">[ PROBLEM ]</h4>
+                      <p className="text-emerald-100/70 text-sm leading-relaxed">{caseStudy.problem}</p>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <h4 className="text-matrix font-bold text-sm tracking-widest">[ FEATURES & ROLE ]</h4>
+                      <ul className="list-disc list-inside text-emerald-100/70 text-sm flex flex-col gap-1">
+                        {caseStudy.features.slice(0, 3).map((f: string, i: number) => (
+                          <li key={i}>{f}</li>
+                        ))}
+                        {caseStudy.role.slice(0, 2).map((r: string, i: number) => (
+                          <li key={i} className="text-cyanex">Role: {r}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="mt-auto pt-6 flex flex-wrap gap-4">
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-5 py-3 text-sm flex items-center gap-2">
+                          <Github size={16} /> {ui.projects.btnGithub}
+                        </a>
+                      )}
+                      {(project as any).demo && (
+                        <a href={(project as any).demo} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-5 py-3 text-sm flex items-center gap-2 text-matrix border-matrix/50 shadow-[0_0_15px_rgba(105,255,135,0.2)] hover:bg-matrix/20">
+                          <Globe2 size={16} /> LIVE DEMO
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <div className="text-[10px] font-mono text-matrix/50">
-                    SYS_MOD_0{index + 1}
+
+                  <div className="flex-1 flex flex-col gap-6">
+                    <div className="flex flex-col gap-3 border border-matrix/20 bg-black/40 rounded-lg p-5">
+                      <h4 className="text-matrix font-bold text-sm tracking-widest text-center">[ SYSTEM ARCHITECTURE FLOW ]</h4>
+                      <div className="flex flex-col items-center gap-2 py-4">
+                        {caseStudy.architecture.map((node: any, i: number) => (
+                          <React.Fragment key={i}>
+                            <div className={`px-4 py-2 rounded font-mono text-xs font-bold border flex items-center gap-2
+                              ${node.icon === 'user' ? 'border-cyanex text-cyanex bg-cyanex/10' : 
+                                node.icon === 'ai' ? 'border-violetx text-violetx bg-violetx/10 animate-pulse' : 
+                                'border-matrix text-matrix bg-matrix/10'}`}>
+                              {node.label}
+                            </div>
+                            {i < caseStudy.architecture.length - 1 && (
+                              <div className="h-6 w-[1px] bg-matrix/50 relative">
+                                <div className="absolute top-0 left-[-2px] w-[5px] h-[5px] rounded-full bg-matrix animate-[ping_1.5s_linear_infinite]" />
+                              </div>
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <h4 className="text-cyanex font-bold text-sm tracking-widest">[ TECH STACK ]</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.stack.map((tech) => (
+                          <span key={tech} className="rounded border border-cyanex/25 bg-cyanex/10 px-2.5 py-1.5 font-mono text-xs text-cyanex">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                <p className="mt-4 flex-1 text-sm leading-7 text-emerald-100/70">
-                  {project.description}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded border border-cyanex/25 bg-cyanex/10 px-2.5 py-1.5 font-mono text-xs text-cyanex"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.github ? (
-                    <a href={project.github} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
-                      <Github size={14} /> {ui.projects.btnGithub}
-                    </a>
-                  ) : null}
-                  {(project as any).demo ? (
-                    <a href={(project as any).demo} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5 text-matrix border-matrix/50">
-                      <Globe2 size={14} /> LIVE DEMO
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </motion.article>
-          ))}
+              </motion.article>
+            );
+          })}
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {data.projects.map((project, index) => {
+              const isFeatured = (project as any).isFeatured;
+              if (isFeatured) return null;
+
+              return (
+                <motion.article
+                  key={project.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                  whileHover={{ y: -8 }}
+                  className="cyber-panel flex min-h-[520px] flex-col overflow-hidden rounded-lg w-full"
+                >
+                  <div className="relative h-48 overflow-hidden border-b border-matrix/20 bg-black/55 group">
+                    <div className="absolute inset-0 bg-terminal-grid bg-[length:24px_24px] opacity-50 group-hover:opacity-70 transition-opacity" />
+                    
+                    {index === 1 && ( // E-Commerce
+                      <div className="absolute inset-0 flex items-center justify-center opacity-70">
+                         <svg viewBox="0 0 100 100" className="w-full h-full text-cyanex stroke-current" fill="none">
+                          <polygon points="50,20 80,40 80,70 50,90 20,70 20,40" strokeWidth="2" className="animate-pulse" />
+                          <path d="M50 20 L50 50 L80 70 M50 50 L20 70" strokeWidth="2" strokeDasharray="4 4" />
+                          <circle cx="50" cy="50" r="4" className="fill-matrix" />
+                          <circle cx="80" cy="40" r="4" className="fill-matrix" />
+                          <circle cx="20" cy="40" r="4" className="fill-matrix" />
+                        </svg>
+                      </div>
+                    )}
+                    {index === 2 && ( // Agriculture
+                      <div className="absolute inset-0 flex items-center justify-center opacity-70">
+                        <svg viewBox="0 0 100 100" className="w-full h-full text-violetx stroke-current" fill="none">
+                          <path d="M20 80 Q 50 80 50 40 Q 50 80 80 80" strokeWidth="2" />
+                          <path d="M50 80 L50 30" strokeWidth="2" strokeDasharray="4 4" className="text-matrix" />
+                          <circle cx="50" cy="30" r="10" className="stroke-matrix stroke-2 animate-[pulse_3s_ease-in-out_infinite]" />
+                          <path d="M35 55 Q 40 45 50 50" strokeWidth="2" />
+                          <path d="M65 65 Q 60 55 50 60" strokeWidth="2" />
+                        </svg>
+                      </div>
+                    )}
+
+                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                      <div className="rounded border border-cyanex/40 bg-black/60 px-3 py-2 terminal-title text-[10px] text-cyanex backdrop-blur-sm">
+                        {project.label}
+                      </div>
+                      <div className="text-[10px] font-mono text-matrix/50">
+                        SYS_MOD_0{index + 1}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-xl font-bold text-white">{project.title}</h3>
+                    <p className="mt-4 flex-1 text-sm leading-7 text-emerald-100/70">
+                      {project.description}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.stack.map((tech) => (
+                        <span key={tech} className="rounded border border-cyanex/25 bg-cyanex/10 px-2.5 py-1.5 font-mono text-xs text-cyanex">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
+                          <Github size={14} /> {ui.projects.btnGithub}
+                        </a>
+                      )}
+                      {(project as any).demo && (
+                        <a href={(project as any).demo} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5 text-matrix border-matrix/50">
+                          <Globe2 size={14} /> LIVE DEMO
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

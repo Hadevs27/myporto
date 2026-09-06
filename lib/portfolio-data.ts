@@ -73,13 +73,27 @@ export const skillGroups = [
 export const projects = [
   {
     title: "Digital Archive System with Chatbot",
-    label: "Web Application",
+    label: "PROJECT_01 // FEATURED",
     description:
       "Web-based document archive application equipped with an AI chatbot feature. Built with Next.js 16 and Drizzle ORM, featuring secure authentication and cloud-based file attachments via Cloudinary.",
     stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Gemini AI", "Cloudinary"],
     accent: "matrix",
     github: "https://github.com/Hadevs27/AplikasiArsipDigitalBerbasisWebDenganFiturChatbot",
     demo: "https://aplikasi-arsip-digital-berbasis-web-tau.vercel.app/",
+    isFeatured: true,
+    caseStudy: {
+      problem: "The previous archiving process was manual, prone to document loss, and made information retrieval slow. Employees needed a system to securely store, manage, and instantly query archive data without manually reading through hundreds of files.",
+      role: ["System Analysis & DB Design", "Full-stack Next.js Development", "AI Integration (Gemini)", "Authentication & Cloud Storage Setup"],
+      features: ["Secure Role-based Authentication", "Incoming & Outgoing Mail Management", "AI Chatbot for Document Contextual Queries", "Cloudinary Attachment Uploads", "Automated WhatsApp Gateway via Fonnte"],
+      architecture: [
+        { label: "USER", icon: "user" },
+        { label: "NEXT.JS UI", icon: "frontend" },
+        { label: "BETTER AUTH", icon: "auth" },
+        { label: "DRIZZLE ORM", icon: "db" },
+        { label: "NEON POSTGRES", icon: "db" },
+        { label: "GEMINI AI", icon: "ai" }
+      ]
+    }
   },
   {
     title: "E-Commerce Prefab Building Materials",

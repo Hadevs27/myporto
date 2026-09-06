@@ -73,13 +73,27 @@ export const skillGroups = [
 export const projects = [
   {
     title: "Aplikasi Arsip Digital dengan Chatbot AI",
-    label: "Aplikasi Web",
+    label: "PROJECT_01 // FEATURED",
     description:
       "Aplikasi arsip surat berbasis web yang dilengkapi dengan fitur AI Chatbot untuk pencarian informasi. Dibangun dengan Next.js 16, otentikasi aman, dan manajemen lampiran terintegrasi Cloudinary.",
     stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Gemini AI", "Cloudinary"],
     accent: "matrix",
     github: "https://github.com/Hadevs27/AplikasiArsipDigitalBerbasisWebDenganFiturChatbot",
     demo: "https://aplikasi-arsip-digital-berbasis-web-tau.vercel.app/",
+    isFeatured: true,
+    caseStudy: {
+      problem: "Proses pengarsipan sebelumnya dilakukan secara manual, rentan terhadap kehilangan dokumen, dan membuat pencarian informasi menjadi lambat. Pegawai membutuhkan sistem untuk menyimpan, mengelola, dan melakukan kueri data arsip secara instan tanpa harus membaca ratusan file secara manual.",
+      role: ["Analisis Sistem & Desain DB", "Full-stack Development Next.js", "Integrasi AI (Gemini)", "Pengaturan Autentikasi & Penyimpanan Cloud"],
+      features: ["Autentikasi Berbasis Peran yang Aman", "Manajemen Surat Masuk & Keluar", "Chatbot AI untuk Pencarian Kontekstual Dokumen", "Unggahan Lampiran Cloudinary", "Gateway WhatsApp Otomatis via Fonnte"],
+      architecture: [
+        { label: "USER", icon: "user" },
+        { label: "NEXT.JS UI", icon: "frontend" },
+        { label: "BETTER AUTH", icon: "auth" },
+        { label: "DRIZZLE ORM", icon: "db" },
+        { label: "NEON POSTGRES", icon: "db" },
+        { label: "GEMINI AI", icon: "ai" }
+      ]
+    }
   },
   {
     title: "E-Commerce Material Bangunan Prefab",
