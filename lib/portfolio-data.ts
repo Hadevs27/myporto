@@ -72,13 +72,14 @@ export const skillGroups = [
 
 export const projects = [
   {
-    title: "Meeting Scheduling Information System",
-    label: "BAPENDA Kab. Tangerang",
+    title: "Digital Archive System with Chatbot",
+    label: "Web Application",
     description:
-      "Web-based meeting scheduling system for managing meeting agendas and schedules, with role-based authentication, PostgreSQL integration, and Telegram notification support.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Telegram Bot"],
+      "Web-based document archive application equipped with an AI chatbot feature. Built with Next.js 16 and Drizzle ORM, featuring secure authentication and cloud-based file attachments via Cloudinary.",
+    stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Gemini AI", "Cloudinary"],
     accent: "matrix",
-    github: "https://github.com/Hadevs27/Sistem-Informasi-Penjadwalan-Agenda-Rapat-berbasis-Web-pada-BAPENDA-",
+    github: "https://github.com/Hadevs27/AplikasiArsipDigitalBerbasisWebDenganFiturChatbot",
+    demo: "https://aplikasi-arsip-digital-berbasis-web-tau.vercel.app/",
   },
   {
     title: "E-Commerce Prefab Building Materials",

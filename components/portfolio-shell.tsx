@@ -471,13 +471,17 @@ function ProjectsSection() {
                 <div className="absolute inset-0 bg-terminal-grid bg-[length:24px_24px] opacity-50 group-hover:opacity-70 transition-opacity" />
                 
                 {/* Visual Logic per Project */}
-                {index === 0 && ( // Meeting Scheduling
+                {index === 0 && ( // Digital Archive Chatbot
                   <div className="absolute inset-0 flex items-center justify-center opacity-70">
                     <svg viewBox="0 0 100 100" className="w-full h-full text-matrix stroke-current" fill="none">
-                      <rect x="25" y="25" width="50" height="50" rx="4" strokeWidth="2" strokeDasharray="4 4" className="animate-[spin_20s_linear_infinite]" />
-                      <path d="M40 40 L60 40 M40 50 L60 50 M40 60 L50 60" strokeWidth="2" />
-                      <circle cx="50" cy="50" r="8" className="fill-cyanex/20 stroke-cyanex shadow-cyan" />
-                      <path d="M30 30 L20 20 M70 70 L80 80 M70 30 L80 20 M30 70 L20 80" strokeWidth="1" strokeDasharray="2 2" className="text-cyanex" />
+                      {/* Document icon */}
+                      <path d="M30 20 L55 20 L70 35 L70 80 L30 80 Z" strokeWidth="2" className="text-cyanex" />
+                      <path d="M55 20 L55 35 L70 35" strokeWidth="2" className="text-cyanex" />
+                      <path d="M40 45 L60 45 M40 55 L55 55 M40 65 L60 65" strokeWidth="1.5" strokeDasharray="3 3" />
+                      {/* AI Sparkles / Bot visual */}
+                      <circle cx="50" cy="50" r="15" className="fill-void stroke-matrix stroke-2 animate-pulse" />
+                      <path d="M42 45 L46 45 M54 45 L58 45 M45 55 Q50 60 55 55" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M50 20 L50 35" strokeWidth="2" strokeDasharray="2 2" className="animate-[spin_4s_linear_infinite] origin-center text-matrix" />
                     </svg>
                   </div>
                 )}
@@ -528,10 +532,15 @@ function ProjectsSection() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 flex gap-2">
+                <div className="mt-6 flex flex-wrap gap-2">
                   {project.github ? (
                     <a href={project.github} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5">
                       <Github size={14} /> {ui.projects.btnGithub}
+                    </a>
+                  ) : null}
+                  {(project as any).demo ? (
+                    <a href={(project as any).demo} target="_blank" rel="noreferrer" onClick={() => playAudio(AUDIO_ASSETS.UI.CLICK, 0.2)} className="hud-button rounded-md px-3 py-2 text-xs flex items-center gap-1.5 text-matrix border-matrix/50">
+                      <Globe2 size={14} /> LIVE DEMO
                     </a>
                   ) : null}
                 </div>

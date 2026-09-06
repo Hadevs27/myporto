@@ -72,13 +72,14 @@ export const skillGroups = [
 
 export const projects = [
   {
-    title: "Sistem Informasi Penjadwalan Rapat",
-    label: "BAPENDA Kab. Tangerang",
+    title: "Aplikasi Arsip Digital dengan Chatbot AI",
+    label: "Aplikasi Web",
     description:
-      "Sistem manajemen agenda dan penjadwalan rapat berbasis web dengan autentikasi berbasis peran, fitur manajemen rapat, dan integrasi notifikasi pengingat via Telegram.",
-    stack: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS", "Bot Telegram"],
+      "Aplikasi arsip surat berbasis web yang dilengkapi dengan fitur AI Chatbot untuk pencarian informasi. Dibangun dengan Next.js 16, otentikasi aman, dan manajemen lampiran terintegrasi Cloudinary.",
+    stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Gemini AI", "Cloudinary"],
     accent: "matrix",
-    github: "https://github.com/Hadevs27/Sistem-Informasi-Penjadwalan-Agenda-Rapat-berbasis-Web-pada-BAPENDA-",
+    github: "https://github.com/Hadevs27/AplikasiArsipDigitalBerbasisWebDenganFiturChatbot",
+    demo: "https://aplikasi-arsip-digital-berbasis-web-tau.vercel.app/",
   },
   {
     title: "E-Commerce Material Bangunan Prefab",
