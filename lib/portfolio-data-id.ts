@@ -73,7 +73,7 @@ export const skillGroups = [
 export const projects = [
   {
     title: "Aplikasi Arsip Digital dengan Chatbot AI",
-    label: "PROJECT_01 // FEATURED",
+    label: "PROJECT_01 // UNGGULAN",
     description:
       "Aplikasi arsip surat berbasis web yang dilengkapi dengan fitur AI Chatbot untuk pencarian informasi. Dibangun dengan Next.js 16, otentikasi aman, dan manajemen lampiran terintegrasi Cloudinary.",
     stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Gemini AI", "Cloudinary"],

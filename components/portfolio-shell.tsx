@@ -324,14 +324,14 @@ function HeroSection() {
             <div className="relative aspect-[4/3] overflow-y-auto bg-black/80 p-5 sm:p-8 font-mono text-xs sm:text-sm text-emerald-100/90 border-t border-matrix/20">
               <p className="text-cyanex font-bold text-base mb-6">{ui.hero.hudSync}</p>
               
-              <p className="text-matrix font-bold mt-5 mb-2">PROJECTS</p>
+              <p className="text-matrix font-bold mt-5 mb-2">{ui.hero.projectsTitle}</p>
               <ul className="list-none space-y-1.5 pl-0 text-emerald-100/80">
-                <li>- Meeting Scheduling Information System</li>
-                <li>- E-Commerce Prefab Building Materials</li>
-                <li>- Agricultural Production & Sales System</li>
+                {ui.hero.projectList.map((project, idx) => (
+                  <li key={idx}>{project}</li>
+                ))}
               </ul>
 
-              <p className="text-matrix font-bold mt-6 mb-2">TECH STACK</p>
+              <p className="text-matrix font-bold mt-6 mb-2">{ui.hero.techStackTitle}</p>
               <div className="flex flex-wrap gap-2 mt-2">
                 {['Next.js', 'TypeScript', 'React.js', 'Laravel', 'PostgreSQL', 'MySQL', 'Git'].map(tech => (
                   <span key={tech} className="bg-cyanex/10 text-cyanex px-2 py-0.5 rounded border border-cyanex/30">{tech}</span>
@@ -340,11 +340,11 @@ function HeroSection() {
 
               <div className="mt-8 flex flex-wrap gap-8">
                 <div>
-                  <p className="text-matrix font-bold mb-1">STATUS</p>
+                  <p className="text-matrix font-bold mb-1">{ui.hero.statusTitle}</p>
                   <p className="text-emerald-100/80">{ui.hero.online}</p>
                 </div>
                 <div>
-                  <p className="text-matrix font-bold mb-1">SOURCE</p>
+                  <p className="text-matrix font-bold mb-1">{ui.hero.sourceTitle}</p>
                   <p className="text-emerald-100/80">GitHub</p>
                 </div>
               </div>
@@ -670,35 +670,35 @@ function ExperienceSection() {
       <div className="mx-auto max-w-5xl space-y-32">
         <TimelineBlock
           id="experience-work"
-          eyebrow="EXPERIENCE // 02"
+          eyebrow={ui.experience.workEyebrow}
           title={ui.experience.workTitle}
           description={ui.experience.workDesc}
           logs={workLogs}
         />
         <TimelineBlock
           id="education"
-          eyebrow="EDUCATION // 03"
+          eyebrow={ui.experience.eduEyebrow}
           title={ui.experience.eduTitle}
           description={ui.experience.eduDesc}
           logs={eduLogs}
         />
         <TimelineBlock
           id="certifications"
-          eyebrow="CERTIFICATIONS // 04"
+          eyebrow={ui.experience.certEyebrow}
           title={ui.experience.certTitle}
           description={ui.experience.certDesc}
           logs={certLogs}
         />
         <TimelineBlock
           id="achievements"
-          eyebrow="ACHIEVEMENTS // 05"
+          eyebrow={ui.experience.awardsEyebrow}
           title={ui.experience.awardsTitle}
           description={ui.experience.awardsDesc}
           logs={awardLogs}
         />
         <TimelineBlock
           id="organizations"
-          eyebrow="ORGANIZATION // 06"
+          eyebrow={ui.experience.orgEyebrow}
           title={ui.experience.orgTitle}
           description={ui.experience.orgDesc}
           logs={orgLogs}
@@ -721,6 +721,7 @@ function TimelineBlock({
   description: string;
   logs: any[];
 }) {
+  const { t } = useLanguage();
   if (!logs || logs.length === 0) return null;
   return (
     <div id={id}>
@@ -752,7 +753,7 @@ function TimelineBlock({
                     <item.icon size={19} />
                   </div>
                   <div>
-                    <p className="terminal-title text-xs text-cyanex">{item.type}</p>
+                    <p className="terminal-title text-xs text-cyanex">{t.ui.experience.types[item.type as keyof typeof t.ui.experience.types] || item.type}</p>
                     {item.link ? (
                       <a href={item.link} target="_blank" rel="noreferrer" className="group mt-1 inline-flex items-center gap-1.5 text-lg font-bold text-white transition hover:text-cyanex">
                         {item.title}
