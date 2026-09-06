@@ -21,7 +21,7 @@ export const AUDIO_ASSETS = {
 
 class AudioManager {
   private static instance: AudioManager;
-  public soundEnabled: boolean = false;
+  public soundEnabled: boolean = true;
   private cache: Map<string, HTMLAudioElement> = new Map();
 
   private constructor() {}
