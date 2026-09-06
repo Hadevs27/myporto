@@ -535,19 +535,19 @@ function ProjectsSection() {
                       <h4 className="text-matrix font-bold text-sm tracking-widest text-center">[ SYSTEM ARCHITECTURE FLOW ]</h4>
                       <div className="flex flex-col items-center gap-2 py-4">
                         {caseStudy.architecture.map((node: any, i: number) => (
-                          <React.Fragment key={i}>
-                            <div className={`px-4 py-2 rounded font-mono text-xs font-bold border flex items-center gap-2
+                          <div key={i} className="flex flex-col items-center">
+                            <div className={`px-4 py-2 rounded font-mono text-xs font-bold border flex items-center gap-2 w-full max-w-[200px] justify-center text-center
                               ${node.icon === 'user' ? 'border-cyanex text-cyanex bg-cyanex/10' : 
-                                node.icon === 'ai' ? 'border-violetx text-violetx bg-violetx/10 animate-pulse' : 
+                                node.icon === 'ai' ? 'border-violetx text-violetx bg-violetx/10 animate-pulse shadow-[0_0_15px_rgba(182,106,255,0.3)]' : 
                                 'border-matrix text-matrix bg-matrix/10'}`}>
                               {node.label}
                             </div>
                             {i < caseStudy.architecture.length - 1 && (
-                              <div className="h-6 w-[1px] bg-matrix/50 relative">
+                              <div className="h-6 w-[1px] bg-matrix/50 relative my-2">
                                 <div className="absolute top-0 left-[-2px] w-[5px] h-[5px] rounded-full bg-matrix animate-[ping_1.5s_linear_infinite]" />
                               </div>
                             )}
-                          </React.Fragment>
+                          </div>
                         ))}
                       </div>
                     </div>
