@@ -86,7 +86,7 @@ export const projects = [
     stack: ["Next.js 16", "TypeScript", "PostgreSQL", "Gemini AI", "Cloudinary"],
     accent: "matrix",
     github: "https://github.com/Hadevs27/AplikasiArsipDigitalBerbasisWebDenganFiturChatbot",
-    demo: "https://aplikasi-arsip-digital-berbasis-web-tau.vercel.app/",
+    demo: "https://projek.harryfolio.my.id/",
     isFeatured: true,
     caseStudy: {
       problem: "Proses pengarsipan sebelumnya dilakukan secara manual, rentan terhadap kehilangan dokumen, dan membuat pencarian informasi menjadi lambat. Pegawai membutuhkan sistem untuk menyimpan, mengelola, dan melakukan kueri data arsip secara instan tanpa harus membaca ratusan file secara manual.",
